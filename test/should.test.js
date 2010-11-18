@@ -212,6 +212,14 @@ module.exports = {
     err(function(){
       ({ foo: 1 }).should.have.keys([]);
     }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys([]);
+    }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.include.keys([]);
+    }, "keys required");
 
     err(function(){
       ({ foo: 1 }).should.have.keys(['bar']);
