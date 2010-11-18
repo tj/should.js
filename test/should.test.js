@@ -185,6 +185,24 @@ module.exports = {
     }, "expected { length: 12 } to not have own property 'length'");
   },
   
+  'test string()': function(){
+    'foobar'.should.include.string('bar');
+    'foobar'.should.include.string('foo');
+    'foobar'.should.not.include.string('baz');
+
+    err(function(){
+      (3).should.include.string('baz');
+    }, "expected 3 to be a string");
+    
+    err(function(){
+      'foobar'.should.include.string('baz');
+    }, "expected 'foobar' to include 'baz'");
+    
+    err(function(){
+      'foobar'.should.not.include.string('bar');
+    }, "expected 'foobar' to not include 'bar'");
+  },
+  
   'test keys(array)': function(){
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
