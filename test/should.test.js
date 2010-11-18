@@ -100,6 +100,7 @@ module.exports = {
   
   'test ownProperty(n)': function(){
     'test'.should.have.ownProperty('length');
+    'test'.should.haveOwnProperty('length');
     ({ length: 12 }).should.have.ownProperty('length');
     
     err(function(){
