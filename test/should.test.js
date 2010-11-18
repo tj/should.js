@@ -118,7 +118,6 @@ module.exports = {
   
   'test property(name, val)': function(){
     'test'.should.have.property('length', 4);
-    (4).should.not.have.property('length', 5);
     'asd'.should.have.property('constructor', String);
     
     err(function(){
@@ -128,6 +127,10 @@ module.exports = {
     err(function(){
       'asd'.should.not.have.property('length', 3);
     }, "expected 'asd' to not have a property 'length' of 3");
+    
+    err(function(){
+      'asd'.should.not.have.property('foo', 3);
+    }, "'asd' has no property 'foo'");
     
     err(function(){
       'asd'.should.have.property('constructor', Number);
