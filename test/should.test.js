@@ -213,6 +213,10 @@ module.exports = {
     err(function(){
       ['foo'].should.include.value('bar');
     }, "expected [ 'foo' ] to include 'bar'");
+    
+    err(function(){
+      ['bar', 'foo'].should.not.include.value('foo');
+    }, "expected [ 'bar', 'foo' ] to not include 'foo'");
   },
   
   'test keys(array)': function(){
