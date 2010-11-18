@@ -48,5 +48,19 @@ module.exports = {
     err(function(){
       'test'.should.be.a.number;
     }, "expected 'test' to be a number");
+  },
+  
+  'test above(n)': function(){
+    (5).should.be.above(2);
+    (5).should.not.be.above(5);
+    (5).should.not.be.above(6);
+
+    err(function(){
+      (5).should.be.above(6);
+    }, "expected 5 to be above 6");
+    
+    err(function(){
+      (10).should.not.be.above(6);
+    }, "expected 10 to be below 6");
   }
 };
