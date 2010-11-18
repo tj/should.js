@@ -47,6 +47,13 @@ module.exports = {
     }, "expected 3 to be an instance of Foo");
   },
   
+  'test within(start, finish)': function(){
+    (5).should.be.within(5, 10);
+    (5).should.be.within(3,6);
+    (5).should.be.within(3,5);
+    (5).should.not.be.within(1,3);
+  },
+  
   'test above(n)': function(){
     (5).should.be.above(2);
     (5).should.be.greaterThan(2);
