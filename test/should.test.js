@@ -288,5 +288,10 @@ module.exports = {
     err(function(){
       ({ foo: 1 }).should.include.keys('foo', 'bar');
     }, "expected { foo: 1 } to include keys 'foo', and 'bar'");
+  },
+  
+  'test respondTo(method)': function(){
+    'test'.should.respondTo('toString');
+    'test'.should.not.respondTo('toBuffer');
   }
 };
