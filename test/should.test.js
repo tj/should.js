@@ -213,5 +213,25 @@ module.exports = {
     err(function(){
       ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
     }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
+
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+    
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+    
+    err(function(){
+      ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
+    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    
+    err(function(){
+      ({ foo: 1 }).should.not.include.keys(['foo']);
+    }, "expected { foo: 1 } to not include key 'foo'");
+    
+    err(function(){
+      ({ foo: 1 }).should.include.keys('foo', 'bar');
+    }, "expected { foo: 1 } to include keys 'foo', and 'bar'");
   }
 };
