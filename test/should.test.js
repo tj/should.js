@@ -81,12 +81,30 @@ module.exports = {
     [1,2,3].should.have.length(3);
     
     err(function(){
-      (4).should.not.have.length(3);
+      (4).should.have.length(3);
     }, 'expected 4 to have a property \'length\'');
     
     err(function(){
       'asd'.should.not.have.length(3);
     }, "expected 'asd' to not have a length of 3");
+  },
+  
+  'test empty': function(){
+    ''.should.be.empty;
+    [].should.be.empty;
+    ({ length: 0 }).should.be.empty;
+    
+    err(function(){
+      (4).should.be.empty;
+    }, 'expected 4 to have a property \'length\'');
+    
+    err(function(){
+      'asd'.should.be.empty;
+    }, "expected 'asd' to be empty");
+    
+    err(function(){
+      ''.should.not.be.empty;
+    }, "expected 'asd' not to be empty");
   },
   
   'test property(n)': function(){
