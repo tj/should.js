@@ -193,14 +193,14 @@ module.exports = {
     ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('bar', 'foo');
     ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('baz');
 
-    ({ foo: 1, bar: 2 }).should.not.have.keys(['foo']);
-    ({ foo: 1, bar: 2 }).should.not.have.keys('foo');
-
     ({ foo: 1, bar: 2 }).should.include.keys('foo');
     ({ foo: 1, bar: 2 }).should.include.keys('bar', 'foo');
     ({ foo: 1, bar: 2 }).should.include.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.include.keys(['bar']);
     ({ foo: 1, bar: 2 }).should.include.keys(['bar', 'foo']);
+
+    ({ foo: 1, bar: 2 }).should.not.have.keys('baz');
+    ({ foo: 1, bar: 2 }).should.not.have.keys('foo', 'baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('foo', 'baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz', 'foo');
