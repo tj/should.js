@@ -49,6 +49,7 @@ module.exports = {
   
   'test above(n)': function(){
     (5).should.be.above(2);
+    (5).should.be.greaterThan(2);
     (5).should.not.be.above(5);
     (5).should.not.be.above(6);
 
