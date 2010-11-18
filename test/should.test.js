@@ -24,6 +24,11 @@ module.exports = {
     'test'.should.be.a.string;
   },
   
+  'test .equal()': function(){
+    var foo;
+    should.equal(undefined, foo);
+  },
+  
   'test typeof': function(){
     'test'.should.be.a('string');
 
