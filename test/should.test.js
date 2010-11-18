@@ -38,6 +38,15 @@ module.exports = {
     }, "expected 5 not to be a number");
   },
   
+  'test instanceof': function(){
+    function Foo(){}
+    new Foo().should.be.an.instanceof(Foo);
+
+    err(function(){
+      (3).should.an.instanceof(Foo);
+    }, "expected 3 to be an instance of Foo");
+  },
+  
   'test above(n)': function(){
     (5).should.be.above(2);
     (5).should.not.be.above(5);
