@@ -203,6 +203,18 @@ module.exports = {
     }, "expected 'foobar' to not include 'bar'");
   },
   
+  'test value()': function(){
+    ['foo', 'bar'].should.include.value('foo');
+    ['foo', 'bar'].should.include.value('bar');
+    [1,2].should.include.value(1);
+    ['foo', 'bar'].should.not.include.value('baz');
+    ['foo', 'bar'].should.not.include.value(1);
+
+    err(function(){
+      ['foo'].should.include.value('bar');
+    }, "expected [ 'foo' ] to include 'bar'");
+  },
+  
   'test keys(array)': function(){
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
