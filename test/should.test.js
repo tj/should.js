@@ -201,5 +201,17 @@ module.exports = {
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('foo', 'baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz', 'foo');
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar']);
+    }, "expected { foo: 1 } to have key 'bar'");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
   }
 };
