@@ -52,6 +52,14 @@ module.exports = {
     (5).should.be.within(3,6);
     (5).should.be.within(3,5);
     (5).should.not.be.within(1,3);
+    
+    err(function(){
+      (5).should.not.be.within(4,6);
+    }, "expected 5 to not be within 4..6");
+    
+    err(function(){
+      (10).should.be.within(50,100);
+    }, "expected 10 to be within 50..100");
   },
   
   'test above(n)': function(){
