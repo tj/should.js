@@ -75,5 +75,28 @@ module.exports = {
     err(function(){
       'foobar'.should.not.match(/^foo/i)
     }, "expected 'foobar' not to match /^foo/i");
+  },
+  
+  'test length(n)': function(){
+    'test'.should.have.length(4);
+    'test'.should.not.have.length(3);
+    [1,2,3].should.have.length(3);
+    
+    err(function(){
+      (4).should.not.have.length(3);
+    }, 'expected 4 to have a length property');
+    
+    err(function(){
+      'asd'.should.not.have.length(3);
+    }, "expected 'asd' to not have a length of 3");
+  },
+  
+  'test property(n)': function(){
+    'test'.should.have.property('length');
+    (4).should.not.have.property('length');
+    
+    err(function(){
+      'asd'.should.have.property('foo');
+    }, "expected 'asd' to have a foo property");
   }
 };
