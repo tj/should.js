@@ -204,20 +204,21 @@ module.exports = {
     }, "expected 'foobar' to not include 'bar'");
   },
   
-  'test value()': function(){
-    ['foo', 'bar'].should.include.value('foo');
-    ['foo', 'bar'].should.include.value('bar');
-    [1,2].should.include.value(1);
-    ['foo', 'bar'].should.not.include.value('baz');
-    ['foo', 'bar'].should.not.include.value(1);
+  'test contain()': function(){
+    ['foo', 'bar'].should.contain('foo');
+    ['foo', 'bar'].should.contain('foo');
+    ['foo', 'bar'].should.contain('bar');
+    [1,2].should.contain(1);
+    ['foo', 'bar'].should.not.contain('baz');
+    ['foo', 'bar'].should.not.contain(1);
 
     err(function(){
-      ['foo'].should.include.value('bar');
-    }, "expected [ 'foo' ] to include 'bar'");
+      ['foo'].should.contain('bar');
+    }, "expected [ 'foo' ] to contain 'bar'");
     
     err(function(){
-      ['bar', 'foo'].should.not.include.value('foo');
-    }, "expected [ 'bar', 'foo' ] to not include 'foo'");
+      ['bar', 'foo'].should.not.contain('foo');
+    }, "expected [ 'bar', 'foo' ] to not contain 'foo'");
   },
   
   'test keys(array)': function(){
