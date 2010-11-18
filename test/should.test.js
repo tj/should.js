@@ -107,7 +107,7 @@ module.exports = {
     }, "expected '' not to be empty");
   },
   
-  'test property(n)': function(){
+  'test property(name)': function(){
     'test'.should.have.property('length');
     (4).should.not.have.property('length');
     
@@ -116,7 +116,25 @@ module.exports = {
     }, "expected 'asd' to have a property 'foo'");
   },
   
-  'test ownProperty(n)': function(){
+  'test property(name, val)': function(){
+    'test'.should.have.property('length', 4);
+    (4).should.not.have.property('length', 5);
+    'asd'.should.have.property('constructor', String);
+    
+    err(function(){
+      'asd'.should.have.property('length', 4);
+    }, "expected 'asd' to have a property 'length' of 4, but got 3");
+    
+    err(function(){
+      'asd'.should.not.have.property('length', 3);
+    }, "expected 'asd' to not have a property 'length' of 3");
+    
+    err(function(){
+      'asd'.should.have.property('constructor', Number);
+    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String]");
+  },
+  
+  'test ownProperty(name)': function(){
     'test'.should.have.ownProperty('length');
     'test'.should.haveOwnProperty('length');
     ({ length: 12 }).should.have.ownProperty('length');
