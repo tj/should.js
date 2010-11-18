@@ -89,6 +89,16 @@ module.exports = {
     }, "expected 'asd' to not have a length of 3");
   },
   
+  'test eql(val)': function(){
+    'test'.should.eql('test');
+    (1).should.eql(1);
+    '4'.should.eql(4);
+    
+    err(function(){
+      (4).should.eql(3);
+    }, 'expected 4 to equal 3');
+  },
+  
   'test equal(val)': function(){
     'test'.should.equal('test');
     (1).should.equal(1);
