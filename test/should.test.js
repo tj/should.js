@@ -84,7 +84,7 @@ module.exports = {
     
     err(function(){
       (4).should.not.have.length(3);
-    }, 'expected 4 to have a length property');
+    }, 'expected 4 to have a property \'length\'');
     
     err(function(){
       'asd'.should.not.have.length(3);
@@ -97,6 +97,15 @@ module.exports = {
     
     err(function(){
       'asd'.should.have.property('foo');
-    }, "expected 'asd' to have a foo property");
+    }, "expected 'asd' to have a property 'foo'");
+  },
+  
+  'test ownProperty(n)': function(){
+    'test'.should.have.ownProperty('length');
+    ({ length: 12 }).should.have.ownProperty('length');
+    
+    err(function(){
+      ({ length: 12 }).should.not.have.ownProperty('length');
+    }, "expected { length: 12 } to not have own property 'length'");
   }
 };
