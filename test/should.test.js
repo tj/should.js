@@ -95,8 +95,8 @@ module.exports = {
     ({ length: 0 }).should.be.empty;
     
     err(function(){
-      (4).should.be.empty;
-    }, 'expected 4 to have a property \'length\'');
+      ({}).should.be.empty;
+    }, 'expected {} to have a property \'length\'');
     
     err(function(){
       'asd'.should.be.empty;
@@ -104,7 +104,7 @@ module.exports = {
     
     err(function(){
       ''.should.not.be.empty;
-    }, "expected 'asd' not to be empty");
+    }, "expected '' not to be empty");
   },
   
   'test property(n)': function(){
