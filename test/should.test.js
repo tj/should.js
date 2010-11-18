@@ -189,6 +189,9 @@ module.exports = {
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
     ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
+    ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('foo', 'bar');
+    ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('bar', 'foo');
+    ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('baz');
 
     ({ foo: 1, bar: 2 }).should.not.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.not.have.keys('foo');
@@ -201,6 +204,14 @@ module.exports = {
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('foo', 'baz');
     ({ foo: 1, bar: 2 }).should.not.include.keys('baz', 'foo');
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys();
+    }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys([]);
+    }, "keys required");
 
     err(function(){
       ({ foo: 1 }).should.have.keys(['bar']);
