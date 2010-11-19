@@ -148,6 +148,10 @@ To run the tests for _should_ simple update your git submodules and run:
 
     $ make test
 
+## OMG IT EXTENDS OBJECT???!?!@
+
+Yes, yes it does, with a single getter _should_, and no it wont break your code, because it does this **properly** with a non-enumerable property.
+
 ## License 
 
 (The MIT License)
