@@ -1,6 +1,147 @@
 
 # Should.js
 
+  _should_ is a test framework agnostic assertion library for [node](http://nodejs.org), following BDD-style conventions. For example `user.age.should.be.within(1, 90)` vs `assert.ok(user.age >= 1 && user.age <= 90)`.
+
+_should_ literally extends node's _assert_ module, infact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `asset.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
+
+## Installation
+
+    $ npm install should
+
+## empty
+
+Asserts that length is 0:
+
+    [].should.be.empty
+    ''.should.be.empty
+    ({ length: 0 }).should.be.empty
+
+## eql
+
+equality:
+
+    ({ foo: 'bar' }).should.eql({ foo: 'bar' })
+    [1,2,3].should.eql([1,2,3])
+
+## equal
+
+strict equality:
+
+    should.strictEqual(undefined, value)
+    should.strictEqual(false, value)
+    (4).should.equal(4)
+    'test'.should.equal('test')
+    [1,2,3].should.not.equal([1,2,3])
+
+## within
+
+Assert inclusive numeric range:
+
+    user.age.should.be.within(5, 50)
+
+## a
+
+Assert __typeof__:
+
+    user.should.be.a('object')
+    'test'.should.be.a('string')
+
+## instanceof
+
+Assert __instanceof__:
+
+    user.should.be.an.instanceof(User)
+    [].should.be.an.instanceof(Array)
+
+## above
+
+Assert numeric value above the given value:
+
+    user.age.should.be.above(5)
+    user.age.should.not.be.above(100)
+
+## below
+
+Assert numeric value below the given value:
+
+    user.age.should.be.below(100)
+    user.age.should.not.be.below(5)
+
+## match
+
+Assert regexp match:
+
+    username.should.match(/^\w+$/)
+
+## length
+
+Assert _length_ property exists and has a value of the given number:
+
+    user.pets.should.have.length(5)
+    user.pets.should.have.a.lengthOf(5)
+
+Aliases: _lengthOf_
+
+## string
+
+Substring assertion:
+
+    'foobar'.should.include.string('foo')
+    'foobar'.should.include.string('bar')
+    'foobar'.should.not.include.string('baz')
+
+## property
+
+Assert property exists and has optional value:
+
+    user.should.have.property('name')
+    user.should.have.property('age', 15)
+    user.should.not.have.property('rawr')
+    user.should.not.have.property('age', 0)
+
+## ownProperty
+
+Assert own property (on the immediate object):
+
+    ({ foo: 'bar' }).should.have.ownProperty('foo')
+
+## contain
+
+Assert array value:
+
+    [1,2,3].should.contain(3)
+    [1,2,3].should.contain(2)
+    [1,2,3].should.not.contain(4)
+
+## keys
+
+Assert own object keys, which must match _exactly_,
+and will fail if you omit a key or two:
+
+    var obj = { foo: 'bar', baz: 'raz' };
+    obj.should.have.keys('foo', 'bar');
+    obj.should.have.keys(['foo', 'bar']);
+
+using the _include_ modifier, we can check inclusion of a key,
+but not fail when we omit a few:
+
+    obj.should.have.keys('foo')
+    obj.should.have.keys('bar')
+    obj.should.not.have.keys('baz')
+
+## respondTo
+
+Assert that the given property is a function:
+
+    user.should.respondTo('email')
+
+## Running tests
+
+To run the tests for _should_ simple update your git submodules and run:
+
+    $ make test
+
 ## License 
 
 (The MIT License)
