@@ -41,6 +41,10 @@ which is essentially equivalent to below, however the property may not exist:
 
     user.pets.should.have.lengthOf(4)
 
+our dummy getters such as _and_ also help express chaining:
+
+    user.should.be.a('object').and.have.property('name', 'tj')
+
 ## empty
 
 Asserts that length is 0:
