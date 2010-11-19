@@ -24,6 +24,26 @@ module.exports = {
     'test'.should.be.a.string;
   },
   
+  'test true': function(){
+    true.should.be.true;
+    false.should.not.be.true;
+    (1).should.not.be.true;
+    
+    err(function(){
+      'test'.should.be.true;
+    }, "expected 'test' to be true")
+  },
+  
+  'test false': function(){
+    false.should.be.false;
+    true.should.not.be.false;
+    (0).should.not.be.false;
+    
+    err(function(){
+      ''.should.be.false;
+    }, "expected '' to be false")
+  },
+  
   'test .equal()': function(){
     var foo;
     should.equal(undefined, foo);

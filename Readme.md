@@ -45,6 +45,20 @@ our dummy getters such as _and_ also help express chaining:
 
     user.should.be.a('object').and.have.property('name', 'tj')
 
+## true
+
+Assert === true:
+
+    true.should.be.true
+    '1'.should.not.be.true
+
+## false
+
+Assert === false:
+
+   false.should.be.false
+   (0).should.not.be.false
+
 ## empty
 
 Asserts that length is 0:
