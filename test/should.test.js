@@ -3,21 +3,20 @@
  * Module dependencies.
  */
 
-var should = require('should')
-  , assert = require('assert');
+var should = require('should');
 
 function err(fn, msg) {
   try {
     fn();
-    assert.fail('expected an error');
+    should.fail('expected an error');
   } catch (err) {
-    assert.equal(msg, err.message);
+    should.equal(msg, err.message);
   }
 }
 
 module.exports = {
   'test .version': function(){
-    assert.match(should.version, /^\d+\.\d+\.\d+$/);
+    should.match(should.version, /^\d+\.\d+\.\d+$/);
   },
   
   'test assertion': function(){
