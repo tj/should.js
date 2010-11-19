@@ -14,6 +14,7 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 ## Example
 
     
+    user.should.have.property('name', 'tj')
 
 ## Installation
 

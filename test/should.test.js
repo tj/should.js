@@ -298,5 +298,13 @@ module.exports = {
   'test respondTo(method)': function(){
     'test'.should.respondTo('toString');
     'test'.should.not.respondTo('toBuffer');
+  },
+  
+  'test chaining': function(){
+    var user = { name: 'tj', pets: ['tobi', 'loki', 'jane', 'bandit'] };
+    user.should.have.property('pets').with.lengthOf(4);
+    err(function(){
+      user.should.have.property('pets').with.lengthOf(5);
+    }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
   }
 };
