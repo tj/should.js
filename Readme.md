@@ -142,6 +142,19 @@ Assert that the given property is a function:
 
     user.should.respondTo('email')
 
+## Express example
+
+For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:
+
+    var lib = require('mylib')
+      , should = require('should');
+  
+    module.exports = {
+      'test .version': function(){
+        lib.version.should.match(/^\d+\.\d+\.\d+$/);
+      }
+    };
+
 ## Running tests
 
 To run the tests for _should_ simple update your git submodules and run:
