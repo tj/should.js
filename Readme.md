@@ -1,9 +1,19 @@
+<pre>
+     _                 _     _ 
+ ___| |__   ___  _   _| | __| |
+/ __| '_ \ / _ \| | | | |/ _` |
+\__ \ | | | (_) | |_| | | (_| |
+|___/_| |_|\___/ \__,_|_|\__,_|
 
-# Should.js
+</pre>
 
-  _should_ is a test framework agnostic assertion library for [node](http://nodejs.org), following BDD-style conventions. For example `user.age.should.be.within(1, 90)` vs `assert.ok(user.age >= 1 && user.age <= 90)`.
+  _should_ is an expressive, test framework agnostic, assertion library for [node](http://nodejs.org). 
 
-_should_ literally extends node's _assert_ module, infact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `asset.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
+_should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `asset.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
+
+## Example
+
+    
 
 ## Installation
 
