@@ -16,11 +16,12 @@ function err(fn, msg) {
 
 module.exports = {
   'test .version': function(){
-    should.match(should.version, /^\d+\.\d+\.\d+$/);
+    should.version.should.match(/^\d+\.\d+\.\d+$/);
   },
   
   'test assertion': function(){
     'test'.should.be.a.string;
+    should.equal('foo', 'foo');
   },
   
   'test true': function(){
