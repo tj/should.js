@@ -59,6 +59,14 @@ Assert === false:
    false.should.be.false
    (0).should.not.be.false
 
+## arguments
+
+Assert `Arguments`:
+
+    var args = (function(){ return arguments; })(1,2,3);
+    args.should.be.arguments;
+    [].should.not.be.arguments;
+
 ## empty
 
 Asserts that length is 0:
