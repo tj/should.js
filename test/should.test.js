@@ -43,6 +43,12 @@ module.exports = {
     }, "expected '' to be false")
   },
   
+  'test arguments': function(){
+    var args = (function(){ return arguments; })(1,2,3);
+    args.should.be.arguments;
+    [].should.not.be.arguments;
+  },
+  
   'test .equal()': function(){
     var foo;
     should.equal(undefined, foo);
