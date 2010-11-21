@@ -56,8 +56,8 @@ Assert === true:
 
 Assert === false:
 
-   false.should.be.false
-   (0).should.not.be.false
+     false.should.be.false
+     (0).should.not.be.false
 
 ## arguments
 
