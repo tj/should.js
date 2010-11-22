@@ -18,7 +18,7 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 
 ## modifiers
 
- _should_'s assertion chaining provides an expressive way to build up an assertion, along with dummy getters such as _an_, _have_, and _be_, provided are what I am simply calling **modifiers**, which have a meaning effect on the assertion. An example of this is the _not_ getter, which negates the meaning, aka `user.should.not.have.property('name')`, note the user of _have_ as we could omit it and still construct a valid assertion.
+ _should_'s assertion chaining provides an expressive way to build up an assertion, along with dummy getters such as _an_, _have_, and _be_, provided are what I am simply calling **modifiers**, which have a meaning effect on the assertion. An example of this is the _not_ getter, which negates the meaning, aka `user.should.not.have.property('name')`. In the previous example note the use of _have_, as we could omit it and still construct a valid assertion.
 
 Some modifiers such as _include_ only have an effect with specific assertion methods, for example when asserting a substring like so: `str.should.include.string('test')`, we could omit _include_, but it helps express the meaning, however _keys_ has a strict effect, unless the _include_ modifier is used.
 
