@@ -1,12 +1,3 @@
-<pre>
-     _                 _     _ 
- ___| |__   ___  _   _| | __| |
-/ __| '_ \ / _ \| | | | |/ _` |
-\__ \ | | | (_) | |_| | | (_| |
-|___/_| |_|\___/ \__,_|_|\__,_|
-
-</pre>
-
   _should_ is an expressive, test framework agnostic, assertion library for [node](http://nodejs.org). 
 
 _should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `asset.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
