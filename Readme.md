@@ -36,6 +36,20 @@ our dummy getters such as _and_ also help express chaining:
 
     user.should.be.a('object').and.have.property('name', 'tj')
 
+## ok
+
+Assert truthfulness:
+
+    true.should.be.ok
+    'yay'.should.be.ok
+    (1).should.be.ok
+
+or negated:
+
+    false.should.not.be.ok
+    ''.should.not.be.ok
+    (0).should.not.be.ok
+
 ## true
 
 Assert === true:
