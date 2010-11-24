@@ -18,7 +18,11 @@ module.exports = {
   'test .version': function(){
     should.version.should.match(/^\d+\.\d+\.\d+$/);
   },
-  
+
+  'test double require': function(){
+    require('should').should.equal(should);
+  },
+
   'test assertion': function(){
     'test'.should.be.a.string;
     should.equal('foo', 'foo');
