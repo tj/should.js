@@ -3,6 +3,9 @@
  * Module dependencies.
  */
 
+//modules.makeRequire
+//require = require('remap/modules').makeRequire(module)
+
 var should = require('should');
 
 function err(fn, msg) {
@@ -350,5 +353,9 @@ module.exports = {
     }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
  
     user.should.be.a('object').and.have.property('name', 'tj');
+  },
+  'can require twice': function (assert){
+    should2 = require('should')
+    should.should.eql(should2)
   }
 };
