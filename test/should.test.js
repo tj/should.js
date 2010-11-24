@@ -3,9 +3,6 @@
  * Module dependencies.
  */
 
-//modules.makeRequire
-//require = require('remap/modules').makeRequire(module)
-
 var should = require('should');
 
 function err(fn, msg) {
