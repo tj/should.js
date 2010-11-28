@@ -354,5 +354,11 @@ module.exports = {
     }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
  
     user.should.be.a('object').and.have.property('name', 'tj');
+  },
+  'test should can require(\'should\') twice': function (){
+    should2 = require('should')
+    should.should.eql(should2)
   }
+  
+
 };
