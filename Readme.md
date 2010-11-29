@@ -201,11 +201,15 @@ Assert that the given property is a function:
     
 ## get more MESSAGE for your error
 
+Add a description to something you're gonna say should about.
+
     var describe = require('should').describe
 
     var it = 
       describe(42,"the ultimate answer to life the universe and everything")
     it.should.eql(6*9)
+    
+which will throw this message:
     
     AssertionError: on :"the ultimate answer to life the universe and everything" expected 42 to equal 54
     at Object.eql (...)
