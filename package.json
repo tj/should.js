@@ -4,8 +4,5 @@
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
   , "keywords": ["test", "bdd", "assert"]
   , "main": "./lib/should.js"
-  , "modules": {
-    "describe":"./lib/describe"
-    }
   , "engines": { "node": ">= 0.2.0" }
 }
