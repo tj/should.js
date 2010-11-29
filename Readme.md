@@ -198,6 +198,18 @@ but not fail when we omit a few:
 Assert that the given property is a function:
 
     user.should.respondTo('email')
+    
+## get more MESSAGE for your error
+
+    var describe = require('should').describe
+
+    var it = 
+      describe(42,"the ultimate answer to life the universe and everything")
+    it.should.eql(6*9)
+    
+    AssertionError: on :"the ultimate answer to life the universe and everything" expected 42 to equal 54
+    at Object.eql (...)
+    Et cetera!
 
 ## Express example
 
