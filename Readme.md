@@ -189,9 +189,9 @@ and will fail if you omit a key or two:
 using the _include_ modifier, we can check inclusion of a key,
 but not fail when we omit a few:
 
-    obj.should.have.keys('foo')
-    obj.should.have.keys('bar')
-    obj.should.not.have.keys('baz')
+    obj.should.include.keys('foo')
+    obj.should.include.keys('bar')
+    obj.should.not.include.keys('baz')
 
 ## respondTo
 
