@@ -244,6 +244,8 @@ Yes, yes it does, with a single getter _should_, and no it wont break your code,
 
 Copyright (c) 2010 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
 
+Copyright (c) 2011 Aseem Kishore &lt;aseem.kishore@gmail.com&gt;
+
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
 'Software'), to deal in the Software without restriction, including
