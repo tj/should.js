@@ -54,11 +54,11 @@ module.exports = {
   // static should.exist() fail:
   
   'test static should.exist() fail w/ null': function () {
-    err_should_exist(null)
+    err_should_exist(null);
   },
   
   'test static should.exist() fail w/ undefined': function () {
-    err_should_exist(undefined)
+    err_should_exist(undefined);
   },
   
   // static should.not.exist() pass:
@@ -74,27 +74,23 @@ module.exports = {
   // static should.not.exist() fail:
   
   'test static should.not.exist() fail w/ bool': function () {
-    err_should_not_exist(false)
+    err_should_not_exist(false);
   },
   
   'test static should.not.exist() fail w/ number': function () {
-    err_should_not_exist(0)
+    err_should_not_exist(0);
   },
   
   'test static should.not.exist() fail w/ string': function () {
-    err_should_not_exist('')
+    err_should_not_exist('');
   },
   
   'test static should.not.exist() fail w/ object': function () {
-    err_should_not_exist({})
+    err_should_not_exist({});
   },
   
   'test static should.not.exist() fail w/ array': function () {
-    err_should_not_exist([])
+    err_should_not_exist([]);
   },
-  
-  // TODO instance tests (e.g. `true.should.exist()`) if we implement them.
-  // not sure if instance is worth implementing; `foo.should.exist()` will often
-  // just not work if `foo` is null or undefined. thus only static for now.
   
 };
