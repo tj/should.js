@@ -1,4 +1,6 @@
-  _should_ is an expressive, test framework agnostic, assertion library for [node](http://nodejs.org). 
+_should_ is an expressive, readable, test framework agnostic, assertion library for [node](http://nodejs.org).
+  
+It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
 _should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `asset.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
 
@@ -11,26 +13,16 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 
     user.should.have.property('name', 'tj');
     user.should.have.property('pets').with.lengthOf(4)
+    
+    someAsyncTask(foo, function (err, result) {
+        should.not.exist(err);
+        should.exist(result);
+        result.bar.should.equal(foo);
+    });
 
 ## Installation
 
     $ npm install should
-
-## assert extras
-
-As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it has one extra convenience method:
-
-    should.exist('hello')
-    should.exist([])
-    should.exist(null)  // will throw
-
-This is equivalent to `should.ok`, which is equivalent to `assert.ok`, but reads a bit better. It gets better, though:
-
-    should.not.exist(false)
-    should.not.exist('')
-    should.not.exist({})    // will throw
-
-We may add more _assert_ extras in the future... ;)
 
 ## modifiers
 
@@ -51,6 +43,39 @@ which is essentially equivalent to below, however the property may not exist:
 our dummy getters such as _and_ also help express chaining:
 
     user.should.be.a('object').and.have.property('name', 'tj')
+
+## exist (static)
+
+The returned object from `require('should')` is the same object as `require('assert')`. So you can use `should` just like `assert`:
+
+    should.fail('expected an error!')
+    should.strictEqual(foo, bar)
+
+In general, using the Object prototype's _should_ is nicer than using these `assert` equivalents, because _should_ gives you access to the expressive and readable language described above:
+
+    foo.should.equal(bar)   // same as should.strictEqual(foo, bar) above
+
+The only exception, though, is when you can't be sure that a particular object exists. In that case, attempting to access the _should_ property may throw a TypeError:
+
+    foo.should.equal(bar)   // throws if foo is null or undefined!
+
+For this case, `require('should')` extends `require('assert')` with an extra convenience method to check whether an object exists:
+
+    should.exist({})
+    should.exist([])
+    should.exist('')
+    should.exist(0)
+    should.exist(null)      // will throw
+    should.exist(undefined) // will throw
+
+You can also check the negation:
+
+    should.not.exist(undefined)
+    should.not.exist(null)
+    should.not.exist('')    // will throw
+    should.not.exist({})    // will throw
+
+Once you know an object exists, you can safely use the _should_ property on it.
 
 ## ok
 
