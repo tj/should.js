@@ -10,7 +10,8 @@ function err(fn, msg) {
     fn();
     should.fail('expected an error');
   } catch (err) {
-    should.equal(msg, err.message);
+    should.exist(err.message);
+    err.message.should.equal(msg);
   }
 }
 
@@ -26,6 +27,27 @@ module.exports = {
   'test assertion': function(){
     'test'.should.be.a.string;
     should.equal('foo', 'foo');
+  },
+  
+  'test existence': function(){
+    should.exist('test');
+    should.exist(0);
+    should.exist('');
+    
+    should.not.exist(null);
+    should.not.exist(undefined);
+    
+    err(function(){
+      should.exist(null);
+    }, "expected null to exist");
+    
+    err(function(){
+      should.not.exist(false);
+    }, "expected false to not exist");
+    
+    err(function(){
+      should.not.exist('', 'test assertion message!');
+    }, 'test assertion message!');
   },
   
   'test true': function(){
