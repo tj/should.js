@@ -1,4 +1,10 @@
 
+0.1.0 / 2011-04-06 
+==================
+
+  * Added `should.exist(obj)` [aseemk]
+  * Added `should.not.exist(obj)` [aseemk]
+
 0.0.4 / 2010-11-24 
 ==================
 

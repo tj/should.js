@@ -267,7 +267,8 @@ Yes, yes it does, with a single getter _should_, and no it wont break your code,
 
 (The MIT License)
 
-Copyright (c) 2010 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+Copyright (c) 2010-2011 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+Copyright (c) 2011 Aseem Kishore &lt;aseem.kishore@gmail.com&gt;
 
 Copyright (c) 2011 Aseem Kishore &lt;aseem.kishore@gmail.com&gt;
 
