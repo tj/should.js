@@ -24,6 +24,22 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 
     $ npm install should
 
+## assert extras
+
+As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it has one extra convenience method:
+
+    should.exist('hello')
+    should.exist([])
+    should.exist(null)  // will throw
+
+This is equivalent to `should.ok`, which is equivalent to `assert.ok`, but reads a bit better. It gets better, though:
+
+    should.not.exist(false)
+    should.not.exist('')
+    should.not.exist({})    // will throw
+
+We may add more _assert_ extras in the future... ;)
+
 ## modifiers
 
  _should_'s assertion chaining provides an expressive way to build up an assertion, along with dummy getters such as _an_, _have_, and _be_, provided are what I am simply calling **modifiers**, which have a meaning effect on the assertion. An example of this is the _not_ getter, which negates the meaning, aka `user.should.not.have.property('name')`. In the previous example note the use of _have_, as we could omit it and still construct a valid assertion.
