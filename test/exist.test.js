@@ -31,16 +31,16 @@ module.exports = {
   
   // static should.exist() pass:
   
-  'test static should.exist() pass w/ true': function () {
-    should.exist(true);
+  'test static should.exist() pass w/ bool': function () {
+    should.exist(false);
   },
   
   'test static should.exist() pass w/ number': function () {
-    should.exist(42);
+    should.exist(0);
   },
   
   'test static should.exist() pass w/ string': function () {
-    should.exist('hello');
+    should.exist('');
   },
   
   'test static should.exist() pass w/ object': function () {
@@ -53,18 +53,6 @@ module.exports = {
   
   // static should.exist() fail:
   
-  'test static should.exist() fail w/ false': function () {
-    err_should_exist(false)
-  },
-  
-  'test static should.exist() fail w/ zero': function () {
-    err_should_exist(0)
-  },
-  
-  'test static should.exist() fail w/ empty string': function () {
-    err_should_exist('')
-  },
-  
   'test static should.exist() fail w/ null': function () {
     err_should_exist(null)
   },
@@ -74,18 +62,6 @@ module.exports = {
   },
   
   // static should.not.exist() pass:
-  
-  'test static should.not.exist() pass w/ false': function () {
-    should.not.exist(false);
-  },
-  
-  'test static should.not.exist() pass w/ zero': function () {
-    should.not.exist(0);
-  },
-  
-  'test static should.not.exist() pass w/ empty string': function () {
-    should.not.exist('');
-  },
   
   'test static should.not.exist() pass w/ null': function () {
     should.not.exist(null);
@@ -97,16 +73,16 @@ module.exports = {
   
   // static should.not.exist() fail:
   
-  'test static should.not.exist() fail w/ true': function () {
-    err_should_not_exist(true)
+  'test static should.not.exist() fail w/ bool': function () {
+    err_should_not_exist(false)
   },
   
   'test static should.not.exist() fail w/ number': function () {
-    err_should_not_exist(42)
+    err_should_not_exist(0)
   },
   
   'test static should.not.exist() fail w/ string': function () {
-    err_should_not_exist('hello')
+    err_should_not_exist('')
   },
   
   'test static should.not.exist() fail w/ object': function () {
