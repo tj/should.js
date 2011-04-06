@@ -59,21 +59,10 @@ The only exception, though, is when you can't be sure that a particular object e
 
     foo.should.equal(bar)   // throws if foo is null or undefined!
 
-For this case, `require('should')` extends `require('assert')` with an extra convenience method to check whether an object exists:
+For this case, `require('should')` extends `require('assert')` with extra convenience methods to check whether an object exists or not:
 
-    should.exist({})
-    should.exist([])
-    should.exist('')
-    should.exist(0)
-    should.exist(null)      // will throw
-    should.exist(undefined) // will throw
-
-You can also check the negation:
-
-    should.not.exist(undefined)
-    should.not.exist(null)
-    should.not.exist('')    // will throw
-    should.not.exist({})    // will throw
+    should.exist(foo)       // asserts that foo is not null or undefined
+    should.not.exist(foo)
 
 Once you know an object exists, you can safely use the _should_ property on it.
 
