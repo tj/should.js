@@ -27,6 +27,10 @@ module.exports = {
   'test assertion': function(){
     'test'.should.be.a.string;
     should.equal('foo', 'foo');
+    
+    err(function(){
+      should.fail('custom failure message');
+    }, 'custom failure message');
   },
   
   'test existence': function(){
