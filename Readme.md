@@ -48,7 +48,7 @@ our dummy getters such as _and_ also help express chaining:
 
 All assertion methods accept an optional message as the last parameter, which gets used instead of the default message in case the assertion fails.
 
-    result.should.be.respondTo('serialize', 'Non-serializable result.')
+    result.should.respondTo('serialize', 'Non-serializable result.')
 
 Note that this only applies to methods that take an argument and not to properties like `ok` or `empty` currently.
 
