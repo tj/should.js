@@ -227,6 +227,28 @@ module.exports = {
     }, "expected 'asd' to have a property 'foo'");
   },
   
+  'test expose(name)': function(){
+    'test'.should.expose('length');
+    'asd'.should.expose('constructor');
+    
+    err(function(){
+      'asd'.should.expose('foo');
+    }, "expected 'asd' to expose 'foo'");
+    
+    [].should.expose('length');
+    [].should.not.expose('0');
+    
+    [null].should.expose('0');
+    ({bool: false}).should.expose('bool');
+    
+    'asd'.should.not.expose('foo');
+    [null].should.not.expose('1');
+    
+    err(function(){
+      [null].should.not.expose(0);
+    }, "expected [ null ] to not expose 0")
+  },
+  
   'test property(name, val)': function(){
     'test'.should.have.property('length', 4);
     'asd'.should.have.property('constructor', String);
@@ -397,12 +419,9 @@ module.exports = {
       Function.should.not.respondTo('bind', 'yes it should');
     }, 'yes it should');
     
-    // TODO add should.define like should.have.property but w/out val arg?
-    // currently, this is the only way to assert should.have.property('foo') with message:
-    // note how undefined is explicitly needed, can't pass null.
     err(function(){
-      [1,2,3].should.have.property('woo', undefined, 'what array has that?');
-    }, 'what array has that?');
+      [1,2,3].should.expose(4, 'range error');
+    }, 'range error');
     
     err(function(){
       [1,2,3].should.have.property('0', 0, 'zero-based indexing');

@@ -55,11 +55,11 @@ Note that this only applies to methods that take an argument and not to properti
 There are two gotchas to be aware of:
 
     // to assert that foo has property bar with a custom message,
-    // need to pass undefined as the expected value of that property:
-    foo.should.have.property('bar', undefined, 'custom message')
+    // use expose() instead of property():
+    foo.should.expose('bar', 'custom message')
     
     // to assert that foo has or includes one or more keys with a custom message,
-    // need to pass the keys as an array instead of separate args:
+    // pass the keys as an array instead of separate args:
     foo.should.include.keys(['bar'], 'custom message')
 
 See _property_ and _keys_ for details.
@@ -204,6 +204,17 @@ Substring assertion:
     'foobar'.should.include.string('bar')
     'foobar'.should.not.include.string('baz')
 
+## expose
+
+Assert the object exposes a given property or method:
+
+    user.should.expose('name')
+    [1,2,3].should.expose('forEach')
+
+This is similar to _property_, except it doesn't take an optional value, allowing you to more naturally pass a custom assertion message:
+
+    arguments.should.expose('caller', 'are we in ES5 strict mode?')
+
 ## property
 
 Assert property exists and has optional value:
@@ -213,13 +224,13 @@ Assert property exists and has optional value:
     user.should.not.have.property('rawr')
     user.should.not.have.property('age', 0)
 
-Note that if you want to assert with a custom message, you _must_ pass a value. If you only want to assert that the property exists, not that it should have a particular value, pass _undefined_ as the value.
+Note that if you want to assert with a custom message, you _must_ pass a value. If you only want to assert that the property exists, use _expose_:
 
     // wrong: this will assert that foo.bar === 'custom message'
     foo.should.have.property('bar', 'custom message')
     
     // right: this will assert that foo.bar exists
-    foo.should.have.property('bar', undefined, 'custom message')
+    foo.should.expose('bar', 'custom message')
 
 ## ownProperty
 
