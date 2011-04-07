@@ -17,7 +17,7 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
     someAsyncTask(foo, function (err, result) {
         should.not.exist(err);
         should.exist(result);
-        result.bar.should.equal(foo);
+        result.bar.should.equal(foo, 'why the heck would they not be equal?!');
     });
 
 ## Installation
@@ -43,6 +43,26 @@ which is essentially equivalent to below, however the property may not exist:
 our dummy getters such as _and_ also help express chaining:
 
     user.should.be.a('object').and.have.property('name', 'tj')
+
+## messages
+
+All assertion methods accept an optional message as the last parameter, which gets used instead of the default message in case the assertion fails.
+
+    result.should.be.respondTo('serialize', 'Non-serializable result.')
+
+Note that this only applies to methods that take an argument and not to properties like `ok` or `empty` currently.
+
+There are two gotchas to be aware of:
+
+    // to assert that foo has property bar with a custom message,
+    // need to pass undefined as the expected value of that property:
+    foo.should.have.property('bar', undefined, 'custom message')
+    
+    // to assert that foo has or includes one or more keys with a custom message,
+    // need to pass the keys as an array instead of separate args:
+    foo.should.include.keys(['bar'], 'custom message')
+
+See _property_ and _keys_ for details.
 
 ## exist (static)
 
@@ -193,6 +213,14 @@ Assert property exists and has optional value:
     user.should.not.have.property('rawr')
     user.should.not.have.property('age', 0)
 
+Note that if you want to assert with a custom message, you _must_ pass a value. If you only want to assert that the property exists, not that it should have a particular value, pass _undefined_ as the value.
+
+    // wrong: this will assert that foo.bar === 'custom message'
+    foo.should.have.property('bar', 'custom message')
+    
+    // right: this will assert that foo.bar exists
+    foo.should.have.property('bar', undefined, 'custom message')
+
 ## ownProperty
 
 Assert own property (on the immediate object):
@@ -222,6 +250,14 @@ but not fail when we omit a few:
     obj.should.include.keys('foo')
     obj.should.include.keys('bar')
     obj.should.not.include.keys('baz')
+
+Note that if you want to assert with a custom message, you must pass the keys as an array.
+
+    // wrong: this will assert that foo has 'custom message' as a key
+    foo.should.have.keys('bar', 'custom message')
+    
+    // right: this will assert that foo has the given keys
+    foo.should.have.keys(['bar'], 'custom message')
 
 ## respondTo
 

@@ -240,6 +240,12 @@ module.exports = {
     }, "expected 'asd' to not have a property 'length' of 3");
     
     err(function(){
+      'asd'.should.have.property('foo');
+    }, "expected 'asd' to have a property 'foo'");
+    
+    'asd'.should.not.have.property('foo');
+    
+    err(function(){
       'asd'.should.not.have.property('foo', 3);
     }, "'asd' has no property 'foo'");
     
@@ -376,5 +382,49 @@ module.exports = {
     }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
  
     user.should.be.a('object').and.have.property('name', 'tj');
+  },
+  
+  'test messages': function(){
+    err(function(){
+      true.should.equal(1, 'strict equality');
+    }, 'strict equality');
+    
+    err(function(){
+      'hello'.should.match(/world/, 'regexp no match!');
+    }, 'regexp no match!');
+    
+    err(function(){
+      Function.should.not.respondTo('bind', 'yes it should');
+    }, 'yes it should');
+    
+    // TODO add should.define like should.have.property but w/out val arg?
+    // currently, this is the only way to assert should.have.property('foo') with message:
+    // note how undefined is explicitly needed, can't pass null.
+    err(function(){
+      [1,2,3].should.have.property('woo', undefined, 'what array has that?');
+    }, 'what array has that?');
+    
+    err(function(){
+      [1,2,3].should.have.property('0', 0, 'zero-based indexing');
+    }, 'zero-based indexing');
+    
+    err(function(){
+      [1,2,3].should.not.have.property('0', 1, 'two wrongs a right do not make');
+    }, 'two wrongs a right do not make');
+    
+    // note that this case should *not* use our custom message; it's an error.
+    // TODO perhaps this behavior should change; this could be an assertion.
+    err(function(){
+      [1,2,3].should.not.have.property('3', 4, 'five-o hawaii');
+    }, "[ 1, 2, 3 ] has no property '3'");
+    
+    err(function(){
+      ({foo: 'bar'}).should.not.include.keys(['foo'], 'array message');
+    }, 'array message');
+    
+    // note that this case should *not* use our custom message; variable number of keys.
+    err(function(){
+      ({foo: 'bar'}).should.have.keys('foo', 'varargs message');
+    }, "expected { foo: 'bar' } to have keys 'foo', and 'varargs message'");
   }
 };
