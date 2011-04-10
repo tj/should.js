@@ -52,6 +52,14 @@ module.exports = {
     err(function(){
       should.not.exist('', 'test assertion message!');
     }, 'test assertion message!');
+    
+    err(function(){
+      try {
+        foo.bar;
+      } catch (e) {
+        should.not.exist(e);
+      }
+    }, 'ReferenceError: foo is not defined');
   },
   
   'test true': function(){
