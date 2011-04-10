@@ -6,12 +6,16 @@
 var should = require('should');
 
 function err(fn, msg) {
+  var error;
   try {
     fn();
-    should.fail('expected an error');
   } catch (err) {
+    error = err;
     should.exist(err.message);
     err.message.should.equal(msg);
+  }
+  if (!error) {
+    should.fail('expected an error');
   }
 }
 
