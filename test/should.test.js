@@ -6,12 +6,16 @@
 var should = require('should');
 
 function err(fn, msg) {
+  var error;
   try {
     fn();
-    should.fail('expected an error');
   } catch (err) {
+    error = err;
     should.exist(err.message);
     err.message.should.equal(msg);
+  }
+  if (!error) {
+    should.fail('expected an error');
   }
 }
 
@@ -52,6 +56,14 @@ module.exports = {
     err(function(){
       should.not.exist('', 'test assertion message!');
     }, 'test assertion message!');
+    
+    err(function(){
+      try {
+        foo.bar;
+      } catch (e) {
+        should.not.exist(e);
+      }
+    }, 'ReferenceError: foo is not defined');
   },
   
   'test true': function(){
