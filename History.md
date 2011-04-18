@@ -1,4 +1,10 @@
 
+0.2.0 / 2011-04-17 
+==================
+
+  * Added `res.should.have.status(code)` method
+  * Added `res.should.have.header(field, val)` method
+
 0.1.0 / 2011-04-06 
 ==================
 
