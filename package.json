@@ -6,4 +6,7 @@
   , "keywords": ["test", "bdd", "assert"]
   , "main": "./lib/should.js"
   , "engines": { "node": ">= 0.2.0" }
+  , "scripts" : {
+    "test": "expresso"
+  }
 }
