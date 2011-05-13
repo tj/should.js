@@ -253,7 +253,29 @@ module.exports = {
       'foobar'.should.not.include.string('bar');
     }, "expected 'foobar' to not include 'bar'");
   },
-  
+
+  'test object()': function(){
+    var obj = {foo: 'bar', baz: {baaz: 42}, qux: 13};
+    obj.should.include.object({foo: 'bar'});
+    obj.should.include.object({baz: {baaz: 42}});
+    obj.should.include.object({foo: 'bar', qux: 13});
+    obj.should.not.include.object({foo: 'baz'});
+    obj.should.not.include.object({foo: 'bar', baz: {baaz: -42}});
+
+    err(function(){
+      (3).should.include.object({foo: 'bar'});
+    }, "expected 3 to be a object");
+
+    err(function(){
+      var obj = {foo: 'bar'};
+      obj.should.include.object({foo: 'baz'});
+    }, "expected { foo: 'bar' } to include { foo: 'baz' }");
+
+    err(function(){
+      var obj = {foo: 'bar'};
+      obj.should.not.include.object({foo: 'bar'});
+    }, "expected { foo: 'bar' } to not include { foo: 'bar' }");
+  },
   'test contain()': function(){
     ['foo', 'bar'].should.contain('foo');
     ['foo', 'bar'].should.contain('foo');
