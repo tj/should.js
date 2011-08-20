@@ -1,4 +1,9 @@
 
+0.3.0 / 2011-08-20 
+==================
+
+  * Added assertion for inclusion of an object: `foo.should.include.object({ foo: 'bar' })`
+
 0.2.1 / 2011-05-13 
 ==================
 
