@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var should = require('should');
+var should = require('../');
 var util = require('util');
 
 function err(fn, msg) {
