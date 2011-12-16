@@ -321,6 +321,9 @@ module.exports = {
   },
 
   'test throw()': function(){
+    (function(){}).should.not.throw();
+    (function(){ throw new Error('fail') }).should.throw();
+
     err(function(){
       (function(){}).should.throw();
     }, 'expected an exception to be thrown');
