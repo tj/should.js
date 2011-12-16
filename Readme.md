@@ -229,6 +229,12 @@ Assert own property (on the immediate object):
 
     ({ foo: 'bar' }).should.have.ownProperty('foo')
 
+## status(code)
+
+ Asserts that `.statusCode` is `code`:
+
+   res.should.have.status(200);
+
 ## header(field[, value])
 
  Asserts that a `.headers` object with `field` and optional `value` are present:
