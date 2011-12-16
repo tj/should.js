@@ -12,12 +12,12 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
     };
 
     user.should.have.property('name', 'tj');
-    user.should.have.property('pets').with.lengthOf(4)
+    user.should.have.property('pets').with.lengthOf(4);
     
-    someAsyncTask(foo, function (err, result) {
-        should.not.exist(err);
-        should.exist(result);
-        result.bar.should.equal(foo);
+    someAsyncTask(foo, function(err, result){
+      should.not.exist(err);
+      should.exist(result);
+      result.bar.should.equal(foo);
     });
 
 ## Installation
