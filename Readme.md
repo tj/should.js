@@ -209,10 +209,10 @@ Substring assertion:
 
 Assert inclusion of object:
 
-    var obj = {foo: 'bar', baz: {baaz: 42}};
-    obj.should.include.object({foo: 'bar'});
-    obj.should.include.object({baz: {baaz: 42}});
-    obj.should.not.include.object({foo: 'baz'});
+    var obj = { foo: 'bar', baz: { baaz: 42 }};
+    obj.should.include.object({ foo: 'bar' });
+    obj.should.include.object({ baz: { baaz: 42 }});
+    obj.should.not.include.object({ foo: 'baz' });
 
 ## property
 
