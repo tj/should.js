@@ -260,13 +260,6 @@ and will fail if you omit a key or two:
     obj.should.have.keys('foo', 'bar');
     obj.should.have.keys(['foo', 'bar']);
 
-using the _include_ modifier, we can check inclusion of a key,
-but not fail when we omit a few:
-
-    obj.should.include.keys('foo')
-    obj.should.include.keys('bar')
-    obj.should.not.include.keys('baz')
-
 ## Express example
 
 For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:

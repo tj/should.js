@@ -267,74 +267,47 @@ module.exports = {
     }, "expected [ 'bar', 'foo' ] to not include 'foo'");
   },
   
-  // 'test keys(array)': function(){
-  //   ({ foo: 1 }).should.have.keys(['foo']);
-  //   ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
-  //   ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
-  //   ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('foo', 'bar');
-  //   ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('bar', 'foo');
-  //   ({ foo: 1, bar: 2, baz: 3 }).should.include.keys('baz');
-  // 
-  //   ({ foo: 1, bar: 2 }).should.include.keys('foo');
-  //   ({ foo: 1, bar: 2 }).should.include.keys('bar', 'foo');
-  //   ({ foo: 1, bar: 2 }).should.include.keys(['foo']);
-  //   ({ foo: 1, bar: 2 }).should.include.keys(['bar']);
-  //   ({ foo: 1, bar: 2 }).should.include.keys(['bar', 'foo']);
-  // 
-  //   ({ foo: 1, bar: 2 }).should.not.have.keys('baz');
-  //   ({ foo: 1, bar: 2 }).should.not.have.keys('foo', 'baz');
-  //   ({ foo: 1, bar: 2 }).should.not.include.keys('baz');
-  //   ({ foo: 1, bar: 2 }).should.not.include.keys('foo', 'baz');
-  //   ({ foo: 1, bar: 2 }).should.not.include.keys('baz', 'foo');
-  // 
-  //   err(function(){
-  //     ({ foo: 1 }).should.have.keys();
-  //   }, "keys required");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.have.keys([]);
-  //   }, "keys required");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.not.have.keys([]);
-  //   }, "keys required");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.include.keys([]);
-  //   }, "keys required");
-  // 
-  //   err(function(){
-  //     ({ foo: 1 }).should.have.keys(['bar']);
-  //   }, "expected { foo: 1 } to have key 'bar'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.have.keys(['bar', 'baz']);
-  //   }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
-  //   }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
-  // 
-  //   err(function(){
-  //     ({ foo: 1 }).should.not.have.keys(['foo']);
-  //   }, "expected { foo: 1 } to not have key 'foo'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.not.have.keys(['foo']);
-  //   }, "expected { foo: 1 } to not have key 'foo'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
-  //   }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.not.include.keys(['foo']);
-  //   }, "expected { foo: 1 } to not include key 'foo'");
-  //   
-  //   err(function(){
-  //     ({ foo: 1 }).should.include.keys('foo', 'bar');
-  //   }, "expected { foo: 1 } to include keys 'foo', and 'bar'");
-  // },
+  'test keys(array)': function(){
+    ({ foo: 1 }).should.have.keys(['foo']);
+    ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
+    ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys();
+    }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys([]);
+    }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys([]);
+    }, "keys required");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar']);
+    }, "expected { foo: 1 } to have key 'bar'");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
+    
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
+  
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+    
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+    
+    err(function(){
+      ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
+    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+  },
   
   'test chaining': function(){
     var user = { name: 'tj', pets: ['tobi', 'loki', 'jane', 'bandit'] };
