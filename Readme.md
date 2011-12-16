@@ -259,12 +259,6 @@ but not fail when we omit a few:
     obj.should.include.keys('bar')
     obj.should.not.include.keys('baz')
 
-## respondTo
-
-Assert that the given property is a function:
-
-    user.should.respondTo('email')
-
 ## Express example
 
 For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:
