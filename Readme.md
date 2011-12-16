@@ -235,13 +235,13 @@ Assert own property (on the immediate object):
 
     ({ foo: 'bar' }).should.have.ownProperty('foo')
 
-## contain
+## include
 
 Assert array value:
 
-    [1,2,3].should.contain(3)
-    [1,2,3].should.contain(2)
-    [1,2,3].should.not.contain(4)
+    [1,2,3].should.include(3)
+    [1,2,3].should.include(2)
+    [1,2,3].should.not.include(4)
 
 ## keys
 
