@@ -318,5 +318,17 @@ module.exports = {
     }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
  
     user.should.be.a('object').and.have.property('name', 'tj');
+  },
+
+  'test throw()': function(){
+    err(function(){
+      (function(){}).should.throw();
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){
+        throw new Error('fail');
+      }).should.not.throw();
+    }, 'expected no exception to be thrown, got "fail"');
   }
 };
