@@ -236,24 +236,6 @@ module.exports = {
     }, "expected { length: 12 } to not have own property 'length'");
   },
   
-  // 'test string()': function(){
-  //   'foobar'.should.include.string('bar');
-  //   'foobar'.should.include.string('foo');
-  //   'foobar'.should.not.include.string('baz');
-  // 
-  //   err(function(){
-  //     (3).should.include.string('baz');
-  //   }, "expected 3 to be a string");
-  //   
-  //   err(function(){
-  //     'foobar'.should.include.string('baz');
-  //   }, "expected 'foobar' to include 'baz'");
-  //   
-  //   err(function(){
-  //     'foobar'.should.not.include.string('bar');
-  //   }, "expected 'foobar' to not include 'bar'");
-  // },
-
   // 'test object()': function(){
   //   var obj = {foo: 'bar', baz: {baaz: 42}, qux: 13};
   //   obj.should.include.object({foo: 'bar'});
@@ -276,6 +258,20 @@ module.exports = {
   //     obj.should.not.include.object({foo: 'bar'});
   //   }, "expected { foo: 'bar' } to not include { foo: 'bar' }");
   // },
+
+  'test include() with string': function(){
+    'foobar'.should.include('bar');
+    'foobar'.should.include('foo');
+    'foobar'.should.not.include('baz');
+  
+    err(function(){
+      'foobar'.should.include('baz');
+    }, "expected 'foobar' to include 'baz'");
+    
+    err(function(){
+      'foobar'.should.not.include('bar');
+    }, "expected 'foobar' to not include 'bar'");
+  },
 
   'test include() with array': function(){
     ['foo', 'bar'].should.include('foo');

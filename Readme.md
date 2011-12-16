@@ -243,13 +243,22 @@ Assert own property (on the immediate object):
    res.should.have.header('Content-Length', '123');
    res.should.have.header('content-length', '123');
 
-## include
+## include(obj)
+
+Assert that the given `obj` is present via `indexOf()`:
 
 Assert array value:
 
     [1,2,3].should.include(3)
     [1,2,3].should.include(2)
     [1,2,3].should.not.include(4)
+
+Assert substring:
+
+    'foo bar baz'.should.include('foo')
+    'foo bar baz'.should.include('bar')
+    'foo bar baz'.should.include('baz')
+    'foo bar baz'.should.not.include('FOO')
 
 ## keys
 
