@@ -251,6 +251,22 @@ Assert substring:
     'foo bar baz'.should.include('baz')
     'foo bar baz'.should.not.include('FOO')
 
+## throw()
+
+  Assert exceptions:
+
+```js
+(function(){
+ 
+}).should.not.throw();
+```
+
+```js
+(function(){
+  throw new Error('fail');
+}).should.throw();
+```
+
 ## keys
 
 Assert own object keys, which must match _exactly_,
