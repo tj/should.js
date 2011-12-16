@@ -235,29 +235,6 @@ module.exports = {
       ({ length: 12 }).should.not.have.ownProperty('length');
     }, "expected { length: 12 } to not have own property 'length'");
   },
-  
-  // 'test object()': function(){
-  //   var obj = {foo: 'bar', baz: {baaz: 42}, qux: 13};
-  //   obj.should.include.object({foo: 'bar'});
-  //   obj.should.include.object({baz: {baaz: 42}});
-  //   obj.should.include.object({foo: 'bar', qux: 13});
-  //   obj.should.not.include.object({foo: 'baz'});
-  //   obj.should.not.include.object({foo: 'bar', baz: {baaz: -42}});
-  // 
-  //   err(function(){
-  //     (3).should.include.object({foo: 'bar'});
-  //   }, "expected 3 to be a object");
-  // 
-  //   err(function(){
-  //     var obj = {foo: 'bar'};
-  //     obj.should.include.object({foo: 'baz'});
-  //   }, "expected { foo: 'bar' } to include { foo: 'baz' }");
-  // 
-  //   err(function(){
-  //     var obj = {foo: 'bar'};
-  //     obj.should.not.include.object({foo: 'bar'});
-  //   }, "expected { foo: 'bar' } to not include { foo: 'bar' }");
-  // },
 
   'test include() with string': function(){
     'foobar'.should.include('bar');
