@@ -229,6 +229,14 @@ Assert own property (on the immediate object):
 
     ({ foo: 'bar' }).should.have.ownProperty('foo')
 
+## header(field[, value])
+
+ Asserts that a `.headers` object with `field` and optional `value` are present:
+
+   res.should.have.header('content-length');
+   res.should.have.header('Content-Length', '123');
+   res.should.have.header('content-length', '123');
+
 ## include
 
 Assert array value:
