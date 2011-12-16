@@ -1,4 +1,17 @@
 
+0.4.0 / 2011-12-16 
+==================
+
+  * Added `.should.throw()`
+  * Added `.include()` support for strings
+  * Added `.include()` support for arrays
+  * Removed `keys()` `.include` modifier support
+  * Removed `.object()`
+  * Removed `.string()`
+  * Removed `.contain()`
+  * Removed `.respondTo()` rubyism
+  * expresso -> mocha
+
 0.3.2 / 2011-10-24 
 ==================
 
