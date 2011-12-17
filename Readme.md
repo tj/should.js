@@ -240,6 +240,12 @@ Assert own property (on the immediate object):
   
       res.should.be.json
 
+## json
+
+  Assert that Content-Type is "text/html; charset=utf-8"
+  
+      res.should.be.html
+
 ## include(obj)
 
 Assert that the given `obj` is present via `indexOf()`:
