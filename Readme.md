@@ -234,6 +234,12 @@ Assert own property (on the immediate object):
    res.should.have.header('Content-Length', '123');
    res.should.have.header('content-length', '123');
 
+## json
+
+  Assert that Content-Type is "application/json; charset=utf-8"
+  
+      res.should.be.json
+
 ## include(obj)
 
 Assert that the given `obj` is present via `indexOf()`:
