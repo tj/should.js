@@ -240,7 +240,7 @@ Assert own property (on the immediate object):
   
       res.should.be.json
 
-## json
+## html
 
   Assert that Content-Type is "text/html; charset=utf-8"
   
