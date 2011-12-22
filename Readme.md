@@ -240,7 +240,7 @@ Assert own property (on the immediate object):
 
 ## include(obj)
 
-Assert that the given `obj` is present via `indexOf()`:
+Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf:
 
 Assert array value:
 
