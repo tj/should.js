@@ -197,14 +197,6 @@ Assert _length_ property exists and has a value of the given number:
 
 Aliases: _lengthOf_
 
-## string
-
-Substring assertion:
-
-    'foobar'.should.include('foo')
-    'foobar'.should.include('bar')
-    'foobar'.should.not.include('baz')
-
 ## property
 
 Assert property exists and has optional value:
