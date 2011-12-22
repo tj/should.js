@@ -201,9 +201,9 @@ Aliases: _lengthOf_
 
 Substring assertion:
 
-    'foobar'.should.include.string('foo')
-    'foobar'.should.include.string('bar')
-    'foobar'.should.not.include.string('baz')
+    'foobar'.should.include('foo')
+    'foobar'.should.include('bar')
+    'foobar'.should.not.include('baz')
 
 ## property
 
