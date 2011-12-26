@@ -255,6 +255,14 @@ Assert substring:
     'foo bar baz'.should.include('baz')
     'foo bar baz'.should.not.include('FOO')
 
+## includeEql(obj)
+
+    Assert that an object equal to the given `obj` is present in an Array:
+
+    [[1],[2],[3]].should.includeEql([3])
+    [[1],[2],[3]].should.includeEql([2])
+    [[1],[2],[3]].should.not.includeEql([4])
+
 ## throw()
 
   Assert exceptions:

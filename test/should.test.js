@@ -267,6 +267,21 @@ module.exports = {
     }, "expected [ 'bar', 'foo' ] to not include 'foo'");
   },
   
+  'test includeEql() with array': function(){
+    [['foo'], ['bar']].should.includeEql(['foo']);
+    [['foo'], ['bar']].should.includeEql(['bar']);
+    [['foo'], ['bar']].should.not.includeEql(['baz']);
+    [].should.not.includeEql(['baz']);
+    
+    err(function(){
+      [['foo']].should.includeEql(['bar']);
+    }, "expected [ [ 'foo' ] ] to include an object equal to [ 'bar' ]");
+    
+    err(function(){
+      [['foo']].should.not.includeEql(['foo']);
+    }, "expected [ [ 'foo' ] ] to not include an object equal to [ 'foo' ]");
+  },
+  
   'test keys(array)': function(){
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
