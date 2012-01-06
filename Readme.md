@@ -222,9 +222,9 @@ Assert own property (on the immediate object):
 
  Asserts that a `.headers` object with `field` and optional `value` are present:
 
-   res.should.have.header('content-length');
-   res.should.have.header('Content-Length', '123');
-   res.should.have.header('content-length', '123');
+     res.should.have.header('content-length');
+     res.should.have.header('Content-Length', '123');
+     res.should.have.header('content-length', '123');
 
 ## json
 

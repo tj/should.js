@@ -272,7 +272,7 @@ module.exports = {
     [['foo'], ['bar']].should.includeEql(['bar']);
     [['foo'], ['bar']].should.not.includeEql(['baz']);
     [].should.not.includeEql(['baz']);
-    
+
     err(function(){
       [['foo']].should.includeEql(['bar']);
     }, "expected [ [ 'foo' ] ] to include an object equal to [ 'bar' ]");
