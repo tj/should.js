@@ -298,7 +298,7 @@ As it can often be difficult to assertain exactly where failed assertions are co
       at Object.eql (/Users/swift/code/should.js/node_modules/should/lib/should.js:280:10)
       ...
 
-The methods that support this optional description are: `eql`, `equal`, `within`, `a`, `instanceof`, `above`, `below`, `match`, `length`, `property`, `ownProperty`, `include`, `includeEql`, and `throw`.
+The methods that support this optional description are: `eql`, `equal`, `within`, `a`, `instanceof`, `above`, `below`, `match`, `length`, `property`, `ownProperty`, `include`, and `includeEql`.
 
 ## Express example
 
