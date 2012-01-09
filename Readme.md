@@ -288,6 +288,18 @@ and will fail if you omit a key or two:
     obj.should.have.keys('foo', 'bar');
     obj.should.have.keys(['foo', 'bar']);
 
+## Optional Error description
+
+As it can often be difficult to assertain exactly where failed assertions are comming from in your tests, an optional description parameter can be passed to several should matchers. The description will follow the failed assertion in the error:
+
+    (1).should.eql(0, 'some useful description')
+
+    AssertionError: expected 1 to equal 0 | some useful description
+      at Object.eql (/Users/swift/code/should.js/node_modules/should/lib/should.js:280:10)
+      ...
+
+The methods that support this optional description are: `eql`, `equal`, `within`, `a`, `instanceof`, `above`, `below`, `match`, `length`, `property`, `ownProperty`, `include`, `includeEql`, and `throw`.
+
 ## Express example
 
 For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:
