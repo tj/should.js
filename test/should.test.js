@@ -348,5 +348,29 @@ module.exports = {
         throw new Error('fail');
       }).should.not.throw();
     }, 'expected no exception to be thrown, got "fail"');
+  },
+
+  'test throw() with regex message': function(){
+    (function(){ throw new Error('fail'); }).should.throw(/fail/);
+
+    err(function(){
+      (function(){}).should.throw(/fail/);
+    }, 'expected an exception to be thrown matching \'/fail/\'');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.throw(/fail/);
+    }, 'expected an exception to be thrown matching \'/fail/\'');
+  },
+
+  'test throw() with string message': function(){
+    (function(){ throw new Error('fail'); }).should.throw('fail');
+
+    err(function(){
+      (function(){}).should.throw('fail');
+    }, 'expected an exception to be thrown matching \'fail\'');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.throw('fail');
+    }, 'expected an exception to be thrown matching \'fail\'');
   }
 };
