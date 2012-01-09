@@ -488,15 +488,5 @@ module.exports = {
         throw new Error('fail');
       }).should.not.throw();
     }, 'expected no exception to be thrown, got "fail"');
-
-    err(function(){
-      (function(){}).should.throw("foo");
-    }, 'expected an exception to be thrown | foo');
-
-    err(function(){
-      (function(){
-        throw new Error('fail');
-      }).should.not.throw('foo');
-    }, 'expected no exception to be thrown, got "fail" | foo');
   }
 };
