@@ -359,7 +359,7 @@ module.exports = {
 
     err(function(){
       (function(){ throw new Error('error'); }).should.throw(/fail/);
-    }, 'expected an exception to be thrown matching \'/fail/\'');
+    }, "expected an exception to be thrown with a message matching '/fail/', but got 'error'");
   },
 
   'test throw() with string message': function(){
@@ -371,18 +371,6 @@ module.exports = {
 
     err(function(){
       (function(){ throw new Error('error'); }).should.throw('fail');
-    }, 'expected an exception to be thrown matching \'fail\'');
-  },
-
-  'test throw() with string message': function(){
-    (function(){ throw new Error('fail'); }).should.throw('fail');
-
-    err(function(){
-      (function(){}).should.throw('fail');
-    }, 'expected an exception to be thrown');
-
-    err(function(){
-      (function(){ throw new Error('error'); }).should.throw('fail');
-    }, 'expected an exception to be thrown matching \'fail\'');
+    }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
   }
-};
+}; 
