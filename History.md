@@ -1,4 +1,15 @@
 
+0.5.0 / 2012-01-12 
+==================
+
+  * Added string matching to `.throw()` [serby]
+  * Added regexp matching to `.throw()` [serby]
+  * Added `.includeEql()` [RubenVerborgh]
+  * Added `.should.be.html`
+  * Added `.should.be.json`
+  * Added optional description args to most matchers [Mike Swift]
+
+
 0.4.2 / 2011-12-17 
 ==================
 
