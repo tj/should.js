@@ -9,7 +9,6 @@
   * Added `.should.be.json`
   * Added optional description args to most matchers [Mike Swift]
 
-
 0.4.2 / 2011-12-17 
 ==================
 
