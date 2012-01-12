@@ -499,7 +499,7 @@ module.exports = {
 
     err(function(){
       (function(){ throw new Error('error'); }).should.throw(/fail/);
-    }, "expected an exception to be thrown with a message matching '/fail/', but got 'error'");
+    }, "expected an exception to be thrown with a message matching /fail/, but got 'error'");
   },
 
   'test throw() with string message': function(){
