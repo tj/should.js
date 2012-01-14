@@ -265,18 +265,35 @@ Assert that an object equal to the given `obj` is present in an Array:
 
 ## throw()
 
-  Assert exceptions:
+Assert an exception is throw:
+
+```js
+(function(){
+  throw new Error('fail');
+}).should.throw();
+```
+
+Assert an exception is not throw:
 
 ```js
 (function(){
  
 }).should.not.throw();
 ```
+Assert exepection message matches string:
 
 ```js
 (function(){
   throw new Error('fail');
-}).should.throw();
+}).should.throw('fail');
+```
+
+Assert exepection message matches regexp:
+
+```js
+(function(){
+  throw new Error('failed to foo');
+}).should.throw(/^fail/);
 ```
 
 ## keys
