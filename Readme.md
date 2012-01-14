@@ -257,7 +257,7 @@ Assert substring:
 
 ## includeEql(obj)
 
-    Assert that an object equal to the given `obj` is present in an Array:
+Assert that an object equal to the given `obj` is present in an Array:
 
     [[1],[2],[3]].should.includeEql([3])
     [[1],[2],[3]].should.includeEql([2])
@@ -265,18 +265,35 @@ Assert substring:
 
 ## throw()
 
-  Assert exceptions:
+Assert an exception is thrown:
+
+```js
+(function(){
+  throw new Error('fail');
+}).should.throw();
+```
+
+Assert an exception is not thrown:
 
 ```js
 (function(){
  
 }).should.not.throw();
 ```
+Assert exepection message matches string:
 
 ```js
 (function(){
   throw new Error('fail');
-}).should.throw();
+}).should.throw('fail');
+```
+
+Assert exepection message matches regexp:
+
+```js
+(function(){
+  throw new Error('failed to foo');
+}).should.throw(/^fail/);
 ```
 
 ## keys
