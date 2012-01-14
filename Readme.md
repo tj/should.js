@@ -257,7 +257,7 @@ Assert substring:
 
 ## includeEql(obj)
 
-    Assert that an object equal to the given `obj` is present in an Array:
+Assert that an object equal to the given `obj` is present in an Array:
 
     [[1],[2],[3]].should.includeEql([3])
     [[1],[2],[3]].should.includeEql([2])
