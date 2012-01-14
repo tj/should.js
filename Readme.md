@@ -265,7 +265,7 @@ Assert that an object equal to the given `obj` is present in an Array:
 
 ## throw()
 
-Assert an exception is throw:
+Assert an exception is thrown:
 
 ```js
 (function(){
@@ -273,7 +273,7 @@ Assert an exception is throw:
 }).should.throw();
 ```
 
-Assert an exception is not throw:
+Assert an exception is not thrown:
 
 ```js
 (function(){
