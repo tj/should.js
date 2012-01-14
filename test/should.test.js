@@ -240,7 +240,25 @@ module.exports = {
       (3).should.not.eql(3, "foo");
     }, 'expected 3 to not equal 3 | foo');
   },
-  
+
+  'test .json': function(){
+    var req = {
+      headers: {
+        'content-type': 'application/json'
+      }
+    };
+
+    req.should.be.json;
+
+    var req = {
+      headers: {
+        'content-type': 'application/json; charset=utf-8'
+      }
+    };
+
+    req.should.be.json;
+  },
+
   'test equal(val)': function(){
     'test'.should.equal('test');
     (1).should.equal(1);
