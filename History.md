@@ -1,4 +1,10 @@
 
+0.6.0 / 2012-03-01 
+==================
+
+  * Added `err.actual` and `err.expected` for .{eql,equal}()
+  * Added 'return this;' to 'get json' and 'get html' in order to provide chaining for should.be.json and should.be.html
+
 0.5.1 / 2012-01-13 
 ==================
 
