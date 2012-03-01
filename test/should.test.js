@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var should = require('../');
+var should = require('../')
+  , assert = require('assert');
 
 function err(fn, msg) {
   try {
@@ -62,7 +63,16 @@ module.exports = {
       ''.should.be.false;
     }, "expected '' to be false")
   },
-  
+
+  'test .expected and .actual': function(){
+    try {
+      'foo'.should.equal('bar');
+    } catch (err) {
+      assert('foo' == err.actual, 'err.actual');
+      assert('bar' == err.expected, 'err.expected');
+    }
+  },
+
   'test arguments': function(){
     var args = (function(){ return arguments; })(1,2,3);
     args.should.be.arguments;
