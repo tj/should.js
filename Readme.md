@@ -307,7 +307,7 @@ and will fail if you omit a key or two:
 
 ## Optional Error description
 
-As it can often be difficult to assertain exactly where failed assertions are comming from in your tests, an optional description parameter can be passed to several should matchers. The description will follow the failed assertion in the error:
+As it can often be difficult to ascertain exactly where failed assertions are coming from in your tests, an optional description parameter can be passed to several should matchers. The description will follow the failed assertion in the error:
 
     (1).should.eql(0, 'some useful description')
 
@@ -332,13 +332,13 @@ For example you can use should with the [Expresso TDD Framework](http://github.c
 
 ## Running tests
 
-To run the tests for _should_ simple update your git submodules and run:
+To run the tests for _should_ simply update your git submodules and run:
 
     $ make test
 
 ## OMG IT EXTENDS OBJECT???!?!@
 
-Yes, yes it does, with a single getter _should_, and no it wont break your code, because it does this **properly** with a non-enumerable property.
+Yes, yes it does, with a single getter _should_, and no it won't break your code, because it does this **properly** with a non-enumerable property.
 
 ## License 
 
