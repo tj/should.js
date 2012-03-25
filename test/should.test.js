@@ -124,7 +124,7 @@ module.exports = {
     (5).should.be.within(3,6);
     (5).should.be.within(3,5);
     (5).should.not.be.within(1,3);
-    
+   
     err(function(){
       (5).should.not.be.within(4,6);
     }, "expected 5 to not be within 4..6");
@@ -426,7 +426,20 @@ module.exports = {
       ['bar', 'foo'].should.not.include('foo', 'foo');
     }, "expected [ 'bar', 'foo' ] to not include 'foo' | foo");
   },
-  
+
+  'test include() with object': function(){
+    var full_object = {'foo':'bar', 'baz':'qux'};
+    var included_partial_object = {'foo':'bar'};
+    var not_included_partial_object = {'foo': 1}
+
+    full_object.should.include(included_partial_object);
+    full_object.should.not.include(not_included_partial_object);
+
+    err(function(){
+      full_object.should.include(not_included_partial_object)
+    }, "expected { foo: 'bar', baz: 'qux' } to include an object equal to { foo: 1 }");
+  },
+
   'test includeEql() with array': function(){
     [['foo'], ['bar']].should.includeEql(['foo']);
     [['foo'], ['bar']].should.includeEql(['bar']);
