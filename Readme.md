@@ -240,7 +240,7 @@ Assert own property (on the immediate object):
 
 ## include(obj)
 
-Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf:
+Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf, if `obj` is an associative array (object) it uses deep equality:
 
 Assert array value:
 
@@ -254,6 +254,14 @@ Assert substring:
     'foo bar baz'.should.include('bar')
     'foo bar baz'.should.include('baz')
     'foo bar baz'.should.not.include('FOO')
+
+Assert object includes another object:
+
+    var full_object = {'foo':'bar', 'baz': 'qux'}
+    var partial_object = {'foo':'bar'}
+
+    full_object.should.include(partial_object)
+
 
 ## includeEql(obj)
 
