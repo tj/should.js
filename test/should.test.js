@@ -119,6 +119,19 @@ module.exports = {
     }, "expected 3 to be an instance of Foo | foo");
   },
 
+  'test instanceOf (non-reserved)': function(){
+    function Foo(){}
+    new Foo().should.be.an.instanceOf(Foo);
+
+    err(function(){
+      (9).should.an.instanceOf(Foo);
+    }, "expected 9 to be an instance of Foo");
+
+    err(function(){
+      (9).should.an.instanceOf(Foo, 'foo');
+    }, "expected 9 to be an instance of Foo | foo");
+  },
+
   'test within(start, finish)': function(){
     (5).should.be.within(5, 10);
     (5).should.be.within(3,6);
