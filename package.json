@@ -5,7 +5,6 @@
   , "contributors": [ "Aseem Kishore <aseem.kishore@gmail.com>" ]
   , "devDependencies": {
       "mocha": "*"
-    , "should": "*"
   }
   , "keywords": ["test", "bdd", "assert"]
   , "main": "./lib/should.js"

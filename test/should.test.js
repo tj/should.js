@@ -21,7 +21,7 @@ module.exports = {
   },
 
   'test double require': function(){
-    require('should').should.equal(should);
+    require('../').should.equal(should);
   },
 
   'test assertion': function(){
