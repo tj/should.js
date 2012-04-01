@@ -553,5 +553,45 @@ module.exports = {
     err(function(){
       (function(){ throw new Error('error'); }).should.throw('fail');
     }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
+  },
+
+  'test crash()': function(){
+    (function(){}).should.not.crash();
+    (function(){ throw new Error('fail') }).should.crash();
+
+    err(function(){
+      (function(){}).should.crash();
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){
+        throw new Error('fail');
+      }).should.not.crash();
+    }, 'expected no exception to be thrown, got "fail"');
+  },
+
+  'test crash() with regex message': function(){
+    (function(){ throw new Error('fail'); }).should.crash(/fail/);
+
+    err(function(){
+      (function(){}).should.crash(/fail/);
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.crash(/fail/);
+    }, "expected an exception to be thrown with a message matching /fail/, but got 'error'");
+  },
+
+  'test crash() with string message': function(){
+    (function(){ throw new Error('fail'); }).should.crash('fail');
+
+    err(function(){
+      (function(){}).should.crash('fail');
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.crash('fail');
+    }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
   }
+
 };
