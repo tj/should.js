@@ -296,7 +296,7 @@ Assert exepection message matches regexp:
 }).should.throw(/^fail/);
 ```
 
-## crash()
+## throwError()
 
 An alias of `throw`, its purpose is to be an option for those who run
 [jshint](https://github.com/jshint/node-jshint/) in strict mode.
@@ -304,7 +304,7 @@ An alias of `throw`, its purpose is to be an option for those who run
 ```js
 (function(){
   throw new Error('failed to baz');
-}).should.throw(/^fail.*/);
+}).should.throwError(/^fail.*/);
 ```
 
 
