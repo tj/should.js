@@ -1,4 +1,10 @@
 
+0.6.1 / 2012-04-10 
+==================
+
+  * package: add "repository" section [TooTallNate]
+  * use valueOf() to get the reference the object [TooTallNate]
+
 0.6.0 / 2012-03-01 
 ==================
 
