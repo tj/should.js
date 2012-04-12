@@ -245,6 +245,21 @@ module.exports = {
 
   },
 
+  'test hash(obj)': function(){
+    var foo = Object.create(null);
+    foo.bar = 'foo';
+
+    Object.prototype.should.hash(foo).not.be.an.instanceof(Object);
+    Object.prototype.should.hash(foo).have.property('bar');
+
+    err(function(){
+      Object.prototype.should.hash(foo).be.an.instanceof(Object);
+    }, 'expected { bar: \'foo\' } to be an instance of Object');
+    err(function(){
+      Object.prototype.should.hash(foo).not.have.property('bar');
+    }, 'expected { bar: \'foo\' } to not have a property \'bar\'');
+  },
+
   'test eql(val)': function(){
     'test'.should.eql('test');
     ({ foo: 'bar' }).should.eql({ foo: 'bar' });
