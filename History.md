@@ -1,4 +1,10 @@
 
+0.6.2 / 2012-04-26 
+==================
+
+  * Added homepage to package.json
+  * Fixed .equal() with dates. Closes #63
+
 0.6.1 / 2012-04-10 
 ==================
 
