@@ -257,11 +257,8 @@ Assert substring:
 
 Assert object includes another object:
 
-    var full_object = {'foo':'bar', 'baz': 'qux'}
-    var partial_object = {'foo':'bar'}
-
-    full_object.should.include(partial_object)
-
+     ({foo:'bar', baz: 'qux'}).should.include({foo:'bar'}) 
+     ({foo:'bar', baz: 'qux'}).should.not.include({name:'TJ'}); 
 
 ## includeEql(obj)
 
