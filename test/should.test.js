@@ -301,6 +301,9 @@ module.exports = {
     err(function(){
       (4).should.not.equal(4, "foo");
     }, "expected 4 to not equal 4 | foo");
+
+    var date = new Date;
+    date.should.equal(date);
   },
 
   'test empty': function(){
