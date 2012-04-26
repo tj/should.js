@@ -443,6 +443,23 @@ module.exports = {
     }, "expected [ 'bar', 'foo' ] to not include 'foo' | foo");
   },
 
+  'test include() with object': function(){
+    var tobi = { name: 'Tobi', age: 2 };
+    var jane = { name: 'Jane', age: 2 };
+
+    var user = { name: 'TJ', pet: tobi, age: 24 };
+
+    user.should.include({ pet: tobi });
+    user.should.include({ pet: tobi, name: 'TJ' });
+    user.should.not.include({ pet: tobi, name: 'Someone else' });
+    user.should.not.include({ pet: jane });
+    user.should.not.include({ pet: jane, name: 'TJ' });
+
+    err(function(){
+      user.should.include({ pet: { name: 'Luna' } });
+    }, "expected { name: 'TJ', pet: { name: 'Tobi', age: 2 }, age: 24 } to include an object equal to { pet: { name: 'Luna' } }");
+  },
+
   'test includeEql() with array': function(){
     [['foo'], ['bar']].should.includeEql(['foo']);
     [['foo'], ['bar']].should.includeEql(['bar']);

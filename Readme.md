@@ -240,7 +240,7 @@ Assert own property (on the immediate object):
 
 ## include(obj)
 
-Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf:
+Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf.
 
 Assert array value:
 
@@ -254,6 +254,17 @@ Assert substring:
     'foo bar baz'.should.include('bar')
     'foo bar baz'.should.include('baz')
     'foo bar baz'.should.not.include('FOO')
+
+Assert object includes another object:
+
+    var tobi = { name: 'Tobi', age: 1 };
+    var jane = { name: 'Jane', age: 5 };
+    var user = { name: 'TJ', pet: tobi };
+
+    user.should.include({ pet: tobi });
+    user.should.include({ pet: tobi, name: 'TJ' });
+    user.should.not.include({ pet: jane });
+    user.should.not.include({ name: 'Someone' });
 
 ## includeEql(obj)
 
