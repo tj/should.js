@@ -1,5 +1,5 @@
 _should_ is an expressive, readable, test framework agnostic, assertion library for [node](http://nodejs.org).
-  
+
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
 _should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
@@ -13,7 +13,7 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 
     user.should.have.property('name', 'tj');
     user.should.have.property('pets').with.lengthOf(4);
-    
+
     someAsyncTask(foo, function(err, result){
       should.not.exist(err);
       should.exist(result);
@@ -161,12 +161,12 @@ Assert __typeof__:
     user.should.be.a('object')
     'test'.should.be.a('string')
 
-## instanceof
+## instanceof and instanceOf
 
-Assert __instanceof__:
+Assert __instanceof__ or __instanceOf__:
 
     user.should.be.an.instanceof(User)
-    [].should.be.an.instanceof(Array)
+    [].should.be.an.instanceOf(Array)
 
 ## above
 
@@ -229,13 +229,13 @@ Assert own property (on the immediate object):
 ## json
 
   Assert that Content-Type is "application/json; charset=utf-8"
-  
+
       res.should.be.json
 
 ## html
 
   Assert that Content-Type is "text/html; charset=utf-8"
-  
+
       res.should.be.html
 
 ## include(obj)
@@ -288,7 +288,7 @@ Assert an exception is not thrown:
 
 ```js
 (function(){
- 
+
 }).should.not.throw();
 ```
 Assert exepection message matches string:
@@ -306,6 +306,18 @@ Assert exepection message matches regexp:
   throw new Error('failed to foo');
 }).should.throw(/^fail/);
 ```
+
+## throwError()
+
+An alias of `throw`, its purpose is to be an option for those who run
+[jshint](https://github.com/jshint/node-jshint/) in strict mode.
+
+```js
+(function(){
+  throw new Error('failed to baz');
+}).should.throwError(/^fail.*/);
+```
+
 
 ## keys
 
@@ -334,7 +346,7 @@ For example you can use should with the [Expresso TDD Framework](http://github.c
 
     var lib = require('mylib')
       , should = require('should');
-  
+
     module.exports = {
       'test .version': function(){
         lib.version.should.match(/^\d+\.\d+\.\d+$/);
@@ -351,7 +363,7 @@ To run the tests for _should_ simply update your git submodules and run:
 
 Yes, yes it does, with a single getter _should_, and no it won't break your code, because it does this **properly** with a non-enumerable property.
 
-## License 
+## License
 
 (The MIT License)
 
