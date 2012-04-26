@@ -257,8 +257,8 @@ Assert substring:
 
 Assert object includes another object:
 
-     ({foo:'bar', baz: 'qux'}).should.include({foo:'bar'}) 
-     ({foo:'bar', baz: 'qux'}).should.not.include({name:'TJ'}); 
+    ({foo:'bar', baz: 'qux'}).should.include({foo:'bar'}) 
+    ({foo:'bar', baz: 'qux'}).should.not.include({name:'TJ'}); 
 
 ## includeEql(obj)
 
