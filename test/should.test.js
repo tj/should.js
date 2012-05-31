@@ -573,5 +573,45 @@ module.exports = {
     err(function(){
       (function(){ throw new Error('error'); }).should.throw('fail');
     }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
+  },
+
+  'test throwError()': function(){
+    (function(){}).should.not.throwError();
+    (function(){ throw new Error('fail') }).should.throwError();
+
+    err(function(){
+      (function(){}).should.throwError();
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){
+        throw new Error('fail');
+      }).should.not.throwError();
+    }, 'expected no exception to be thrown, got "fail"');
+  },
+
+  'test throwError() with regex message': function(){
+    (function(){ throw new Error('fail'); }).should.throwError(/fail/);
+
+    err(function(){
+      (function(){}).should.throwError(/fail/);
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.throwError(/fail/);
+    }, "expected an exception to be thrown with a message matching /fail/, but got 'error'");
+  },
+
+  'test throwError() with string message': function(){
+    (function(){ throw new Error('fail'); }).should.throwError('fail');
+
+    err(function(){
+      (function(){}).should.throwError('fail');
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw new Error('error'); }).should.throwError('fail');
+    }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
   }
+
 };
