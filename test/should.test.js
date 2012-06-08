@@ -575,6 +575,27 @@ module.exports = {
     }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
   },
 
+  'test throw() with optional arguments': function(){
+
+    var throwsOn1 = function(a){
+      if( a === 1 ){
+        throw new Error('fail');
+      }
+    };
+
+    throwsOn1.should.throw(1, 'fail');
+    throwsOn1.should.not.throw(2, 'fail');
+
+    // testing for the null last parameter case
+    throwsOn1.should.throw(1, null);
+    throwsOn1.should.not.throw(2, null);
+
+    err(function(){
+      throwsOn1.should.throw(2, 'fail');
+    }, 'expected an exception to be thrown');
+
+  },
+
   'test throwError()': function(){
     (function(){}).should.not.throwError();
     (function(){ throw new Error('fail') }).should.throwError();
