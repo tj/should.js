@@ -307,6 +307,25 @@ Assert exepection message matches regexp:
 }).should.throw(/^fail/);
 ```
 
+Assert exepection with function arguments (note: requires a string or regex match)
+
+```js
+(function(a){
+  if(a === 1){
+    throw new Error('failed to foo');
+  }
+}).should.throw(1, /^fail/);
+```
+
+Assert exepection with function arguments when you don't care about what error was thrown
+```js
+(function(a){
+  if(a === 1){
+    throw new Error('any old error');
+  }
+}).should.throw(1, null);
+```
+
 ## throwError()
 
 An alias of `throw`, its purpose is to be an option for those who run
