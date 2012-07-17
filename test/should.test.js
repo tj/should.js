@@ -575,6 +575,18 @@ module.exports = {
     }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
   },
 
+  'test throw() with type': function(){
+    (function(){ throw new Error('fail'); }).should.throw(Error);
+
+    err(function(){
+      (function(){}).should.throw(Error);
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw 'error'; }).should.throw(Error);
+    }, "expected an exception to be thrown of type Error, but got String");
+  },
+
   'test throwError()': function(){
     (function(){}).should.not.throwError();
     (function(){ throw new Error('fail') }).should.throwError();
@@ -612,6 +624,18 @@ module.exports = {
     err(function(){
       (function(){ throw new Error('error'); }).should.throwError('fail');
     }, "expected an exception to be thrown with a message matching 'fail', but got 'error'");
+  },
+
+  'test throwError() with type': function(){
+    (function(){ throw new Error('fail'); }).should.throw(Error);
+
+    err(function(){
+      (function(){}).should.throw(Error);
+    }, 'expected an exception to be thrown');
+
+    err(function(){
+      (function(){ throw 'error'; }).should.throw(Error);
+    }, "expected an exception to be thrown of type Error, but got String");
   }
 
 };
