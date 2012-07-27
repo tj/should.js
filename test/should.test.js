@@ -117,6 +117,8 @@ module.exports = {
     err(function(){
       (3).should.an.instanceof(Foo, 'foo');
     }, "expected 3 to be an instance of Foo | foo");
+
+    (new Date).should.be.an.instanceof(Date);
   },
 
   'test instanceOf (non-reserved)': function(){
