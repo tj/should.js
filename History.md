@@ -1,4 +1,10 @@
 
+1.1.0 / 2012-07-30 
+==================
+
+  * add enclosing of failure message functions. Closes #81
+  * add mocha .actual / .expected string support for all assertion values
+
 0.7.0 / 2012-07-17 
 ==================
 
