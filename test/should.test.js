@@ -66,8 +66,13 @@ module.exports = {
 
   'test NaN': function(){
     NaN.should.be.NaN;
+    Infinity.should.not.be.NaN;
     (0).should.not.be.NaN;
     false.should.not.be.NaN;
+    ({}).should.not.be.NaN;
+    ''.should.not.be.NaN;
+    'foo'.should.not.be.NaN;
+    /^$/.should.not.be.NaN;
 
     err(function(){
       Infinity.should.be.NaN;
