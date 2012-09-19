@@ -16,10 +16,6 @@ function err(fn, msg) {
 }
 
 module.exports = {
-  'test .version': function(){
-    should.version.should.match(/^\d+\.\d+\.\d+$/);
-  },
-
   'test double require': function(){
     require('../').should.equal(should);
   },
