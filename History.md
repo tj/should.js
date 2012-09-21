@@ -1,4 +1,9 @@
 
+1.2.0 / 2012-09-21 
+==================
+
+  * Added #approximately(value, delta, description) for doing assertions on results of operations with numbers. [titarenko]
+
 1.1.1 / 2012-09-19 
 ==================
 
