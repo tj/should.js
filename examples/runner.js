@@ -50,4 +50,16 @@ test('Point#add()', function(){
   point.should.respondTo('add');
 });
 
+test('Math#sin()', function(){
+  Math.sin(12).should.be.approximately(-0.5365, 1e-3);
+});
+
+test('Math#cos()', function(){
+  Math.cos(0).should.not.be.approximately(10, 1e-3);
+});
+
+test('Math#log()', function(){
+  Math.log(10).should.be.approximately(10, 1e-3);
+});
+
 console.log();
