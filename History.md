@@ -1,4 +1,11 @@
 
+1.2.1 / 2012-11-02 
+==================
+
+  * add .showDiff
+  * Make instanceOf and throwError be aliased like others [alFReD-NSH]
+  * Fix should[.not].exist not having stack trace #84 [alFReD-NSH]
+
 1.2.0 / 2012-09-21 
 ==================
 
