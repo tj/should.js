@@ -12,6 +12,12 @@ function err(fn, msg) {
     should.fail('expected an error');
   } catch (err) {
     should.equal(msg, err.message);
+    should(err.stack, 'Expected error to have an stack trace');
+
+    var stackTraceFirstLine = err.stack.split('\n')[1];
+    var message = 'Expected error to have a proper stack trace showing the file names';
+    should(stackTraceFirstLine, message); 
+    stackTraceFirstLine.should.match(/at\s*[\S]+/, message);
   }
 }
 
