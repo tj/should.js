@@ -392,6 +392,10 @@ module.exports = {
     }, "expected { length: 12 } to have own property 'foo' | foo");
   },
 
+  'test ownProperty(name).equal(val)': function() {
+    ({length: 10}).should.have.ownProperty('length').equal(10);
+  },
+
   'test include() with string': function(){
     'foobar'.should.include('bar');
     'foobar'.should.include('foo');
