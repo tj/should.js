@@ -246,6 +246,13 @@ module.exports = {
     ({ foo: 'bar' }).should.eql({ foo: 'bar' });
     (1).should.eql(1);
     '4'.should.not.eql(4);
+    var memo = [];
+    function memorize() {
+        memo.push(arguments);
+    }
+    memorize('a', [1, 2]);
+    memorize('a', [1, 2]);
+    memo[0].should.eql(memo[1]);
 
     err(function(){
       (4).should.eql(3);
