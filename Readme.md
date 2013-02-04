@@ -168,6 +168,21 @@ Assert __instanceof__ or __instanceOf__:
     user.should.be.an.instanceof(User)
     [].should.be.an.instanceOf(Array)
 
+## min
+
+Assert numeric value above or equal the given value:
+
+    user.age.should.be.min(5)
+    user.age.should.not.be.min(100)
+
+## max
+
+Assert numeric value bellow or equal the given value:
+
+    user.age.should.be.max(5)
+    user.age.should.not.be.max(100)
+
+
 ## above
 
 Assert numeric value above the given value:
@@ -181,6 +196,19 @@ Assert numeric value below the given value:
 
     user.age.should.be.below(100)
     user.age.should.not.be.below(5)
+
+## email
+
+Assert string is a valid email RFC 822 address:
+
+    emailAddr.should.be.an.email()
+
+## url
+
+Assert string is a valid url:
+
+    link.should.be.a.url()
+
 
 ## match
 
