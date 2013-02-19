@@ -5,21 +5,21 @@ It extends the Object prototype with a single non-enumerable getter that allows 
 _should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
 
 ## Example
+```javascript
+var user = {
+    name: 'tj'
+  , pets: ['tobi', 'loki', 'jane', 'bandit']
+};
 
-    var user = {
-        name: 'tj'
-      , pets: ['tobi', 'loki', 'jane', 'bandit']
-    };
+user.should.have.property('name', 'tj');
+user.should.have.property('pets').with.lengthOf(4);
 
-    user.should.have.property('name', 'tj');
-    user.should.have.property('pets').with.lengthOf(4);
-
-    someAsyncTask(foo, function(err, result){
-      should.not.exist(err);
-      should.exist(result);
-      result.bar.should.equal(foo);
-    });
-
+someAsyncTask(foo, function(err, result){
+  should.not.exist(err);
+  should.exist(result);
+  result.bar.should.equal(foo);
+});
+```
 ## Installation
 
     $ npm install should
@@ -27,253 +27,253 @@ _should_ literally extends node's _assert_ module, in fact, it is node's assert 
 ## assert extras
 
 As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it has one extra convenience method:
-
-    should.exist('hello')
-    should.exist([])
-    should.exist(null)  // will throw
-
+```javascript
+should.exist('hello')
+should.exist([])
+should.exist(null)  // will throw
+```
 This is equivalent to `should.ok`, which is equivalent to `assert.ok`, but reads a bit better. It gets better, though:
-
-    should.not.exist(false)
-    should.not.exist('')
-    should.not.exist({})    // will throw
-
+```javascript
+should.not.exist(false)
+should.not.exist('')
+should.not.exist({})    // will throw
+```
 We may add more _assert_ extras in the future... ;)
 
 ## chaining assertions
 
 Some assertions can be chained, for example if a property is volatile we can first assert property existence:
-
-    user.should.have.property('pets').with.lengthOf(4)
-
+```javascript
+user.should.have.property('pets').with.lengthOf(4)
+```
 which is essentially equivalent to below, however the property may not exist:
-
-    user.pets.should.have.lengthOf(4)
-
+```javascript
+user.pets.should.have.lengthOf(4)
+```
 our dummy getters such as _and_ also help express chaining:
-
-    user.should.be.a('object').and.have.property('name', 'tj')
-
+```javascript
+user.should.be.a('object').and.have.property('name', 'tj')
+```
 ## exist (static)
 
 The returned object from `require('should')` is the same object as `require('assert')`. So you can use `should` just like `assert`:
-
-    should.fail('expected an error!')
-    should.strictEqual(foo, bar)
-
+```javascript
+should.fail('expected an error!')
+should.strictEqual(foo, bar)
+```
 In general, using the Object prototype's _should_ is nicer than using these `assert` equivalents, because _should_ gives you access to the expressive and readable language described above:
-
-    foo.should.equal(bar)   // same as should.strictEqual(foo, bar) above
-
+```javascript
+foo.should.equal(bar)   // same as should.strictEqual(foo, bar) above
+```
 The only exception, though, is when you can't be sure that a particular object exists. In that case, attempting to access the _should_ property may throw a TypeError:
-
-    foo.should.equal(bar)   // throws if foo is null or undefined!
-
+```javascript
+foo.should.equal(bar)   // throws if foo is null or undefined!
+```
 For this case, `require('should')` extends `require('assert')` with an extra convenience method to check whether an object exists:
-
-    should.exist({})
-    should.exist([])
-    should.exist('')
-    should.exist(0)
-    should.exist(null)      // will throw
-    should.exist(undefined) // will throw
-
+```javascript
+should.exist({})
+should.exist([])
+should.exist('')
+should.exist(0)
+should.exist(null)      // will throw
+should.exist(undefined) // will throw
+```
 You can also check the negation:
-
-    should.not.exist(undefined)
-    should.not.exist(null)
-    should.not.exist('')    // will throw
-    should.not.exist({})    // will throw
-
+```javascript
+should.not.exist(undefined)
+should.not.exist(null)
+should.not.exist('')    // will throw
+should.not.exist({})    // will throw
+```
 Once you know an object exists, you can safely use the _should_ property on it.
 
 ## ok
 
 Assert truthfulness:
-
-    true.should.be.ok
-    'yay'.should.be.ok
-    (1).should.be.ok
-
+```javascript
+true.should.be.ok
+'yay'.should.be.ok
+(1).should.be.ok
+```
 or negated:
-
-    false.should.not.be.ok
-    ''.should.not.be.ok
-    (0).should.not.be.ok
-
+```javascript
+false.should.not.be.ok
+''.should.not.be.ok
+(0).should.not.be.ok
+```
 ## true
 
 Assert === true:
-
-    true.should.be.true
-    '1'.should.not.be.true
-
+```javascript
+true.should.be.true
+'1'.should.not.be.true
+```
 ## false
 
 Assert === false:
-
-     false.should.be.false
-     (0).should.not.be.false
-
+```javascript
+false.should.be.false
+(0).should.not.be.false
+```
 ## arguments
 
 Assert `Arguments`:
-
-    var args = (function(){ return arguments; })(1,2,3);
-    args.should.be.arguments;
-    [].should.not.be.arguments;
-
+```javascript
+var args = (function(){ return arguments; })(1,2,3);
+args.should.be.arguments;
+[].should.not.be.arguments;
+```
 ## empty
 
 Asserts that length is 0:
-
-    [].should.be.empty
-    ''.should.be.empty
-    ({ length: 0 }).should.be.empty
-
+```javascript
+[].should.be.empty
+''.should.be.empty
+({ length: 0 }).should.be.empty
+```
 ## eql
 
 equality:
-
-    ({ foo: 'bar' }).should.eql({ foo: 'bar' })
-    [1,2,3].should.eql([1,2,3])
-
+```javascript
+({ foo: 'bar' }).should.eql({ foo: 'bar' })
+[1,2,3].should.eql([1,2,3])
+```
 ## equal
 
 strict equality:
-
-    should.strictEqual(undefined, value)
-    should.strictEqual(false, value)
-    (4).should.equal(4)
-    'test'.should.equal('test')
-    [1,2,3].should.not.equal([1,2,3])
-
+```javascript
+should.strictEqual(undefined, value)
+should.strictEqual(false, value)
+(4).should.equal(4)
+'test'.should.equal('test')
+[1,2,3].should.not.equal([1,2,3])
+```
 ## within
 
 Assert inclusive numeric range:
-
-    user.age.should.be.within(5, 50)
-
+```javascript
+user.age.should.be.within(5, 50)
+```
 ## a
 
 Assert __typeof__:
-
-    user.should.be.a('object')
-    'test'.should.be.a('string')
-
+```javascript
+user.should.be.a('object')
+'test'.should.be.a('string')
+```
 ## instanceof and instanceOf
 
 Assert __instanceof__ or __instanceOf__:
-
-    user.should.be.an.instanceof(User)
-    [].should.be.an.instanceOf(Array)
-
+```javascript
+user.should.be.an.instanceof(User)
+[].should.be.an.instanceOf(Array)
+```
 ## above
 
 Assert numeric value above the given value:
-
-    user.age.should.be.above(5)
-    user.age.should.not.be.above(100)
-
+```javascript
+user.age.should.be.above(5)
+user.age.should.not.be.above(100)
+```
 ## below
 
 Assert numeric value below the given value:
-
-    user.age.should.be.below(100)
-    user.age.should.not.be.below(5)
-
+```javascript
+user.age.should.be.below(100)
+user.age.should.not.be.below(5)
+```
 ## match
 
 Assert regexp match:
-
-    username.should.match(/^\w+$/)
-
+```javascript
+username.should.match(/^\w+$/)
+```
 ## length
 
 Assert _length_ property exists and has a value of the given number:
-
-    user.pets.should.have.length(5)
-    user.pets.should.have.a.lengthOf(5)
-
+```javascript
+user.pets.should.have.length(5)
+user.pets.should.have.a.lengthOf(5)
+```
 Aliases: _lengthOf_
 
 ## property
 
 Assert property exists and has optional value:
-
-    user.should.have.property('name')
-    user.should.have.property('age', 15)
-    user.should.not.have.property('rawr')
-    user.should.not.have.property('age', 0)
-
+```javascript
+user.should.have.property('name')
+user.should.have.property('age', 15)
+user.should.not.have.property('rawr')
+user.should.not.have.property('age', 0)
+```
 ## ownProperty
 
 Assert own property (on the immediate object):
-
-    ({ foo: 'bar' }).should.have.ownProperty('foo')
-
+```javascript
+({ foo: 'bar' }).should.have.ownProperty('foo')
+```
 ## status(code)
 
  Asserts that `.statusCode` is `code`:
-
-   res.should.have.status(200);
-
+```javascript
+res.should.have.status(200);
+```
 ## header(field[, value])
 
  Asserts that a `.headers` object with `field` and optional `value` are present:
-
-     res.should.have.header('content-length');
-     res.should.have.header('Content-Length', '123');
-     res.should.have.header('content-length', '123');
-
+```javascript
+res.should.have.header('content-length');
+res.should.have.header('Content-Length', '123');
+res.should.have.header('content-length', '123');
+```
 ## json
 
   Assert that Content-Type is "application/json; charset=utf-8"
-
-      res.should.be.json
-
+```javascript
+res.should.be.json
+```
 ## html
 
   Assert that Content-Type is "text/html; charset=utf-8"
-
-      res.should.be.html
-
+```javascript
+res.should.be.html
+```
 ## include(obj)
 
 Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf.
 
 Assert array value:
-
-    [1,2,3].should.include(3)
-    [1,2,3].should.include(2)
-    [1,2,3].should.not.include(4)
-
+```javascript
+[1,2,3].should.include(3)
+[1,2,3].should.include(2)
+[1,2,3].should.not.include(4)
+```
 Assert substring:
-
-    'foo bar baz'.should.include('foo')
-    'foo bar baz'.should.include('bar')
-    'foo bar baz'.should.include('baz')
-    'foo bar baz'.should.not.include('FOO')
-
+```javascript
+'foo bar baz'.should.include('foo')
+'foo bar baz'.should.include('bar')
+'foo bar baz'.should.include('baz')
+'foo bar baz'.should.not.include('FOO')
+```
 Assert object includes another object:
+```javascript
+var tobi = { name: 'Tobi', age: 1 };
+var jane = { name: 'Jane', age: 5 };
+var user = { name: 'TJ', pet: tobi };
 
-    var tobi = { name: 'Tobi', age: 1 };
-    var jane = { name: 'Jane', age: 5 };
-    var user = { name: 'TJ', pet: tobi };
-
-    user.should.include({ pet: tobi });
-    user.should.include({ pet: tobi, name: 'TJ' });
-    user.should.not.include({ pet: jane });
-    user.should.not.include({ name: 'Someone' });
-
+user.should.include({ pet: tobi });
+user.should.include({ pet: tobi, name: 'TJ' });
+user.should.not.include({ pet: jane });
+user.should.not.include({ name: 'Someone' });
+```
 ## includeEql(obj)
 
 Assert that an object equal to the given `obj` is present in an Array:
-
-    [[1],[2],[3]].should.includeEql([3])
-    [[1],[2],[3]].should.includeEql([2])
-    [[1],[2],[3]].should.not.includeEql([4])
-
+```javascript
+[[1],[2],[3]].should.includeEql([3])
+[[1],[2],[3]].should.includeEql([2])
+[[1],[2],[3]].should.not.includeEql([4])
+```
 ## throw()
 
 Assert an exception is thrown:
