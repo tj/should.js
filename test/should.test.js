@@ -106,6 +106,14 @@ module.exports = {
     function Foo(){}
     new Foo().should.be.an.instanceof(Foo);
 
+    new Date().should.be.an.instanceof(Date);
+
+    var tobi = { name: 'Tobi', age: 2 };
+    tobi.should.be.an.instanceof(Object);
+
+    var getSomething = function() {return "something"};
+    getSomething.should.be.an.instanceof(Function);
+
     err(function(){
       (3).should.an.instanceof(Foo);
     }, "expected 3 to be an instance of Foo");
@@ -118,6 +126,14 @@ module.exports = {
   'test instanceOf (non-reserved)': function(){
     function Foo(){}
     new Foo().should.be.an.instanceOf(Foo);
+
+    new Date().should.be.an.instanceOf(Date);
+
+    var tobi = { name: 'Tobi', age: 2 };
+    tobi.should.be.an.instanceOf(Object);
+
+    var getSomething = function() {return "something"};
+    getSomething.should.be.an.instanceOf(Function);
 
     err(function(){
       (9).should.an.instanceOf(Foo);
