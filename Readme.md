@@ -137,6 +137,7 @@ equality:
 ```javascript
 ({ foo: 'bar' }).should.eql({ foo: 'bar' })
 [1,2,3].should.eql([1,2,3])
+(new Buffer('Hello')).should.eql(new Buffer('Hello'))
 ```
 ## equal
 
