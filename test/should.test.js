@@ -281,6 +281,30 @@ module.exports = {
     err(function(){
       (3).should.not.eql(3, "foo");
     }, 'expected 3 to not equal 3 | foo');
+
+    var a = [];
+    a[0] = a;
+    var b = [];
+    b[0] = b;
+    a.should.eql(b);
+
+    a[0] = b;
+    b[0] = a;
+    a.should.eql(b);
+
+    a = [0];
+    a[1] = a;
+    b = [0, null];
+
+    err(function(){
+      a.should.eql(b);
+    }, 'expected [ 0, [Circular] ] to equal [ 0, null ]');
+
+    a = [null, 0];
+    a[0] = a;
+    b = [a, 1];
+    a.should.not.eql(b);
+
   },
 
   'test .json': function(){
