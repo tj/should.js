@@ -142,6 +142,10 @@ module.exports = {
     err(function(){
       (9).should.an.instanceOf(Foo, 'foo');
     }, "expected 9 to be an instance of Foo | foo");
+
+    function Foo2(){}
+    Foo2.prototype.valueOf = function (){ return 'foo'; };
+    new Foo2().should.be.an.instanceOf(Foo2);
   },
 
   'test within(start, finish)': function(){
