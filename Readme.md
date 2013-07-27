@@ -1,5 +1,7 @@
 _should_ is an expressive, readable, test framework agnostic, assertion library for [node](http://nodejs.org).
 
+[![Build Status](https://travis-ci.org/akatov/should.js.png)](https://travis-ci.org/akatov/should.js)
+
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
 _should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
