@@ -355,9 +355,8 @@ For example you can use should with the [Expresso TDD Framework](http://github.c
 
 ## Running tests
 
-To run the tests for _should_ simply update your git submodules and run:
-
-    $ make test
+    $ npm update
+    $ npm test
 
 ## OMG IT EXTENDS OBJECT???!?!@
 

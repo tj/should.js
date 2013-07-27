@@ -5,10 +5,14 @@
   , "repository": { "type": "git", "url": "git://github.com/visionmedia/should.js.git" }
   , "homepage": "https://github.com/visionmedia/should.js"
   , "contributors": [ "Aseem Kishore <aseem.kishore@gmail.com>" ]
-  , "devDependencies": {
-      "mocha": "*"
-  }
+  , "devDependencies":
+    { "mocha": "*"
+    , "grunt": "~0.4.1"
+    , "grunt-cli": "~0.1.9"
+    , "grunt-mocha-cli": "~1.0.6"
+    }
   , "keywords": ["test", "bdd", "assert"]
   , "main": "./lib/should.js"
   , "engines": { "node": ">= 0.2.0" }
+  , "scripts" : { "test": "node_modules/.bin/grunt test" }
 }
