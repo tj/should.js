@@ -238,6 +238,14 @@ res.should.be.json
 ```javascript
 res.should.be.html
 ```
+## startWith(str)
+
+Assert that string starts with `str`.
+
+```javascript
+'foobar'.should.startWith('foo')
+'foobar'.should.not.startWith('bar')
+```
 ## include(obj)
 
 Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf.
