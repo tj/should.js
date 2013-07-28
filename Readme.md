@@ -1,6 +1,6 @@
 _should_ is an expressive, readable, test framework agnostic, assertion library for [node](http://nodejs.org).
 
-[![Build Status](https://travis-ci.org/akatov/should.js.png)](https://travis-ci.org/akatov/should.js)
+[![Build Status](https://travis-ci.org/visionmedia/should.js.png)](https://travis-ci.org/visionmedia/should.js)
 
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
