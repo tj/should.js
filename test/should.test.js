@@ -610,6 +610,11 @@ module.exports = {
     }, "expected an exception to be thrown of type Error, but got String");
   },
 
+  'test whenPassed()': function(){
+    (function(n) { if (n < 0) throw new Error('fail')}).should.whenPassed(-1).throw();
+    (function(n) { if (n < 0) throw new Error('fail')}).should.whenPassed(1).not.throw();
+  },
+
   'test throwError()': function(){
     (function(){}).should.not.throwError();
     (function(){ throw new Error('fail') }).should.throwError();
