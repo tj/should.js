@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -673,6 +672,12 @@ module.exports = {
     err(function(){
       (function(){ throw 'error'; }).should.throw(Error);
     }, "expected an exception to be thrown of type Error, but got String");
+  },
+  
+  'test approximate()': function(){
+    (0.8).should.approximate(0.80000001);
+    (0.8).should.approximate(0.80000001, 3);
+    (0.8).should.not.approximate(0.8001, 8);
   }
 
 };
