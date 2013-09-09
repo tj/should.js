@@ -433,7 +433,7 @@ module.exports = {
     ({length: 10}).should.have.ownProperty('length').equal(10);
   },
 
-  'test startsWith()': function() {
+  'test startWith()': function() {
     'foobar'.should.startWith('foo');
     'foobar'.should.not.startWith('bar');
 
