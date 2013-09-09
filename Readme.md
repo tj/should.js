@@ -244,6 +244,7 @@ res.should.be.json
 ```javascript
 res.should.be.html
 ```
+
 ## include(obj)
 
 Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf.
@@ -324,6 +325,14 @@ An alias of `throw`, its purpose is to be an option for those who run
 }).should.throwError(/^fail.*/);
 ```
 
+## startWith(str)
+
+Assert that string starts with `str`.
+
+```javascript
+'foobar'.should.startWith('foo')
+'foobar'.should.not.startWith('bar')
+```
 
 ## keys
 
