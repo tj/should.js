@@ -167,6 +167,20 @@ module.exports = {
     }, "expected 10 to be within 50..100 | foo");
   },
 
+  'test approximately(number, delta)': function() {
+      (1.5).should.be.approximately(1.4, 0.2);
+      (1.5).should.be.approximately(1.5, 10E-10);
+      (1.5).should.not.be.approximately(1.4, 1E-2);
+
+      err(function(){
+          (99.99).should.not.be.approximately(100, 0.1);
+      }, "expected 99.99 to not be approximately 100 +- 0.1");
+
+      err(function(){
+          (99.99).should.be.approximately(105, 0.1);
+      }, "expected 99.99 to be approximately 105 +- 0.1");
+  },
+
   'test above(n)': function(){
     (5).should.be.above(2);
     (5).should.be.greaterThan(2);
