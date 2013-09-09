@@ -154,6 +154,12 @@ Assert inclusive numeric range:
 ```javascript
 user.age.should.be.within(5, 50)
 ```
+## approximately
+
+Assert floating point number:
+```javascript
+(99.99).should.be.approximately(100, 0.1);
+```
 ## a
 
 Assert __typeof__:
