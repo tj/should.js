@@ -433,27 +433,6 @@ module.exports = {
     ({length: 10}).should.have.ownProperty('length').equal(10);
   },
 
-  'test startWith()': function() {
-    'foobar'.should.startWith('foo');
-    'foobar'.should.not.startWith('bar');
-
-    err(function() {
-      'foobar'.should.startWith('bar');
-    }, "expected 'foobar' to start with 'bar'");
-
-    err(function() {
-      'foobar'.should.not.startWith('foo');
-    }, "expected 'foobar' to not start with 'foo'");
-
-    err(function() {
-      'foobar'.should.startWith('bar', 'baz');
-    }, "expected 'foobar' to start with 'bar' | baz");
-
-    err(function() {
-      'foobar'.should.not.startWith('foo', 'baz');
-    }, "expected 'foobar' to not start with 'foo' | baz");
-  },
-
   'test include() with string': function(){
     'foobar'.should.include('bar');
     'foobar'.should.include('foo');
