@@ -137,6 +137,10 @@ equality:
 ```javascript
 ({ foo: 'bar' }).should.eql({ foo: 'bar' })
 [1,2,3].should.eql([1,2,3])
+(new Buffer('Hello')).should.eql('Hello')
+(new Buffer('World')).should.eql(new Buffer('World'))
+// or directly check base64 encoded binary data
+(new Buffer([0x01, 0x02])).should.eql('AQI=');
 ```
 ## equal
 

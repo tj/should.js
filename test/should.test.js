@@ -276,6 +276,9 @@ module.exports = {
     ({ foo: 'bar' }).should.eql({ foo: 'bar' });
     (1).should.eql(1);
     '4'.should.not.eql(4);
+    (new Buffer('Hello')).should.eql('Hello');
+    (new Buffer('Hello')).should.eql(new Buffer('Hello'));
+    (new Buffer([0x01, 0x02])).should.eql('AQI=');
     var memo = [];
     function memorize() {
         memo.push(arguments);
