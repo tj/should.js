@@ -454,6 +454,27 @@ module.exports = {
     }, "expected 'foobar' to not start with 'foo' | baz");
   },
 
+  'test endWith()': function() {
+    'foobar'.should.endWith('bar');
+    'foobar'.should.not.endWith('foo');
+
+    err(function() {
+      'foobar'.should.endWith('foo');
+    }, "expected 'foobar' to end with 'foo'");
+
+    err(function() {
+      'foobar'.should.not.endWith('bar');
+    }, "expected 'foobar' to not end with 'bar'");
+
+    err(function() {
+      'foobar'.should.endWith('foo', 'baz');
+    }, "expected 'foobar' to end with 'foo' | baz");
+
+    err(function() {
+      'foobar'.should.not.endWith('bar', 'baz');
+    }, "expected 'foobar' to not end with 'bar' | baz");
+  },
+
   'test include() with string': function(){
     'foobar'.should.include('bar');
     'foobar'.should.include('foo');

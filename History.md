@@ -1,4 +1,8 @@
 
+  * added tests and docs for `#approximately(value, delta, description)`
+  * added `#beginWith(prefix, description)` [fredr]
+  * added `#endWith(suffix, description)`
+
 1.2.2 / 2013-02-19 
 ==================
 
