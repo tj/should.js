@@ -333,6 +333,14 @@ Assert that string starts with `str`.
 'foobar'.should.startWith('foo')
 'foobar'.should.not.startWith('bar')
 ```
+## endWith(str)
+
+Assert that string ends with `str`.
+
+```javascript
+'foobar'.should.endWith('bar')
+'foobar'.should.not.endWith('foo')
+```
 
 ## keys
 
