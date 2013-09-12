@@ -1,4 +1,7 @@
 
+  * fixed usage of valueOf only for standard wrappers
+  * updated eql.js to current version from assert.js
+  * fixed object comparison in eql.js [dirtyrottenscoundrel]
   * added tests and docs for `#approximately(value, delta, description)`
   * added `#beginWith(prefix, description)` [fredr]
   * added `#endWith(suffix, description)`
