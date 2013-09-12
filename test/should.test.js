@@ -275,7 +275,7 @@ module.exports = {
     'test'.should.eql('test');
     ({ foo: 'bar' }).should.eql({ foo: 'bar' });
     (1).should.eql(1);
-    '4'.should.not.eql(4);
+    '4'.should.eql(4);
     var memo = [];
     function memorize() {
         memo.push(arguments);
