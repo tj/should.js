@@ -348,8 +348,8 @@ Assert own object keys, which must match _exactly_,
 and will fail if you omit a key or two:
 
     var obj = { foo: 'bar', baz: 'raz' };
-    obj.should.have.keys('foo', 'bar');
-    obj.should.have.keys(['foo', 'bar']);
+    obj.should.have.keys('foo', 'baz');
+    obj.should.have.keys(['foo', 'baz']);
 
 ## Optional Error description
 
