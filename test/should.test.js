@@ -81,25 +81,25 @@ module.exports = {
   },
 
   'test typeof': function(){
-    'test'.should.be.a('string');
+    'test'.should.have.type('string');
 
     err(function(){
-      'test'.should.not.be.a('string');
-    }, "expected 'test' not to be a string");
+      'test'.should.not.have.type('string');
+    }, "expected 'test' not to have type string");
 
     err(function(){
-      'test'.should.not.be.a('string', 'foo');
-    }, "expected 'test' not to be a string | foo");
+      'test'.should.not.have.type('string', 'foo');
+    }, "expected 'test' not to have type string | foo");
 
-    (5).should.be.a('number');
-
-    err(function(){
-      (5).should.not.be.a('number');
-    }, "expected 5 not to be a number");
+    (5).should.have.type('number');
 
     err(function(){
-      (5).should.not.be.a('number', 'foo');
-    }, "expected 5 not to be a number | foo");
+      (5).should.not.have.type('number');
+    }, "expected 5 not to have type number");
+
+    err(function(){
+      (5).should.not.have.type('number', 'foo');
+    }, "expected 5 not to have type number | foo");
   },
 
   'test instanceof': function(){
@@ -616,7 +616,7 @@ module.exports = {
       user.should.have.property('pets').with.lengthOf(5);
     }, "expected [ 'tobi', 'loki', 'jane', 'bandit' ] to have a length of 5 but got 4");
 
-    user.should.be.a('object').and.have.property('name', 'tj');
+    user.should.be.instanceOf(Object).and.have.property('name', 'tj');
   },
 
   'test throw()': function(){
