@@ -1,4 +1,5 @@
 
+  * expose should to exports, to do not require Object.prototype only
   * fixed usage of valueOf only for standard wrappers
   * updated eql.js to current version from assert.js
   * fixed object comparison in eql.js [dirtyrottenscoundrel]

@@ -2,7 +2,7 @@ _should_ is an expressive, readable, test framework agnostic, assertion library 
 
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
-_should_ literally extends node's _assert_ module, in fact, it is node's assert module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
+_should_ literally extends node's _assert_ module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
 
 ## Example
 ```javascript
@@ -13,6 +13,10 @@ var user = {
 
 user.should.have.property('name', 'tj');
 user.should.have.property('pets').with.lengthOf(4);
+
+// or without Object.prototype, for guys how did Object.create(null)
+
+should(user).have.property('name', 'tj');
 
 someAsyncTask(foo, function(err, result){
   should.not.exist(err);
