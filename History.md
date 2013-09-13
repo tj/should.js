@@ -1,11 +1,10 @@
 
-  * expose should to exports, to do not require Object.prototype only
-  * fixed usage of valueOf only for standard wrappers
-  * updated eql.js to current version from assert.js
-  * fixed object comparison in eql.js [dirtyrottenscoundrel]
-  * added tests and docs for `#approximately(value, delta, description)`
-  * added `#beginWith(prefix, description)` [fredr]
-  * added `#endWith(suffix, description)`
+1.3.0 / 2013-09-13 
+==================
+
+ * fix doc for .keys. Closes #108.
+ * add #endWith()
+ * add .startWith (#119)
 
 1.2.2 / 2013-02-19 
 ==================
