@@ -367,7 +367,7 @@ As it can often be difficult to ascertain exactly where failed assertions are co
 
 The methods that support this optional description are: `eql`, `equal`, `within`, `a`, `instanceof`, `above`, `below`, `match`, `length`, `property`, `ownProperty`, `include`, and `includeEql`.
 
-## Express example
+## Expresso example
 
 For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:
 
