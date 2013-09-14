@@ -135,6 +135,9 @@ Asserts that given object is empty
 [].should.be.empty
 ''.should.be.empty
 ({}).should.be.empty
+(function() {
+  arguments.should.be.empty;
+})()
 ```
 ## eql
 

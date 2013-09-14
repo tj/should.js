@@ -349,9 +349,13 @@ module.exports = {
     [].should.be.empty;
     ({}).should.be.empty;
 
+    (function() {
+      arguments.should.be.empty;
+    })();
+
     err(function(){
-      ({}).should.be.empty;
-    }, 'expected {} to have a property \'length\'');
+      ({}).should.not.be.empty;
+    }, 'expected {} not to be empty');
 
     err(function(){
       'asd'.should.be.empty;
