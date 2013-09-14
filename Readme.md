@@ -54,10 +54,12 @@ which is essentially equivalent to below, however the property may not exist:
 ```javascript
 user.pets.should.have.lengthOf(4)
 ```
-our dummy getters such as _and_ also help express chaining:
+our dummy getters such as _a_, _an_, _be_ and _have_ make tests more readable while the getters _and_ and _with_ helps express chaining:
 ```javascript
-user.should.be.a('object').and.have.property('name', 'tj')
+user.should.be.an.instanceOf(Object).and.have.property('name', 'tj')
+user.should.have.property('pets').with.a.lengthOf(4)
 ```
+
 ## exist (static)
 
 The returned object from `require('should')` is the same object as `require('assert')`. So you can use `should` just like `assert`:
@@ -164,12 +166,12 @@ Assert floating point number:
 ```javascript
 (99.99).should.be.approximately(100, 0.1);
 ```
-## a
+## type
 
 Assert __typeof__:
 ```javascript
-user.should.be.a('object')
-'test'.should.be.a('string')
+user.should.have.type('object')
+'test'.should.have.type('string')
 ```
 ## instanceof and instanceOf
 
