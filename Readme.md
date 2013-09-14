@@ -380,18 +380,20 @@ As it can often be difficult to ascertain exactly where failed assertions are co
 
 The methods that support this optional description are: `eql`, `equal`, `within`, `a`, `instanceof`, `above`, `below`, `match`, `length`, `property`, `ownProperty`, `include`, and `includeEql`.
 
-## Express example
+## Mocha example
 
-For example you can use should with the [Expresso TDD Framework](http://github.com/visionmedia/expresso) by simply including it:
+For example you can use should with the [Mocha](http://github.com/visionmedia/mocha) by simply including it:
 
-    var lib = require('mylib')
-      , should = require('should');
+```javascript
+var should = require('should');
+      
+describe('Testing with should.js', function() {
+	it('should be cool', function() {
+    	'cool'.should.be.eql('cool');
+    });
+});
+```
 
-    module.exports = {
-      'test .version': function(){
-        lib.version.should.match(/^\d+\.\d+\.\d+$/);
-      }
-    };
 
 ## Running tests
 
@@ -408,6 +410,7 @@ Yes, yes it does, with a single getter _should_, and no it won't break your code
 (The MIT License)
 
 Copyright (c) 2010-2011 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+
 Copyright (c) 2011 Aseem Kishore &lt;aseem.kishore@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
