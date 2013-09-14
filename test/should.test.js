@@ -420,6 +420,24 @@ module.exports = {
     }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String] | foo");
   },
 
+  'test properties(name1, name2, ...)': function(){
+    'test'.should.have.properties('length', 'indexOf');
+    (4).should.not.have.properties('length');
+
+    err(function(){
+      'asd'.should.have.properties('foo');
+    }, "expected 'asd' to have a property 'foo'");
+  },
+
+  'test properties([names])': function(){
+    'test'.should.have.properties(['length', 'indexOf']);
+    (4).should.not.have.properties(['length']);
+
+    err(function(){
+      'asd'.should.have.properties(['foo']);
+    }, "expected 'asd' to have a property 'foo'");
+  },
+
   'test ownProperty(name)': function(){
     'test'.should.have.ownProperty('length');
     'test'.should.haveOwnProperty('length');
