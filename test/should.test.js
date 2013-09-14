@@ -256,6 +256,7 @@ module.exports = {
     'test'.should.have.length(4);
     'test'.should.not.have.length(3);
     [1,2,3].should.have.length(3);
+    ({ length: 10}).should.have.length(10);
 
     err(function(){
       (4).should.have.length(3);
@@ -346,7 +347,7 @@ module.exports = {
   'test empty': function(){
     ''.should.be.empty;
     [].should.be.empty;
-    ({ length: 0 }).should.be.empty;
+    ({}).should.be.empty;
 
     err(function(){
       ({}).should.be.empty;

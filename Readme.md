@@ -15,7 +15,6 @@ user.should.have.property('name', 'tj');
 user.should.have.property('pets').with.lengthOf(4);
 
 // or without Object.prototype, for guys how did Object.create(null)
-
 should(user).have.property('name', 'tj');
 
 someAsyncTask(foo, function(err, result){
@@ -30,7 +29,7 @@ someAsyncTask(foo, function(err, result){
 
 ## assert extras
 
-As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it has one extra convenience method:
+As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it also has one extra convenience method:
 ```javascript
 should.exist('hello')
 should.exist([])
@@ -131,11 +130,11 @@ args.should.be.arguments;
 ```
 ## empty
 
-Asserts that length is 0:
+Asserts that given object is empty
 ```javascript
 [].should.be.empty
 ''.should.be.empty
-({ length: 0 }).should.be.empty
+({}).should.be.empty
 ```
 ## eql
 
@@ -206,6 +205,7 @@ Assert _length_ property exists and has a value of the given number:
 ```javascript
 user.pets.should.have.length(5)
 user.pets.should.have.a.lengthOf(5)
+({ length: 10}).should.have.length(10);
 ```
 Aliases: _lengthOf_
 
@@ -217,6 +217,14 @@ user.should.have.property('name')
 user.should.have.property('age', 15)
 user.should.not.have.property('rawr')
 user.should.not.have.property('age', 0)
+```
+
+## properties
+
+Assert given properties exists:
+```javascript
+user.should.have.properties('name', 'age');
+user.should.have.properties(['name', 'age']);
 ```
 ## ownProperty
 
@@ -253,7 +261,7 @@ res.should.be.html
 
 ## include(obj)
 
-Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf.
+Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf. Also it can assert if given object will have some sub-object
 
 Assert array value:
 ```javascript
