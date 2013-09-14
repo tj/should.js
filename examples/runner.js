@@ -47,7 +47,7 @@ test('Point#sub()', function(){
 
 test('Point#add()', function(){
   var point = new Point(50, 100);
-  point.should.respondTo('add');
+  point.should.have.not.property('add');
 });
 
 test('Math#sin()', function(){
@@ -59,7 +59,7 @@ test('Math#cos()', function(){
 });
 
 test('Math#log()', function(){
-  Math.log(10).should.be.approximately(10, 1e-3);
+  Math.log(10).should.be.approximately(2.3, 1e-1);
 });
 
 console.log();
