@@ -382,18 +382,19 @@ The methods that support this optional description are: `eql`, `equal`, `within`
 
 ## Mocha example
 
-For example you can use should with the [Mocha](http://github.com/visionmedia/mocha) by simply including it:
+For example you can use should with the [Mocha test framework](http://visionmedia.github.io/mocha/) by simply including it:
 
 ```javascript
 var should = require('should');
-      
-describe('Testing with should.js', function() {
-	it('should be cool', function() {
-    	'cool'.should.be.eql('cool');
-    });
+var mylib = require('mylib');
+
+
+describe('mylib', function () {
+  it('should have a version with the format #.#.#', function() {
+    lib.version.should.match(/^\d+\.\d+\.\d+$/);
+  }
 });
 ```
-
 
 ## Running tests
 
