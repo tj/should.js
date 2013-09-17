@@ -375,7 +375,7 @@ For example you can use should with the [Mocha test framework](http://visionmedi
       , should = require('should');
 
     describe('mylib', function () {
-      if('should have a version with the format #.#.#', function() {
+      it('should have a version with the format #.#.#', function() {
         lib.version.should.match(/^\d+\.\d+\.\d+$/);
       }
     });
