@@ -146,7 +146,7 @@ equality:
 ({ foo: 'bar' }).should.eql({ foo: 'bar' })
 [1,2,3].should.eql([1,2,3])
 ```
-## equal
+## equal and exactly
 
 strict equality:
 ```javascript
@@ -155,6 +155,7 @@ should.strictEqual(false, value)
 (4).should.equal(4)
 'test'.should.equal('test')
 [1,2,3].should.not.equal([1,2,3])
+(4).should.be.exactly(4)
 ```
 ## within
 
