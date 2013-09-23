@@ -75,6 +75,22 @@ module.exports = {
     }, "expected Infinity to be NaN")
   },
 
+  'test Infinity': function(){
+    NaN.should.not.be.Infinity;
+    (1/0).should.be.Infinity;
+    Infinity.should.be.Infinity;
+    (0).should.not.be.Infinity;
+    false.should.not.be.Infinity;
+    ({}).should.not.be.Infinity;
+    ''.should.not.be.Infinity;
+    'foo'.should.not.be.Infinity;
+    /^$/.should.not.be.Infinity;
+
+    err(function(){
+      NaN.should.be.Infinity;
+    }, "expected NaN to be Infinity")
+  },
+
   'test .expected and .actual': function(){
     try {
       'foo'.should.equal('bar');

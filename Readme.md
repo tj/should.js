@@ -25,7 +25,7 @@ someAsyncTask(foo, function(err, result){
 ```
 ## Installation
 
-    $ npm install should
+    $ npm install should --save-dev
 
 ## assert extras
 
@@ -195,6 +195,18 @@ Assert numeric value below the given value:
 ```javascript
 user.age.should.be.below(100)
 user.age.should.not.be.below(5)
+```
+## NaN
+
+Assert numeric valus is NaN:
+```javascript
+(undefined + 0).should.be.NaN;
+```
+## Infinity
+
+Assert numeric valus is Infinity:
+```javascript
+(1/0).should.be.Infinity;
 ```
 ## match
 
