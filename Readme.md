@@ -380,6 +380,16 @@ and will fail if you omit a key or two:
     obj.should.have.keys('foo', 'baz');
     obj.should.have.keys(['foo', 'baz']);
 
+## type assertions
+
+```javascript
+({}).should.be.an.Object;
+(1).should.be.an.Number;
+[].should.be.an.Array;
+(true).should.be.a.Boolean;
+''.should.be.a.String;
+```
+
 ## Optional Error description
 
 As it can often be difficult to ascertain exactly where failed assertions are coming from in your tests, an optional description parameter can be passed to several should matchers. The description will follow the failed assertion in the error:

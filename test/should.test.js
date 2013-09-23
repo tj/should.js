@@ -179,6 +179,93 @@ module.exports = {
     new Foo2().should.be.an.instanceOf(Foo2);
   },
 
+  'test Function': function() {
+    var f = function() {};
+    f.should.be.a.Function;
+
+    Object.should.be.a.Function;
+
+    Function.should.be.a.Function;
+
+    (new Function("1 * 1")).should.be.a.Function;
+
+    err(function() {
+      (1).should.be.a.Function;
+    }, "expected 1 to be a function");
+  },
+
+  'test Object': function() {
+    [].should.not.be.an.Object;
+    ({}).should.be.an.Object;
+    Function.should.not.be.an.Object;
+
+    (new Object()).should.be.an.Object;
+    (new Date()).should.be.an.Object;
+
+    err(function() {
+      (1).should.be.an.Object;
+    }, 'expected 1 to be an object');
+  },
+
+  'test String': function() {
+    ''.should.be.a.String;
+    ({}).should.not.be.a.String;
+    (0).should.not.be.a.String;
+
+    (new String("")).should.be.a.String;
+
+    err(function() {
+      (1).should.be.a.String
+    }, 'expected 1 to be a string');
+  },
+
+  'test Array': function() {
+    [].should.be.an.Array;
+    (new Array(10)).should.be.an.Array;
+
+    ''.should.not.be.Array;
+    (1).should.not.be.Array;
+
+    err(function() {
+      [].should.not.be.Array
+    }, 'expected [] not to be an array');
+  },
+
+  'test Number': function() {
+    (1).should.be.a.Number;
+    (new Number(10)).should.be.a.Number;
+
+    NaN.should.not.be.a.Number;
+    Infinity.should.not.be.a.Number;
+
+    ({}).should.not.be.a.Number;
+
+    err(function() {
+      ([]).should.be.a.Number;
+    }, 'expected [] to be a number');
+  },
+  'test Boolean': function() {
+    (true).should.be.a.Boolean;
+    (false).should.be.a.Boolean;
+
+    (new Boolean(false)).should.be.a.Boolean;
+
+    ({}).should.not.be.a.Boolean;
+
+    err(function() {
+      [].should.be.a.Boolean
+    }, 'expected [] to be a boolean');
+  },
+  'test Error': function() {
+    (new Error()).should.be.an.Error;
+
+    ({}).should.not.be.Error;
+
+    err(function() {
+      [].should.be.an.Error
+    }, 'expected [] to be an error');
+  },
+
   'test within(start, finish)': function(){
     (5).should.be.within(5, 10);
     (5).should.be.within(3,6);
