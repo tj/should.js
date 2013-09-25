@@ -33,6 +33,10 @@ module.exports = {
     err(function(){
       'test'.should.be.true;
     }, "expected 'test' to be true")
+
+    err(function(){
+      true.should.not.be.true;
+    }, "expected true not to be true")
   },
 
   'test ok': function(){
@@ -58,6 +62,10 @@ module.exports = {
     err(function(){
       ''.should.be.false;
     }, "expected '' to be false")
+
+    err(function(){
+      false.should.not.be.false;
+    }, "expected false not to be false")
   },
 
   'test NaN': function(){
@@ -73,6 +81,10 @@ module.exports = {
     err(function(){
       Infinity.should.be.NaN;
     }, "expected Infinity to be NaN")
+
+    err(function(){
+      NaN.should.not.be.NaN;
+    }, "expected NaN not to be NaN")
   },
 
   'test Infinity': function(){
@@ -89,6 +101,10 @@ module.exports = {
     err(function(){
       NaN.should.be.Infinity;
     }, "expected NaN to be Infinity")
+
+    err(function(){
+      Infinity.should.not.be.Infinity;
+    }, "expected Infinity not to be Infinity")
   },
 
   'test .expected and .actual': function(){
@@ -104,6 +120,14 @@ module.exports = {
     var args = (function(){ return arguments; })(1,2,3);
     args.should.be.arguments;
     [].should.not.be.arguments;
+
+    err(function() {
+      ((function(){ return arguments; })(1,2,3)).should.not.be.arguments;
+    }, "expected { '0': 1, '1': 2, '2': 3 } to not be arguments");
+
+    err(function() {
+      ({}).should.be.arguments;
+    }, "expected {} to be arguments");
   },
 
   'test .equal()': function(){
@@ -121,6 +145,10 @@ module.exports = {
     err(function(){
       'test'.should.not.have.type('string', 'foo');
     }, "expected 'test' not to have type string | foo");
+
+    err(function(){
+      (10).should.have.type('string');
+    }, "expected 10 to have type string");
 
     (5).should.have.type('number');
 
@@ -152,6 +180,10 @@ module.exports = {
     err(function(){
       (3).should.an.instanceof(Foo, 'foo');
     }, "expected 3 to be an instance of Foo | foo");
+
+    err(function(){
+      ({}).should.not.be.an.instanceof(Object);
+    }, "expected {} not to be an instance of Object");
   },
 
   'test instanceOf (non-reserved)': function(){
@@ -466,6 +498,7 @@ module.exports = {
     ''.should.be.empty;
     [].should.be.empty;
     ({}).should.be.empty;
+    ({ length: 10 }).should.not.be.empty;
 
     (function() {
       arguments.should.be.empty;
@@ -474,6 +507,10 @@ module.exports = {
     err(function(){
       ({}).should.not.be.empty;
     }, 'expected {} not to be empty');
+
+    err(function(){
+      ({ length: 10 }).should.be.empty;
+    }, 'expected { length: 10 } to be empty');
 
     err(function(){
       'asd'.should.be.empty;
@@ -545,6 +582,10 @@ module.exports = {
     err(function(){
       'asd'.should.have.properties('foo');
     }, "expected 'asd' to have a property 'foo'");
+
+    err(function(){
+      'asd'.should.not.have.properties('length', 'indexOf');
+    }, "expected 'asd' to not have properties 'length', and 'indexOf'");
   },
 
   'test properties([names])': function(){
