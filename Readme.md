@@ -275,9 +275,9 @@ res.should.be.json
 res.should.be.html
 ```
 
-## include(obj)
+## include(obj) or contain(obj)
 
-Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf. Also it can assert if given object will have some sub-object
+Assert that the given `obj` is present via `indexOf()`, so this works for strings, arrays, or custom objects implementing indexOf. Also it can assert if given object will have some sub-object.
 
 Assert array value:
 ```javascript
