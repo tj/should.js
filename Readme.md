@@ -1,3 +1,5 @@
+# should.js
+
 _should_ is an expressive, readable, test framework agnostic, assertion library for [node](http://nodejs.org).
 
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
@@ -26,6 +28,16 @@ someAsyncTask(foo, function(err, result){
 ## Installation
 
     $ npm install should --save-dev
+
+## In browser
+
+If you want to use _should_ in browser, use version that is in root of repository. It is build with browserify (see [Makefile](https://github.com/visionmedia/should.js/blob/master/Makefile) about how it is build). To build fresh version:
+
+```bash
+# you should have browserify
+npm install -g browserify
+make browser
+```
 
 ## assert extras
 
@@ -328,7 +340,7 @@ Assert an exception is not thrown:
 
 }).should.not.throw();
 ```
-Assert exepection message matches string:
+Assert exception message matches string:
 
 ```js
 (function(){
