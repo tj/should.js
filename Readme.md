@@ -433,7 +433,7 @@ describe('mylib', function () {
 
 ## Running tests
 
-To run the tests for _should_ simply update your git submodules and run:
+To run the tests for _should_ simply run:
 
     $ make test
 
