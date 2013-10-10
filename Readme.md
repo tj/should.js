@@ -4,10 +4,10 @@ _should_ is an expressive, readable, test framework agnostic, assertion library 
 
 It extends the Object prototype with a single non-enumerable getter that allows you to express how that object should behave.
 
-_should_ literally extends node's _assert_ module, for example `should.equal(str, 'foo')` will work, just as `assert.equal(str, 'foo')` would, and `should.AssertionError` **is** `assert.AssertionError`, meaning any test framework supporting this constructor will function properly with _should_.
-
 ## Example
 ```javascript
+var should = require('should');
+
 var user = {
     name: 'tj'
   , pets: ['tobi', 'loki', 'jane', 'bandit']
@@ -18,6 +18,7 @@ user.should.have.property('pets').with.lengthOf(4);
 
 // or without Object.prototype, for guys how did Object.create(null)
 should(user).have.property('name', 'tj');
+should(true).ok;
 
 someAsyncTask(foo, function(err, result){
   should.not.exist(err);
@@ -39,22 +40,6 @@ npm install -g browserify
 make browser
 ```
 
-## assert extras
-
-As mentioned above, _should_ extends node's _assert_. The returned object from `require('should')` is thus similar to the returned object from `require('assert')`, but it also has one extra convenience method:
-```javascript
-should.exist('hello')
-should.exist([])
-should.exist(null)  // will throw
-```
-This is equivalent to `should.ok`, which is equivalent to `assert.ok`, but reads a bit better. It gets better, though:
-```javascript
-should.not.exist(false)
-should.not.exist('')
-should.not.exist({})    // will throw
-```
-We may add more _assert_ extras in the future... ;)
-
 ## chaining assertions
 
 Some assertions can be chained, for example if a property is volatile we can first assert property existence:
@@ -71,38 +56,24 @@ user.should.be.an.instanceOf(Object).and.have.property('name', 'tj')
 user.should.have.property('pets').with.a.lengthOf(4)
 ```
 
-## exist (static)
+## static
 
-The returned object from `require('should')` is the same object as `require('assert')`. So you can use `should` just like `assert`:
+For some rare cases should can be used statically, without `Object.prototype`.
+It can be replacement for node assert module (and it uses the same `AssertionError`):
+
 ```javascript
-should.fail('expected an error!')
-should.strictEqual(foo, bar)
+assert.fail(actual, expected, message, operator) // just write wrong should assertion
+assert(value, message), assert.ok(value, [message]) // should(value).ok
+assert.equal(actual, expected, [message]) // should(actual).eql(expected, [message])
+assert.notEqual(actual, expected, [message]) // should(actual).not.eql(expected, [message])
+assert.deepEqual(actual, expected, [message]) // should(actual).eql(expected, [message])
+assert.notDeepEqual(actual, expected, [message]) // should(actual).not.eql(expected, [message])
+assert.strictEqual(actual, expected, [message]) // should(actual).equal(expected, [message])
+assert.notStrictEqual(actual, expected, [message]) // should(actual).not.equal(expected, [message])
+assert.throws(block, [error], [message]) // should(block).throw([error])
+assert.doesNotThrow(block, [message]) // should(block).not.throw([error])
+assert.ifError(value) // should(value).Error (to check if it is error) or should(value).not.ok (to check that it is falsy)
 ```
-In general, using the Object prototype's _should_ is nicer than using these `assert` equivalents, because _should_ gives you access to the expressive and readable language described above:
-```javascript
-foo.should.equal(bar)   // same as should.strictEqual(foo, bar) above
-```
-The only exception, though, is when you can't be sure that a particular object exists. In that case, attempting to access the _should_ property may throw a TypeError:
-```javascript
-foo.should.equal(bar)   // throws if foo is null or undefined!
-```
-For this case, `require('should')` extends `require('assert')` with an extra convenience method to check whether an object exists:
-```javascript
-should.exist({})
-should.exist([])
-should.exist('')
-should.exist(0)
-should.exist(null)      // will throw
-should.exist(undefined) // will throw
-```
-You can also check the negation:
-```javascript
-should.not.exist(undefined)
-should.not.exist(null)
-should.not.exist('')    // will throw
-should.not.exist({})    // will throw
-```
-Once you know an object exists, you can safely use the _should_ property on it.
 
 ## ok
 
