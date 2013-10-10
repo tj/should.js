@@ -1,4 +1,5 @@
-2.0.0 / 2013
+
+2.0.0 / 2013-10-10 
 ==================
 
  * breaking change: #a now getter like #an. Was replaced with #type(str)
