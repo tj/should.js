@@ -1,3 +1,8 @@
+2.0.2 / 2013-10-21
+==================
+
+ * Add '#of' as getter for chaining.
+ * Exclude browser script for .npmignore.
 
 2.0.1 / 2013-10-10
 ==================
