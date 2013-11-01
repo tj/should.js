@@ -1,0 +1,14 @@
+{
+  "name": "should",
+  "repo": "visionmedia/should.js",
+  "description": "test framework agnostic BDD-style assertions",
+  "version": "2.0.2",
+  "keywords": ["test", "bdd", "assert"],
+  "dependencies": {},
+  "development": {
+     "mocha":"*"
+  },
+  "main":"./lib/should.js",
+  "scripts":["lib/should.js"],
+  "license": "MIT"
+}
