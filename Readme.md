@@ -30,6 +30,10 @@ someAsyncTask(foo, function(err, result){
 
     $ npm install should --save-dev
 
+## Install for component
+
+	  $ component install visionmedia/should.js 
+
 ## In browser
 
 If you want to use _should_ in browser, use version that is in root of repository. It is build with browserify (see [Makefile](https://github.com/visionmedia/should.js/blob/master/Makefile) about how it is build). To build fresh version:
