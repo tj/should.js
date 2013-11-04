@@ -156,8 +156,8 @@ Assert floating point number:
 
 Assert __typeof__:
 ```javascript
-user.should.have.type('object')
-'test'.should.have.type('string')
+user.should.be.type('object')
+'test'.should.be.type('string')
 ```
 ## instanceof and instanceOf
 
