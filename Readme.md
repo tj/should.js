@@ -42,19 +42,31 @@ make browser
 
 ## chaining assertions
 
-Some assertions can be chained, for example if a property is volatile we can first assert property existence:
+Every assertion will return a should.js-wraped Object, so assertions can be chained. For example:
+
+```js
+user.should.be.an.instanceOf(Object).and.have.property('name', 'tj');
+user.pets.should.be.instanceof(Array).and.have.lengthOf(4);
+```
+
+All assertions return themselves but not `property` and `ownProperty`. They two would return the property value.
+
+for example if a property is volatile we can first assert property existence:
 ```javascript
+// `user.should.have.property('pets')` returned `should(user.pets)` but not `should(user)`
 user.should.have.property('pets').with.lengthOf(4)
 ```
 which is essentially equivalent to below, however the property may not exist:
 ```javascript
 user.pets.should.have.lengthOf(4)
 ```
-our dummy getters such as _a_, _an_, _be_ and _have_ make tests more readable while the getters _and_ and _with_ helps express chaining:
+
+our dummy getters such as _a_, _an_, _be_, _of_ and _have_ make tests more readable while the getters _and_ and _with_ helps express chaining:
 ```javascript
 user.should.be.an.instanceOf(Object).and.have.property('name', 'tj')
 user.should.have.property('pets').with.a.lengthOf(4)
 ```
+Those getters don't have any actual effect, just for readability.
 
 ## static
 
