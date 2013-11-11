@@ -1,3 +1,8 @@
+2.1.0 / 2013-11-11
+==================
+
+ * Override .inspect for Date's to convert them to ISOString
+
 2.0.2 / 2013-10-21
 ==================
 

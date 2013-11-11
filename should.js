@@ -1,4 +1,4 @@
-(function(e){if("function"==typeof bootstrap)bootstrap("should",e);else if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else if("undefined"!=typeof ses){if(!ses.ok())return;ses.makeShould=e}else"undefined"!=typeof window?window.should=e():global.should=e()})(function(){var define,ses,bootstrap,module,exports;
+!function(e){"object"==typeof exports?module.exports=e():"function"==typeof define&&define.amd?define(e):"undefined"!=typeof window?window.should=e():"undefined"!=typeof global?global.should=e():"undefined"!=typeof self&&(self.should=e())}(function(){var define,module,exports;
 return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // Taken from node's assert module, because it sucks
 // and exposes next to nothing useful.
@@ -188,7 +188,10 @@ var should = function(obj) {
   return new Assertion(util.isWrapperType(obj) ? obj.valueOf(): obj);
 };
 
-should.inspect = inspect;
+should.inspect = function(obj, opts) {
+  if(util.isDate(obj) && typeof obj.inspect !== 'function') obj = obj.toISOString();
+  return inspect(obj, opts);
+};
 
 /**
  * Expose assert to should
@@ -2261,7 +2264,11 @@ function isPrimitive(arg) {
 exports.isPrimitive = isPrimitive;
 
 function isBuffer(arg) {
-  return arg instanceof Buffer;
+  return arg && typeof arg === 'object'
+    && typeof arg.copy === 'function'
+    && typeof arg.fill === 'function'
+    && typeof arg.binarySlice === 'function'
+  ;
 }
 exports.isBuffer = isBuffer;
 
