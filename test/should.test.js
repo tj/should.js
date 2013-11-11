@@ -901,6 +901,17 @@ module.exports = {
     err(function(){
       (function(){ throw 'error'; }).should.throw(Error);
     }, "expected an exception to be thrown of type Error, but got String");
+  },
+
+  'test .inspect to format Dates': function() {
+    var d = new Date();
+    should.inspect(d).should.be.exactly("'"+d.toISOString()+"'");
+  },
+
+  'test .inspect to use custom inspect on Dates': function() {
+    var d = new Date();
+    d.inspect = function() { return this.getTime(); }
+    should.inspect(d).should.be.exactly(d.getTime().toString());
   }
 
 };
