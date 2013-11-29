@@ -222,7 +222,7 @@ Aliases: _lengthOf_
 
 ## property
 
-Assert property exists and has optional value:
+Assert property exists and has optional value(compare using `===`):
 ```javascript
 user.should.have.property('name')
 user.should.have.property('age', 15)
