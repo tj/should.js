@@ -376,6 +376,12 @@ and will fail if you omit a key or two:
     obj.should.have.keys('foo', 'baz');
     obj.should.have.keys(['foo', 'baz']);
 
+    ({foo: 1, bar: 2})
+    .should.have.keys({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);}
+    });
+
 ## type assertions
 
 ```javascript
