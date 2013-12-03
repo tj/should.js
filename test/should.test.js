@@ -753,6 +753,35 @@ module.exports = {
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
     ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
 
+    ({foo: 1, bar: 2}).should.have.keys({
+      foo: function (foo) {foo.should.match(/\d+/);},
+      bar: function (bar) {bar.should.match(/\d+/);}
+    });
+
+    ({foo: 1, bar: 2})
+    .should.have.keys({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);}
+    });
+
+    ({foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    })
+    .should.have.keys({
+      foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    });
+
+    ({foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    })
+    .should.have.keys({
+      foo: function (foo) {
+        foo.should.have.property('data')
+          .with.have.keys({one: 1, two: function (two) {two.should.equal(2)}})},
+      bar: function (bar) {bar.should.length(3);}
+    });
+
     err(function(){
       ({ foo: 1 }).should.have.keys();
     }, "keys required");
@@ -788,6 +817,59 @@ module.exports = {
     err(function(){
       ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
     }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.keys({
+        foo: function (foo) {foo.should.match(/111111/);},
+        bar: function (bar) {bar.should.match(/2222/);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have keys 'foo', and 'bar'\n  foo: expected 1 to match /111111/\n  bar: expected 2 to match /2222/");
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.keys({
+        foo: function (foo) {foo.should.equal(0);},
+        bar: function (bar) {bar.should.equal(2);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have keys 'foo', and 'bar'\n  foo: expected 1 to equal 0");
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.keys({
+        foo: function (foo) {foo.should.equal(1);},
+        bar: function (bar) {bar.should.equal(3);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have keys 'foo', and 'bar'\n  bar: expected 2 to equal 3");
+
+    err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.keys({
+        foo: {data: {one: 1, two: 2, three: 3}},
+        bar: [1, 2, 3, 3, 3, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have keys 'foo', and 'bar'\n  foo: expected eql { data: { one: 1, two: 2, three: 3 } }\n  bar: expected eql [ 1, 2, 3, 3, 3, 3 ]");
+
+    err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.keys({
+        foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3, 3, 3, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have keys 'foo', and 'bar'\n  bar: expected eql [ 1, 2, 3, 3, 3, 3 ]");
+
+     err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.keys({
+        foo: {data: {one: 1, two: 2, three: 3}},
+        bar: [1, 2, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have keys 'foo', and 'bar'\n  foo: expected eql { data: { one: 1, two: 2, three: 3 } }");
+
+
   },
 
   'test chaining': function(){
