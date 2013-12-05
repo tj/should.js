@@ -188,10 +188,12 @@ var should = function(obj) {
   return new Assertion(util.isWrapperType(obj) ? obj.valueOf(): obj);
 };
 
-should.inspect = function(obj, opts) {
-  if(util.isDate(obj) && typeof obj.inspect !== 'function') obj = obj.toISOString();
-  return inspect(obj, opts);
-};
+should.inspect = inspect;
+
+function i(value) {
+  if(util.isDate(value) && typeof value.inspect !== 'function') return value.toISOString(); //show millis in dates
+  return should.inspect(value);
+}
 
 /**
  * Expose assert to should
@@ -215,7 +217,7 @@ util.merge(should, assert);
 should.exist = should.exists = function(obj, msg) {
   if(null == obj) {
     throw new AssertionError({
-      message: msg || ('expected ' + should.inspect(obj) + ' to exist')
+      message: msg || ('expected ' + i(obj) + ' to exist')
       , stackStartFunction: should.exist
     });
   }
@@ -233,7 +235,7 @@ should.not = {};
 should.not.exist = should.not.exists = function(obj, msg){
   if (null != obj) {
     throw new AssertionError({
-      message: msg || ('expected ' + should.inspect(obj) + ' to not exist')
+      message: msg || ('expected ' + i(obj) + ' to not exist')
       , stackStartFunction: should.not.exist
     });
   }
@@ -401,7 +403,7 @@ Assertion.prototype = {
    */
 
   get inspect() {
-    return should.inspect(this.obj);
+    return i(this.obj);
   },
 
   /**
@@ -531,8 +533,8 @@ Assertion.prototype = {
   eql: function(val, description){
     this.assert(
         eql(val, this.obj)
-      , function(){ return 'expected ' + this.inspect + ' to equal ' + should.inspect(val) + (description ? " | " + description : "") }
-      , function(){ return 'expected ' + this.inspect + ' to not equal ' + should.inspect(val) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to equal ' + i(val) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to not equal ' + i(val) + (description ? " | " + description : "") }
       , val
       , true
       , description);
@@ -550,8 +552,8 @@ Assertion.prototype = {
   equal: function(val, description){
     this.assert(
         val === this.obj
-      , function(){ return 'expected ' + this.inspect + ' to equal ' + should.inspect(val) + (description ? " | " + description : "") }
-      , function(){ return 'expected ' + this.inspect + ' to not equal ' + should.inspect(val) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to equal ' + i(val) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to not equal ' + i(val) + (description ? " | " + description : "") }
       , val
       , void 0
       , description);
@@ -803,13 +805,13 @@ Assertion.prototype = {
   property: function(name, val, description){
     if (this.negate && undefined !== val) {
       if (undefined === this.obj[name]) {
-        throw new Error(this.inspect + ' has no property ' + should.inspect(name) + (description ? " | " + description : ""));
+        throw new Error(this.inspect + ' has no property ' + i(name) + (description ? " | " + description : ""));
       }
     } else {
       this.assert(
           undefined !== this.obj[name]
-        , function(){ return 'expected ' + this.inspect + ' to have a property ' + should.inspect(name) + (description ? " | " + description : "") }
-        , function(){ return 'expected ' + this.inspect + ' to not have a property ' + should.inspect(name) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to have a property ' + i(name) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to not have a property ' + i(name) + (description ? " | " + description : "") }
         , void 0
         , void 0
         , description);
@@ -818,9 +820,9 @@ Assertion.prototype = {
     if (undefined !== val) {
       this.assert(
           val === this.obj[name]
-        , function(){ return 'expected ' + this.inspect + ' to have a property ' + should.inspect(name)
-          + ' of ' + should.inspect(val) + ', but got ' + should.inspect(this.obj[name]) + (description ? " | " + description : "") }
-        , function(){ return 'expected ' + this.inspect + ' to not have a property ' + should.inspect(name) + ' of ' + should.inspect(val) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to have a property ' + i(name)
+          + ' of ' + i(val) + ', but got ' + i(this.obj[name]) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to not have a property ' + i(name) + ' of ' + i(val) + (description ? " | " + description : "") }
         , void 0
         , void 0
         , description);
@@ -854,12 +856,12 @@ Assertion.prototype = {
     // key string
     if (len > 1) {
       names = names.map(function(name){
-        return should.inspect(name);
+        return i(name);
       });
       var last = names.pop();
       str = names.join(', ') + ', and ' + last;
     } else {
-      str = should.inspect(names[0]);
+      str = i(names[0]);
     }
 
     // message
@@ -884,8 +886,8 @@ Assertion.prototype = {
   ownProperty: function(name, description){
     this.assert(
       hasOwnProperty.call(this.obj, name)
-      , function(){ return 'expected ' + this.inspect + ' to have own property ' + should.inspect(name) + (description ? " | " + description : "") }
-      , function(){ return 'expected ' + this.inspect + ' to not have own property ' + should.inspect(name) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to have own property ' + i(name) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to not have own property ' + i(name) + (description ? " | " + description : "") }
       , void 0
       , void 0
       , description);
@@ -902,8 +904,8 @@ Assertion.prototype = {
 
   startWith: function(str, description) {
     this.assert(0 === this.obj.indexOf(str)
-    , function() { return 'expected ' + this.inspect + ' to start with ' + should.inspect(str) + (description ? " | " + description : "") }
-    , function() { return 'expected ' + this.inspect + ' to not start with ' + should.inspect(str) + (description ? " | " + description : "") }
+    , function() { return 'expected ' + this.inspect + ' to start with ' + i(str) + (description ? " | " + description : "") }
+    , function() { return 'expected ' + this.inspect + ' to not start with ' + i(str) + (description ? " | " + description : "") }
     , void 0
     , void 0
     , description);
@@ -919,8 +921,8 @@ Assertion.prototype = {
 
   endWith: function(str, description) {
     this.assert(-1 !== this.obj.indexOf(str, this.obj.length - str.length)
-    , function() { return 'expected ' + this.inspect + ' to end with ' + should.inspect(str) + (description ? " | " + description : "") }
-    , function() { return 'expected ' + this.inspect + ' to not end with ' + should.inspect(str) + (description ? " | " + description : "") }
+    , function() { return 'expected ' + this.inspect + ' to end with ' + i(str) + (description ? " | " + description : "") }
+    , function() { return 'expected ' + this.inspect + ' to not end with ' + i(str) + (description ? " | " + description : "") }
     , void 0
     , void 0
     , description);
@@ -941,16 +943,16 @@ Assertion.prototype = {
       for (var key in obj) cmp[key] = this.obj[key];
       this.assert(
           eql(cmp, obj)
-        , function(){ return 'expected ' + this.inspect + ' to include an object equal to ' + should.inspect(obj) + (description ? " | " + description : "") }
-        , function(){ return 'expected ' + this.inspect + ' to not include an object equal to ' + should.inspect(obj) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to include an object equal to ' + i(obj) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to not include an object equal to ' + i(obj) + (description ? " | " + description : "") }
         , void 0
         , void 0
         , description);
     } else {
       this.assert(
           ~this.obj.indexOf(obj)
-        , function(){ return 'expected ' + this.inspect + ' to include ' + should.inspect(obj) + (description ? " | " + description : "") }
-        , function(){ return 'expected ' + this.inspect + ' to not include ' + should.inspect(obj) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to include ' + i(obj) + (description ? " | " + description : "") }
+        , function(){ return 'expected ' + this.inspect + ' to not include ' + i(obj) + (description ? " | " + description : "") }
         , void 0
         , void 0
         , description);
@@ -969,8 +971,8 @@ Assertion.prototype = {
   includeEql: function(obj, description){
     this.assert(
       this.obj.some(function(item) { return eql(obj, item); })
-      , function(){ return 'expected ' + this.inspect + ' to include an object equal to ' + should.inspect(obj) + (description ? " | " + description : "") }
-      , function(){ return 'expected ' + this.inspect + ' to not include an object equal to ' + should.inspect(obj) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to include an object equal to ' + i(obj) + (description ? " | " + description : "") }
+      , function(){ return 'expected ' + this.inspect + ' to not include an object equal to ' + i(obj) + (description ? " | " + description : "") }
       , void 0
       , void 0
       , description);
@@ -1009,12 +1011,12 @@ Assertion.prototype = {
     // key string
     if (len > 1) {
       keys = keys.map(function(key){
-        return should.inspect(key);
+        return i(key);
       });
       var last = keys.pop();
       str = keys.join(', ') + ', and ' + last;
     } else {
-      str = should.inspect(keys[0]);
+      str = i(keys[0]);
     }
 
     // message
@@ -1058,9 +1060,9 @@ Assertion.prototype = {
 
     this.assert(
         code == status
-      , function(){ return 'expected response code of ' + code + ' ' + should.inspect(statusCodes[code])
-        + ', but got ' + status + ' ' + should.inspect(statusCodes[status]) }
-      , function(){ return 'expected to not respond with ' + code + ' ' + should.inspect(statusCodes[code]) });
+      , function(){ return 'expected response code of ' + code + ' ' + i(statusCodes[code])
+        + ', but got ' + status + ' ' + i(statusCodes[status]) }
+      , function(){ return 'expected to not respond with ' + code + ' ' + i(statusCodes[code]) });
 
     return this;
   },
