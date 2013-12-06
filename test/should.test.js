@@ -541,6 +541,18 @@ module.exports = {
   'test property(name, val)': function(){
     'test'.should.have.property('length', 4);
     'asd'.should.have.property('constructor', String);
+    'asd'.should.have.property('constructor', function (constructor) {
+      constructor.should.equal(String);
+    });
+
+    ({data: {name: 'alsotang', age: 21}}).should.have.property('data',
+      {name: 'alsotang', age: 21});
+
+    ({str: 'hello world'}).should.have.property('str', /^h.*d$/);
+
+    ({str: 'hello world'}).should.have.property('str', function (str) {
+      str.should.equal('hello world');
+    });
 
     err(function(){
       'asd'.should.have.property('length', 4);
@@ -556,7 +568,7 @@ module.exports = {
 
     err(function(){
       'asd'.should.have.property('constructor', Number);
-    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String]");
+    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String]\n  'asd': expected eql [Function: Number]");
 
     err(function(){
       'asd'.should.have.property('length', 4, 'foo');
@@ -572,12 +584,172 @@ module.exports = {
 
     err(function(){
       'asd'.should.have.property('constructor', Number, 'foo');
-    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String] | foo");
+    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String] | foo\n  'asd': expected eql [Function: Number]");
+
+    err(function () {
+      ({data: {name: 'alsotang', age: 21}}).should.have.property('data',
+        {name: 'tangalso', age: 21});
+    }, "expected { data: { name: 'alsotang', age: 21 } } to have a property 'data' of { name: 'tangalso', age: 21 }, but got { name: 'alsotang', age: 21 }");
+
+    err(function () {
+      ({str: 'hello world'}).should.have.property('str', /^h.*dddddd$/);
+    }, "expected { str: 'hello world' } to have a property 'str' of /^h.*dddddd$/, but got 'hello world'");
+
+    err(function () {
+      ({str: 'hello world'}).should.have.property('str', function (str) {
+        str.should.equal('ni hao shi jie');
+      });
+    }, "expected { str: 'hello world' } to have a property 'str' of [Function], but got 'hello world'\n  { str: 'hello world' }: expected 'hello world' to equal 'ni hao shi jie'")
+
+    err(function () {
+      'asd'.should.have.property('constructor', function (constructor) {
+        constructor.should.equal(Number);
+      });
+    }, "expected 'asd' to have a property 'constructor' of [Function], but got [Function: String]\n  'asd': expected [Function: String] to equal [Function: Number]");
+  },
+
+  'test properties({})': function () {
+    ({foo: 1, bar: 2}).should.have.properties({
+      foo: function (foo) {foo.should.match(/\d+/);},
+      bar: function (bar) {bar.should.match(/\d+/);}
+    });
+
+    ({foo: 1, bar: 2})
+    .should.have.properties({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);}
+    });
+
+    ({foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    })
+    .should.have.properties({
+      foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    });
+
+    ({foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    })
+    .should.have.properties({
+      foo: function (foo) {
+        foo.should.have.property('data')
+          .with.have.keys({one: 1, two: function (two) {two.should.equal(2)}})},
+      bar: function (bar) {bar.should.length(3);}
+    });
+
+    ({foo: 'hello', bar: 'world'})
+    .should.have.properties({
+      foo: /^h.*$/,
+      bar: /world/
+    });
+
+    ({foo: 1, bar: 2, str: 'hello'})
+    .should.have.properties({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);},
+      str: /^h.*/
+    });
+
+    (1).should.have.properties({
+      constructor: Number
+    });
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.properties({
+        foo: function (foo) {foo.should.match(/111111/);},
+        bar: function (bar) {bar.should.match(/2222/);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have properties 'foo', and 'bar'\n  foo: expected 1 to match /111111/\n  bar: expected 2 to match /2222/");
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.properties({
+        foo: function (foo) {foo.should.equal(0);},
+        bar: function (bar) {bar.should.equal(2);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have properties 'foo', and 'bar'\n  foo: expected 1 to equal 0");
+
+    err(function () {
+      ({foo: 1, bar: 2}).should.have.properties({
+        foo: function (foo) {foo.should.equal(1);},
+        bar: function (bar) {bar.should.equal(3);}
+      });
+    }, "expected { foo: 1, bar: 2 } to have properties 'foo', and 'bar'\n  bar: expected 2 to equal 3");
+
+    err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.properties({
+        foo: {data: {one: 1, two: 2, three: 3}},
+        bar: [1, 2, 3, 3, 3, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have properties 'foo', and 'bar'\n  foo: expected eql { data: { one: 1, two: 2, three: 3 } }\n  bar: expected eql [ 1, 2, 3, 3, 3, 3 ]");
+
+    err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.properties({
+        foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3, 3, 3, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have properties 'foo', and 'bar'\n  bar: expected eql [ 1, 2, 3, 3, 3, 3 ]");
+
+    err(function () {
+      ({foo: {data: {one: 1, two: 2}},
+        bar: [1, 2, 3]
+      })
+      .should.have.properties({
+        foo: {data: {one: 1, two: 2, three: 3}},
+        bar: [1, 2, 3]
+      });
+    }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have properties 'foo', and 'bar'\n  foo: expected eql { data: { one: 1, two: 2, three: 3 } }");
+
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.properties({
+        foo: /^w.*$/,
+        bar: /world/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have properties 'foo', and 'bar'\n  foo: expected match /^w.*$/");
+
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.properties({
+        foo: /^h.*$/,
+        bar: /hello/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have properties 'foo', and 'bar'\n  bar: expected match /hello/");
+
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.properties({
+        foo: /world/,
+        bar: /hello/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have properties 'foo', and 'bar'\n  foo: expected match /world/\n  bar: expected match /hello/");
+
+    err(function () {
+      (1).should.have.properties({
+        constructor: String
+      });
+    }, "expected 1 to have a property 'constructor'\n  constructor: expected eql [Function: String]")
+
+    err(function () {
+      (1).should.have.properties({
+        constructor: function (constructor) {
+          constructor.should.equal(String);
+        }
+      });
+    }, "expected 1 to have a property 'constructor'\n  constructor: expected [Function: Number] to equal [Function: String]")
+
   },
 
   'test properties(name1, name2, ...)': function(){
     'test'.should.have.properties('length', 'indexOf');
     (4).should.not.have.properties('length');
+
 
     err(function(){
       'asd'.should.have.properties('foo');
@@ -782,6 +954,19 @@ module.exports = {
       bar: function (bar) {bar.should.length(3);}
     });
 
+    ({foo: 'hello', bar: 'world'})
+    .should.have.keys({
+      foo: /^h.*$/,
+      bar: /world/
+    });
+
+    ({foo: 1, bar: 2, str: 'hello'})
+    .should.have.keys({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);},
+      str: /^h.*/
+    });
+
     err(function(){
       ({ foo: 1 }).should.have.keys();
     }, "keys required");
@@ -859,7 +1044,7 @@ module.exports = {
       });
     }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have keys 'foo', and 'bar'\n  bar: expected eql [ 1, 2, 3, 3, 3, 3 ]");
 
-     err(function () {
+    err(function () {
       ({foo: {data: {one: 1, two: 2}},
         bar: [1, 2, 3]
       })
@@ -869,6 +1054,29 @@ module.exports = {
       });
     }, "expected { foo: { data: { one: 1, two: 2 } }, bar: [ 1, 2, 3 ] } to have keys 'foo', and 'bar'\n  foo: expected eql { data: { one: 1, two: 2, three: 3 } }");
 
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.keys({
+        foo: /^w.*$/,
+        bar: /world/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have keys 'foo', and 'bar'\n  foo: expected match /^w.*$/");
+
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.keys({
+        foo: /^h.*$/,
+        bar: /hello/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have keys 'foo', and 'bar'\n  bar: expected match /hello/");
+
+    err(function () {
+      ({foo: 'hello', bar: 'world'})
+      .should.have.keys({
+        foo: /world/,
+        bar: /hello/
+      });
+    }, "expected { foo: 'hello', bar: 'world' } to have keys 'foo', and 'bar'\n  foo: expected match /world/\n  bar: expected match /hello/");
 
   },
 
