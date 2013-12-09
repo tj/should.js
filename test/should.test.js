@@ -173,6 +173,10 @@ module.exports = {
     var getSomething = function() {return "something"};
     getSomething.should.be.an.instanceof(Function);
 
+    var number = Object(5);
+    (number instanceof Number).should.be.true;
+    number.should.be.an.instanceof(Number);
+
     err(function(){
       (3).should.an.instanceof(Foo);
     }, "expected 3 to be an instance of Foo");
