@@ -551,6 +551,15 @@ module.exports = {
       str.should.equal('hello world');
     });
 
+    ({data: {name: 'alsotang', age: 21}}).should.not.have.property('data',
+      {name: 'alsotang', age: 21111});
+
+    ({str: 'hello world'}).should.not.have.property('str', /^hhhhhh.*d$/);
+
+    ({str: 'hello world'}).should.not.have.property('str', function (str) {
+      str.should.equal('hhhhhhello world');
+    });
+
     err(function(){
       'asd'.should.have.property('length', 4);
     }, "expected 'asd' to have a property 'length' of 4, but got 3");
@@ -609,6 +618,28 @@ module.exports = {
         constructor.should.equal(String);
       });
     }, "expected 'asd' to have a property 'constructor' of [Function], but got [Function: String]\n  'asd': expected equal [Function]");
+
+    err(function () {
+      ({str: 'hello world'}).should.have.property('str', function (str) {
+        str.should.equal('hello world');
+        throw new Error('not AssertionError');
+      });
+    }, 'not AssertionError');
+
+    err(function () {
+      ({data: {name: 'alsotang', age: 21}}).should.not.have.property('data',
+        {name: 'alsotang', age: 21});
+    }, "expected { data: { name: 'alsotang', age: 21 } } to not have a property 'data' of { name: 'alsotang', age: 21 }");
+
+    err(function () {
+      ({str: 'hello world'}).should.not.have.property('str', /^h.*d$/);
+    }, "expected { str: 'hello world' } to not have a property 'str' of /^h.*d$/");
+
+    err(function () {
+      ({str: 'hello world'}).should.not.have.property('str', function (str) {
+        str.should.equal('hello world');
+      });
+    }, "expected { str: 'hello world' } to not have a property 'str' of [Function]");
   },
 
   'test properties({})': function () {
@@ -641,6 +672,16 @@ module.exports = {
       bar: function (bar) {bar.should.length(3);}
     });
 
+    ({foo: {data: {one: 1, two: 2}},
+      bar: [1, 2, 3]
+    })
+    .should.have.properties({
+      foo: function (foo) {
+        foo.should.have.property('data')
+          .with.have.keys({one: 1, two: function (two) {two.should.not.equal(2222222)}})},
+      bar: function (bar) {bar.should.length(3);}
+    });
+
     ({foo: 'hello', bar: 'world'})
     .should.have.properties({
       foo: /^h.*$/,
@@ -656,6 +697,23 @@ module.exports = {
 
     (1).should.have.properties({
       constructor: Number
+    });
+
+    ({foo: 1, bar: 2, str: 'hello'})
+    .should.not.have.properties({
+      foo: 111111,
+      bar: function (bar) {bar.should.equal(2);},
+      str: /^h.*/
+    });
+
+    (1).should.not.have.properties({
+      constructor: String
+    });
+
+    ({foo: 1, bar: 2})
+    .should.not.have.properties({
+      foo: 11111,
+      bar: function (bar) {bar.should.equal(2);}
     });
 
     err(function () {
@@ -745,7 +803,21 @@ module.exports = {
           constructor.should.equal(String);
         }
       });
-    }, "expected 1 to have a property 'constructor'\n  constructor: expected equal [Function]")
+    }, "expected 1 to have a property 'constructor'\n  constructor: expected equal [Function]");
+
+    err(function () {
+      ({foo: 1, bar: 2})
+      .should.not.have.properties({
+        foo: 1,
+        bar: function (bar) {bar.should.equal(2);}
+      });
+    }, "expected { foo: 1, bar: 2 } to not have properties 'foo', and 'bar'");
+
+    err(function () {
+      (1).should.not.have.properties({
+        constructor: Number
+      });
+    }, "expected 1 to not have a property 'constructor'");
 
   },
 
@@ -928,6 +1000,44 @@ module.exports = {
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
     ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
 
+    err(function(){
+      ({ foo: 1 }).should.have.keys();
+    }, "keys required");
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys([]);
+    }, "keys required");
+
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys([]);
+    }, "keys required");
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar']);
+    }, "expected { foo: 1 } to have key 'bar'");
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
+
+    err(function(){
+      ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
+    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
+
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+
+    err(function(){
+      ({ foo: 1 }).should.not.have.keys(['foo']);
+    }, "expected { foo: 1 } to not have key 'foo'");
+
+    err(function(){
+      ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
+    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+  },
+
+  'test keys({})': function () {
     ({foo: 1, bar: 2}).should.have.keys({
       foo: function (foo) {foo.should.match(/\d+/);},
       bar: function (bar) {bar.should.match(/\d+/);}
@@ -970,41 +1080,12 @@ module.exports = {
       str: /^h.*/
     });
 
-    err(function(){
-      ({ foo: 1 }).should.have.keys();
-    }, "keys required");
-
-    err(function(){
-      ({ foo: 1 }).should.have.keys([]);
-    }, "keys required");
-
-    err(function(){
-      ({ foo: 1 }).should.not.have.keys([]);
-    }, "keys required");
-
-    err(function(){
-      ({ foo: 1 }).should.have.keys(['bar']);
-    }, "expected { foo: 1 } to have key 'bar'");
-
-    err(function(){
-      ({ foo: 1 }).should.have.keys(['bar', 'baz']);
-    }, "expected { foo: 1 } to have keys 'bar', and 'baz'");
-
-    err(function(){
-      ({ foo: 1 }).should.have.keys(['foo', 'bar', 'baz']);
-    }, "expected { foo: 1 } to have keys 'foo', 'bar', and 'baz'");
-
-    err(function(){
-      ({ foo: 1 }).should.not.have.keys(['foo']);
-    }, "expected { foo: 1 } to not have key 'foo'");
-
-    err(function(){
-      ({ foo: 1 }).should.not.have.keys(['foo']);
-    }, "expected { foo: 1 } to not have key 'foo'");
-
-    err(function(){
-      ({ foo: 1, bar: 2 }).should.not.have.keys(['foo', 'bar']);
-    }, "expected { foo: 1, bar: 2 } to not have keys 'foo', and 'bar'");
+    ({foo: 1, bar: 2, str: 'hello'})
+    .should.not.have.keys({
+      foo: 11111,
+      bar: function (bar) {bar.should.equal(2);},
+      str: /^h.*/
+    });
 
     err(function () {
       ({foo: 1, bar: 2}).should.have.keys({
@@ -1081,6 +1162,14 @@ module.exports = {
       });
     }, "expected { foo: 'hello', bar: 'world' } to have keys 'foo', and 'bar'\n  foo: expected match /world/\n  bar: expected match /hello/");
 
+    err(function () {
+      ({foo: 1, bar: 2, str: 'hello'})
+      .should.not.have.keys({
+        foo: 1,
+        bar: function (bar) {bar.should.equal(2);},
+        str: /^h.*/
+      });
+    }, "expected { foo: 1, bar: 2, str: 'hello' } to not have keys 'foo', 'bar', and 'str'");
   },
 
   'test chaining': function(){
