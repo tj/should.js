@@ -541,9 +541,6 @@ module.exports = {
   'test property(name, val)': function(){
     'test'.should.have.property('length', 4);
     'asd'.should.have.property('constructor', String);
-    'asd'.should.have.property('constructor', function (constructor) {
-      constructor.should.equal(String);
-    });
 
     ({data: {name: 'alsotang', age: 21}}).should.have.property('data',
       {name: 'alsotang', age: 21});
@@ -568,7 +565,7 @@ module.exports = {
 
     err(function(){
       'asd'.should.have.property('constructor', Number);
-    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String]\n  'asd': expected eql [Function: Number]");
+    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String]\n  'asd': expected equal [Function: Number]");
 
     err(function(){
       'asd'.should.have.property('length', 4, 'foo');
@@ -584,7 +581,7 @@ module.exports = {
 
     err(function(){
       'asd'.should.have.property('constructor', Number, 'foo');
-    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String] | foo\n  'asd': expected eql [Function: Number]");
+    }, "expected 'asd' to have a property 'constructor' of [Function: Number], but got [Function: String] | foo\n  'asd': expected equal [Function: Number]");
 
     err(function () {
       ({data: {name: 'alsotang', age: 21}}).should.have.property('data',
@@ -605,7 +602,13 @@ module.exports = {
       'asd'.should.have.property('constructor', function (constructor) {
         constructor.should.equal(Number);
       });
-    }, "expected 'asd' to have a property 'constructor' of [Function], but got [Function: String]\n  'asd': expected [Function: String] to equal [Function: Number]");
+    }, "expected 'asd' to have a property 'constructor' of [Function], but got [Function: String]\n  'asd': expected equal [Function]");
+
+    err(function () {
+      'asd'.should.have.property('constructor', function (constructor) {
+        constructor.should.equal(String);
+      });
+    }, "expected 'asd' to have a property 'constructor' of [Function], but got [Function: String]\n  'asd': expected equal [Function]");
   },
 
   'test properties({})': function () {
@@ -734,7 +737,7 @@ module.exports = {
       (1).should.have.properties({
         constructor: String
       });
-    }, "expected 1 to have a property 'constructor'\n  constructor: expected eql [Function: String]")
+    }, "expected 1 to have a property 'constructor'\n  constructor: expected equal [Function: String]")
 
     err(function () {
       (1).should.have.properties({
@@ -742,7 +745,7 @@ module.exports = {
           constructor.should.equal(String);
         }
       });
-    }, "expected 1 to have a property 'constructor'\n  constructor: expected [Function: Number] to equal [Function: String]")
+    }, "expected 1 to have a property 'constructor'\n  constructor: expected equal [Function]")
 
   },
 
