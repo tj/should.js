@@ -468,6 +468,16 @@ module.exports = {
     };
 
     req.should.be.json;
+
+    var req = {
+      headers: {
+        'content-type': 'application/json'
+      }
+    };
+
+    (function(){
+      req.should.not.be.json;
+    }).should.throw();
   },
 
   'test equal(val)': function(){
