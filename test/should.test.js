@@ -475,9 +475,73 @@ module.exports = {
       }
     };
 
-    (function(){
+    err(function () {
       req.should.not.be.json;
-    }).should.throw();
+    }, "expected { headers: { 'content-type': 'application/json' } } not to have content-type application/json");
+
+    var req = {
+      headers: {
+        'content-type': 'text/html; charset=utf-8'
+      }
+    };
+
+    req.should.not.be.json;
+
+    var req = {
+      headers: {
+        'content-type': 'text/html; charset=utf-8'
+      }
+    };
+
+    err(function () {
+      req.should.be.json;
+    }, "expected { headers: { 'content-type': 'text/html; charset=utf-8' } } to have content-type application/json");
+  },
+
+  'test .html': function(){
+    var req = {
+      headers: {
+        'content-type': 'text/html'
+      }
+    };
+
+    req.should.be.html;
+
+    var req = {
+      headers: {
+        'content-type': 'text/html; charset=utf-8'
+      }
+    };
+
+    req.should.be.html;
+
+    var req = {
+      headers: {
+        'content-type': 'text/html'
+      }
+    };
+
+    err(function () {
+      req.should.not.be.html;
+    }, "expected { headers: { 'content-type': 'text/html' } } not to have content-type text/html");
+
+    var req = {
+      headers: {
+        'content-type': 'application/json; charset=utf-8'
+      }
+    };
+
+    req.should.not.be.html;
+
+    var req = {
+      headers: {
+        'content-type': 'application/json; charset=utf-8'
+      }
+    };
+
+    err(function () {
+      req.should.be.html;
+    }, "expected { headers: { 'content-type': 'application/json; charset=utf-8' } } to have content-type text/html");
   },
 
   'test equal(val)': function(){
