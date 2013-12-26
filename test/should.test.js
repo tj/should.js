@@ -177,6 +177,14 @@ module.exports = {
     (number instanceof Number).should.be.true;
     number.should.be.an.instanceof(Number);
 
+    var boolean = Object(true);
+    (boolean instanceof Boolean).should.be.true;
+    boolean.should.be.an.instanceof(Boolean);
+
+    var string = Object('string');
+    (string instanceof String).should.be.true;
+    string.should.be.an.instanceof(String);
+
     err(function(){
       (3).should.an.instanceof(Foo);
     }, "expected 3 to be an instance of Foo");
