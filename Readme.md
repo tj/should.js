@@ -16,7 +16,7 @@ var user = {
 user.should.have.property('name', 'tj');
 user.should.have.property('pets').with.lengthOf(4);
 
-// or without Object.prototype, for guys how did Object.create(null)
+// or without Object.prototype, for guys who did Object.create(null)
 should(user).have.property('name', 'tj');
 should(true).ok;
 
