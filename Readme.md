@@ -225,10 +225,18 @@ Aliases: _lengthOf_
 
 ## property
 
-Assert property exists and has optional value(compare using `===`):
+Assert property exists and has optional value:
 ```javascript
 user.should.have.property('name')
 user.should.have.property('age', 15)
+({data: {name: 'alsotang', age: 21}}).should.have.property('data',
+  {name: 'alsotang', age: 21});
+
+({str: 'hello world'}).should.have.property('str', /^h.*d$/);
+
+({str: 'hello world'}).should.have.property('str', function (str) {
+  str.should.equal('hello world');
+});
 user.should.not.have.property('rawr')
 user.should.not.have.property('age', 0)
 ```
@@ -239,9 +247,17 @@ Assert given properties exists:
 ```javascript
 user.should.have.properties('name', 'age');
 user.should.have.properties(['name', 'age']);
+
+({foo: 1, bar: 2, str: 'hello'})
+.should.have.properties({
+  foo: 1,
+  bar: function (bar) {bar.should.equal(2);},
+  str: /^h.*/
+});
 ```
 ## ownProperty
 
+using `Object.prototype.hasOwnProperty`
 Assert own property (on the immediate object):
 ```javascript
 ({ foo: 'bar' }).should.have.ownProperty('foo')
@@ -378,6 +394,13 @@ and will fail if you omit a key or two:
     var obj = { foo: 'bar', baz: 'raz' };
     obj.should.have.keys('foo', 'baz');
     obj.should.have.keys(['foo', 'baz']);
+
+    ({foo: 1, bar: 2, str: 'hello'})
+    .should.have.keys({
+      foo: 1,
+      bar: function (bar) {bar.should.equal(2);},
+      str: /^h.*/
+    });
 
 ## type assertions
 
