@@ -39,6 +39,8 @@ module.exports = {
 
     user.should.be.an.instanceOf(Object).and.have.property('name', 'tj');
 
-    //TODO add chaining nagative tests
+    user.should.have.ownProperty('name')
+      .which.not.have.length(3)
+        .and.be.equal('tj');
   }
 };

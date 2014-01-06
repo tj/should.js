@@ -44,24 +44,4 @@ module.exports = {
     }, "baz");
   },
 
-  'test match(regexp)': function(){
-    'foobar'.should.match(/^foo/)
-    'foobar'.should.not.match(/^bar/)
-
-    err(function(){
-      'foobar'.should.match(/^bar/i)
-    }, "expected 'foobar' to match /^bar/i");
-
-    err(function(){
-      'foobar'.should.not.match(/^foo/i)
-    }, "expected 'foobar' not to match /^foo/i");
-
-    err(function(){
-      'foobar'.should.match(/^bar/i, 'foo')
-    }, "foo");
-
-    err(function(){
-      'foobar'.should.not.match(/^foo/i, 'foo')
-    }, "foo");
-  },
 }

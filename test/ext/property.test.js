@@ -142,4 +142,48 @@ module.exports = {
     }, "expected '' not to be empty");
   },
 
+  'test containEql': function() {
+    'hello boy'.should.containEql('boy');
+    [1,2,3].should.containEql(3);
+    [[1],[2],[3]].should.containEql([3]);
+    [[1],[2],[3, 4]].should.not.containEql([3]);
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.containEql({a: 'a'});
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containEql({b: 'b'});
+
+    ({ b: 10 }).should.containEql({ b: 10 });
+    [1, 2, 3].should.containEql(1);
+    ([1, 2, { a: 10 }]).should.containEql({ a: 10 });
+    [1, 2, 3].should.not.containEql({ a: 1 });
+
+    err(function() {
+      [1,2,3].should.not.containEql(3);
+    }, "expected [ 1, 2, 3 ] not to contain 3");
+
+    err(function() {
+      [1,2,3].should.containEql(4);
+    }, "expected [ 1, 2, 3 ] to contain 4");
+  },
+
+  'test containDeep': function() {
+    'hello boy'.should.containDeep('boy');
+    [1,2,3].should.containDeep(3);
+
+    ({ a: { b: 10 }, b: { c: 10, d: 11, a: { b: 10, c: 11} }}).should
+      .containDeep({ a: { b: 10 }, b: { c: 10, a: { c: 11 }}});
+
+    [1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep({ a: { b: {d: 12}}});
+
+    [[1],[2],[3]].should.containDeep([3]);
+    [[1],[2],[3, 4]].should.containDeep([3]);
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({a: 'a'});
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({b: 'b'});
+
+    err(function() {
+      'hello boy'.should.not.containDeep('boy');
+    }, "expected 'hello boy' not to contain 'boy'");
+
+    err(function() {
+      [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containDeep({b: 'b'});
+    }, "expected [ { a: 'a' }, { b: 'b', c: 'c' } ] not to contain { b: 'b' }");
+  }
 }
