@@ -569,7 +569,7 @@ As it can often be difficult to ascertain exactly where failed assertions are co
 
     (1).should.eql(0, 'some useful description')
 
-    AssertionError: expected 1 to equal 0 | some useful description
+    AssertionError: some useful description
       at Object.eql (/Users/swift/code/should.js/node_modules/should/lib/should.js:280:10)
       ...
 
