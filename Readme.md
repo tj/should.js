@@ -16,7 +16,10 @@ var user = {
 user.should.have.property('name', 'tj');
 user.should.have.property('pets').with.lengthOf(4);
 
-// or without Object.prototype, for guys how did Object.create(null)
+// if the object was created with Object.create(null)
+// then it doesn't inherit `Object` and have the `should` getter
+// so you can do:
+
 should(user).have.property('name', 'tj');
 should(true).ok;
 
