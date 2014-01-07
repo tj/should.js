@@ -53,6 +53,15 @@ npm install -g browserify
 make browser
 ```
 
+*should.js* uses EcmaScript 5 very extensively so any browser that support ES5 is supported. (IE <=8 not supported).
+
+You can easy install it with again npm or bower:
+```
+npm install should --save-dev
+# or
+bower install visionmedia/should.js
+```
+
 ## Static should and assert module
 
 For some rare cases should can be used statically, without `Object.prototype`.
