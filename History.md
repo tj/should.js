@@ -1,3 +1,16 @@
+3.0.0 / 2014-01-
+==================
+
+ * Split everything to smaller files
+ * Added huge extension to .match and .matchEach. Thanks @alsotang for initial code and idea.
+ * Added .containDeep and .containEql
+ * Separate build for browser and node.js
+ * Basic plugin system
+ * Breacking change: .Object now do not fail on arrays
+ * Breacking change: Additional messages now replaces generated and do not added
+ * Deprecated: assert extension
+ * Deprecated: .include and .includeEql
+
 2.1.1 / 2013-12-05
 ==================
 
