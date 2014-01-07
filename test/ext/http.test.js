@@ -29,4 +29,10 @@ module.exports = {
 
     ({}).should.not.be.json;
   },
+
+  'test .status': function() {
+    ({ statusCode: 300 }).should.have.not.status(200);
+    
+    ({ statusCode: 200 }).should.have.status(200);
+  }
 }
