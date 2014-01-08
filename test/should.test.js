@@ -609,6 +609,23 @@ module.exports = {
     }, "expected 'asd' to have a property 'foo'");
   },
 
+  'test properties({ name1: val1, name2: val2, ... })': function(){
+    'test'.should.have.properties({ length: 4 });
+    'test'.should.not.have.properties({ length: 5 });
+
+    err(function(){
+      'test'.should.have.properties({ length: 5 });
+    }, "expected 'test' to have a property 'length' of 5, but got 4");
+
+    var object = { foo: 1, bar: 2, baz: 3 };
+    object.should.have.properties({ foo: 1, bar: 2 });
+    object.should.not.have.properties({ foo: 2 });
+
+    err(function() {
+      object.should.have.properties({ foo: 1, bar: 3 });
+    }, "expected { foo: 1, bar: 2, baz: 3 } to have a property 'bar' of 3, but got 2");
+  },
+
   'test ownProperty(name)': function(){
     'test'.should.have.ownProperty('length');
     'test'.should.haveOwnProperty('length');
