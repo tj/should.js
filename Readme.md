@@ -53,6 +53,24 @@ npm install -g browserify
 make browser
 ```
 
+This script exported to `window.Should`. It is the same as use `should` statically:
+
+```js
+Should(5).be.exactly(5)
+```
+
+Also as for node.js case `Object.prototype` extended with `should` (that is why `window.Should` used):
+
+```js
+window.should.be.exactly(window);
+// the same
+// window is host object 
+should.be.exactly(window);
+// you should not really care about it
+
+(5).should.be.exactly(5);
+```
+
 *should.js* uses EcmaScript 5 very extensively so any browser that support ES5 is supported. (IE <=8 not supported).
 
 You can easy install it with again npm or bower:
