@@ -91,15 +91,15 @@ module.exports = {
 
     err(function(){
       (10).should.not.be.above(6);
-    }, "expected 10 to be below 6");
+    }, "expected 10 not to be above 6");
 
     err(function(){
       (5).should.be.above(6, 'foo');
-    }, "expected 5 to be above 6 | foo");
+    }, "foo");
 
     err(function(){
       (10).should.not.be.above(6, 'foo');
-    }, "expected 10 to be below 6 | foo");
+    }, "foo");
   },
 
   'test below(n)': function(){
@@ -114,14 +114,14 @@ module.exports = {
 
     err(function(){
       (6).should.not.be.below(10);
-    }, "expected 6 to be above 10");
+    }, "expected 6 not to be below 10");
 
     err(function(){
       (6).should.be.below(5, 'foo');
-    }, "expected 6 to be below 5 | foo");
+    }, "foo");
 
     err(function(){
       (6).should.not.be.below(10, 'foo');
-    }, "expected 6 to be above 10 | foo");
+    }, "foo");
   }
 }

@@ -28,5 +28,20 @@ module.exports = {
     err(function(){
       false.should.not.be.false;
     }, "expected false not to be false")
-  }
+  },
+
+  'test ok': function(){
+    true.should.be.ok;
+    false.should.not.be.ok;
+    (1).should.be.ok;
+    (0).should.not.be.ok;
+
+    err(function(){
+      ''.should.be.ok;
+    }, "expected '' to be truthy");
+
+    err(function(){
+      'test'.should.not.be.ok;
+    }, "expected 'test' not to be truthy");
+  },
 }
