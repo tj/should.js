@@ -6,8 +6,9 @@
  * Added .containDeep and .containEql
  * Separate build for browser and node.js
  * Basic plugin system
- * Breacking change: .Object now do not fail on arrays
- * Breacking change: Additional messages now replaces generated and do not added
+ * Breaking change: .Object now do not fail on arrays
+ * Breaking change: Additional messages now replaces generated and do not added
+ * Breaking change: .keys now check as is - no keys in args means no keys in object
  * Deprecated: assert extension
  * Deprecated: .include and .includeEql
 
