@@ -11,6 +11,7 @@
  * Breaking change: .keys now check as is - no keys in args means no keys in object
  * Deprecated: assert extension
  * Deprecated: .include and .includeEql
+ * Now all assertions define only positive cases, should.js take care about negations and chains
 
 2.1.1 / 2013-12-05
 ==================

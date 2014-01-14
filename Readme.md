@@ -72,6 +72,7 @@ should.be.exactly(window);
 ```
 
 *should.js* uses EcmaScript 5 very extensively so any browser that support ES5 is supported. (IE <=8 not supported).
+See [kangax's compat table](http://kangax.github.io/es5-compat-table) to know which exactly.
 
 You can easy install it with again npm or bower:
 ```
@@ -370,7 +371,6 @@ Assert given value to contain something *.eql* to otherValue. See examples to un
 [[1],[2],[3, 4]].should.not.containEql([3]);
 
 ({ b: 10 }).should.containEql({ b: 10 });
-[1, 2, 3].should.containEql(1);
 ([1, 2, { a: 10 }]).should.containEql({ a: 10 });
 [1, 2, 3].should.not.containEql({ a: 1 });
 
@@ -380,24 +380,32 @@ Assert given value to contain something *.eql* to otherValue. See examples to un
 
 ## .containDeep(otherValue)
 
-Assert given value to contain something *.eql* to otherValue within depth. Again see examples:
+Assert given value to contain something *.eql* to otherValue within depth.
+Again see examples:
 
 ```javascript
 'hello boy'.should.containDeep('boy');
-[1,2,3].should.containDeep(3);
+[1,2,3].should.containDeep([3]);
+[1,2,3].should.containDeep([1, 3]);
+//but not
+[1,2,3].should.containDeep([3, 1]);
 
 ({ a: { b: 10 }, b: { c: 10, d: 11, a: { b: 10, c: 11} }}).should
   .containDeep({ a: { b: 10 }, b: { c: 10, a: { c: 11 }}});
 
-[1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep({ a: { b: {d: 12}}});
+[1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep([{ a: { b: {d: 12}}}]);
 
-[[1],[2],[3]].should.containDeep([3]);
-[[1],[2],[3, 4]].should.containDeep([3]);
-[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({a: 'a'});
-[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({b: 'b'});
+[[1],[2],[3]].should.containDeep([[3]]);
+[[1],[2],[3, 4]].should.containDeep([[3]]);
+[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{a: 'a'}]);
+[{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
 ```
 
-It does not search somewhere in depth it check all pattern in depth. It is important meaning.
+It does not search somewhere in depth it check all pattern in depth. Object checked
+by properties key and value, arrays checked like sub sequences. Everyting compared using .eql.
+Main difference with `.containEql` is that this assertion require full type chain -
+if asserted value is an object, otherValue should be also an object (which is sub object of given).
+The same true for arrays, otherValue should be an array which compared to be subsequence of given object.
 
 ## .match(otherValue)
 

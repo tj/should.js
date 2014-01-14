@@ -87,7 +87,7 @@ module.exports = {
     }, "expected 'asd' to have property 'foo'");
   },
 
- 'test keys(array)': function(){
+  'test keys(array)': function(){
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
     ({ foo: 1, bar: 2 }).should.have.keys('foo', 'bar');
@@ -166,24 +166,27 @@ module.exports = {
 
   'test containDeep': function() {
     'hello boy'.should.containDeep('boy');
-    [1,2,3].should.containDeep(3);
 
     ({ a: { b: 10 }, b: { c: 10, d: 11, a: { b: 10, c: 11} }}).should
       .containDeep({ a: { b: 10 }, b: { c: 10, a: { c: 11 }}});
 
-    [1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep({ a: { b: {d: 12}}});
+    [1, 2, 3, { a: { b: { d: 12 }}}].should.containDeep([{ a: { b: {d: 12}}}]);
 
-    [[1],[2],[3]].should.containDeep([3]);
-    [[1],[2],[3, 4]].should.containDeep([3]);
-    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({a: 'a'});
-    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep({b: 'b'});
+    [[1, [2, 3], 3], [2]].should.not.containDeep([1, 2]);
+
+    [[1],[2],[3]].should.containDeep([[3]]);
+    [[1],[2],[3, 4]].should.containDeep([[3]]);
+    [[1],[2],[3, 4]].should.containDeep([[1], [3]]);
+    [[1],[2],[3, 4]].should.not.containDeep([[3], [1]]);
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{a: 'a'}]);
+    [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
 
     err(function() {
       'hello boy'.should.not.containDeep('boy');
     }, "expected 'hello boy' not to contain 'boy'");
 
     err(function() {
-      [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containDeep({b: 'b'});
-    }, "expected [ { a: 'a' }, { b: 'b', c: 'c' } ] not to contain { b: 'b' }");
+      [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containDeep([{b: 'b'}]);
+    }, "expected [ { a: 'a' }, { b: 'b', c: 'c' } ] not to contain [ { b: 'b' } ]");
   }
-}
+};
