@@ -1,4 +1,4 @@
-3.0.0 / 2014-01-
+3.0.0 / 2014-01-17
 ==================
 
  * Split everything to smaller files
