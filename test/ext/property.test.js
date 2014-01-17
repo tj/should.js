@@ -30,6 +30,7 @@ module.exports = {
 
   'test length(n)': function(){
     'test'.should.have.length(4);
+    'test'.should.have.lengthOf(4);
     'test'.should.not.have.length(3);
     [1,2,3].should.have.length(3);
     ({ length: 10}).should.have.length(10);
