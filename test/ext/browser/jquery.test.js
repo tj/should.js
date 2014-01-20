@@ -140,18 +140,6 @@ module.exports = {
     });
   },
 
-  'test haveLength()': function(done) {
-    executeWithJsdom('<div>hello</div>', function (window) {
-      window.$('div').should.haveLength(1);
-
-      err(function () {
-        window.$('div').should.haveLength(2);
-      }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to have length 2");
-
-      done();
-    });
-  },
-
   'test haveAttr()': function(done) {
     executeWithJsdom(function (window) {
       window.$('<a target="_blank"></a>').should.haveAttr('target', '_blank');
