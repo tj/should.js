@@ -1,4 +1,4 @@
-var err = require('../util').err;
+var err = require('../../util').err;
 var fs = require('fs');
 var jsdom = require('jsdom');
 var path = require('path');
