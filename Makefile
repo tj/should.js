@@ -1,6 +1,6 @@
 TESTS=$(shell find test -name *.test.js)
 
-test:
+test: browser
 	@./node_modules/.bin/mocha --ui exports --recursive $(TESTS)
 
 browser:

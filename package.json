@@ -6,7 +6,9 @@
   , "homepage": "https://github.com/visionmedia/should.js"
   , "scripts": { "test": "make test" }
   , "devDependencies": {
-      "mocha": "*"
+      "mocha": "*",
+      "jsdom": "*",
+      "jquery": "*"
   }
   , "keywords": ["test", "bdd", "assert"]
   , "main": "./lib/node.js"
