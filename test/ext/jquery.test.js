@@ -4,7 +4,7 @@ var jsdom = require('jsdom');
 var path = require('path');
 
 var jQuerySource = fs.readFileSync(path.resolve('node_modules/jquery/dist/jquery.js', '.'), "utf-8");
-var shouldSource = fs.readFileSync(path.resolve('should.js', '.'), "utf-8");
+var shouldSource = fs.readFileSync(path.resolve('should.js.for-tests', '.'), "utf-8");
 
 function executeWithJsdom(html, callback) {
   if (typeof html === 'function') {
