@@ -347,6 +347,8 @@ module.exports = function(should, Assertion) {
   * From the jasmine-jquery project under the MIT License.
   */
 
+var util = require('../util');
+
 module.exports = function(should, Assertion) {
   var $ = this.jQuery || this.$;
 
@@ -359,7 +361,7 @@ module.exports = function(should, Assertion) {
 
   jQuery.fn.inspect = function () {
     var elementList = this.toArray().map(function (e) {
-      return e.inspect();
+      return util.inspect(e);
     }).join(", ");
     if (this.selector) {
       return "SELECTOR(" + this.selector + ") matching " + this.length + " elements" + (elementList.length ? ": " + elementList : "");
@@ -560,7 +562,7 @@ module.exports = function(should, Assertion) {
     return this.assert(false);
   });
 };
-},{}],10:[function(require,module,exports){
+},{"../util":16}],10:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -1072,7 +1074,7 @@ var Assertion = should.Assertion = function Assertion(obj) {
 
 
 /**
-  Way to extend Assertion function. It uses some logic 
+  Way to extend Assertion function. It uses some logic
   to define only positive assertions and itself rule with negative assertion.
 
   All actions happen in subcontext and this method take care about negation.
