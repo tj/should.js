@@ -140,13 +140,27 @@ module.exports = {
     });
   },
 
-  'test haveAttr()': function(done) {
+  'test attr()': function(done) {
     executeWithJsdom(function (window) {
-      window.$('<a target="_blank"></a>').should.haveAttr('target', '_blank');
+      window.$('<a target="_blank"></a>').should.have.attr('target', '_blank');
+      window.$('<a target="_blank"></a>').should.have.attr('target');
+      window.$('<a target="_blank"></a>').should.have.attr({
+        target: '_blank'
+      });
 
       err(function () {
-        window.$('<a target="_blank"></a>').should.haveAttr('target', '_self');
-      }, "expected <a target=\"_blank\"></a> to have attribute target with value _self");
+        window.$('<a target="_blank"></a>').should.have.attr('target', '_self');
+      }, "expected <a target=\"_blank\"></a> to have attribute 'target' with value '_self'");
+
+      err(function () {
+        window.$('<a target="_blank"></a>').should.have.attr({
+          target: '_self'
+        });
+      }, "expected <a target=\"_blank\"></a> to have attributes { target: '_self' }");
+
+      err(function () {
+        window.$('<a target="_blank"></a>').should.have.attr('id');
+      }, "expected <a target=\"_blank\"></a> to have attribute 'id'");
 
       done();
     });
@@ -157,11 +171,25 @@ module.exports = {
       var node = window.$('<a target="_blank"></a>');
       node[0].foobar = 'hello'
 
-      node.should.haveProp('foobar', 'hello');
+      node.should.have.prop('foobar', 'hello');
+      node.should.have.prop({
+        foobar: 'hello'
+      });
+      node.should.have.prop('foobar');
 
       err(function () {
-        node.should.haveProp('bar', 'quz');
-      }, "expected <a target=\"_blank\"></a> to have property bar with value quz");
+        node.should.have.prop('bar', 'quz');
+      }, "expected <a target=\"_blank\"></a> to have property 'bar' with value 'quz'");
+
+      err(function () {
+        node.should.have.prop('bar');
+      }, "expected <a target=\"_blank\"></a> to have property 'bar'");
+
+      err(function () {
+        node.should.have.prop({
+          'bar': 'quz'
+        });
+      }, "expected <a target=\"_blank\"></a> to have properties { bar: 'quz' }");
 
       done();
     });
@@ -249,30 +277,27 @@ module.exports = {
     });
   },
 
-  'test haveData()': function(done) {
+  'test data()': function(done) {
     executeWithJsdom('<input type="text" data-greeting="hello" />', function (window) {
-      window.$('input').should.haveData('greeting', 'hello');
+      window.$('input').should.have.data('greeting', 'hello');
+      window.$('input').should.have.data('greeting');
+      window.$('input').should.have.data({
+        greeting: 'hello'
+      });
 
       err(function () {
-        window.$('input').should.haveData('greeting', 'goodbye');
-      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" data-greeting=\"hello\" /> to have data greeting with value goodbye");
-
-      done();
-    });
-  },
-
-  'test containElement()': function(done) {
-    executeWithJsdom('<div><p>hi</p></div><table></table>', function (window) {
-      window.$('div').should.containElement('p');
-      window.$('div').should.containElement(window.$('p'));
+        window.$('input').should.have.data('greeting', 'goodbye');
+      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" data-greeting=\"hello\" /> to have data 'greeting' with value 'goodbye'");
 
       err(function () {
-        window.$('div').should.containElement('img');
-      }, "expected SELECTOR(div) matching 1 elements: <div><p>hi</p></div> to contain SELECTOR(img) matching 0 elements");
+        window.$('input').should.have.data({
+          greeting: 'goodbye'
+        });
+      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" data-greeting=\"hello\" /> to have data { greeting: 'goodbye' }");
 
       err(function () {
-        window.$('div').should.containElement(window.$('table'));
-      }, "expected SELECTOR(div) matching 1 elements: <div><p>hi</p></div> to contain SELECTOR(table) matching 1 elements: <table></table>");
+        window.$('input').should.have.data('blessing');
+      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" data-greeting=\"hello\" /> to have data 'blessing'");
 
       done();
     });
