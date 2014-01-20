@@ -52,29 +52,29 @@ module.exports = {
   //   });
   // },
 
-  'test haveClass()': function(done) {
+  'test className()': function(done) {
     executeWithJsdom(function (window) {
-      window.$('<div class="hello"></div>').should.haveClass('hello');
+      window.$('<div class="hello"></div>').should.have.className('hello');
 
       err(function () {
-        window.$('<div></div>').should.haveClass('hello');
+        window.$('<div></div>').should.have.className('hello');
       }, "expected <div></div> to have class hello");
 
       done();
     });
   },
 
-  'test haveCss()': function(done) {
+  'test css()': function(done) {
     executeWithJsdom(function (window) {
-      window.$('<div style="background-color: red"></div>').should.haveCss({
+      window.$('<div style="background-color: red"></div>').should.have.css({
         backgroundColor: 'red'
       });
 
       err(function () {
-        window.$('<div style="background-color: blue"></div>').should.haveCss({
+        window.$('<div style="background-color: blue"></div>').should.have.css({
           backgroundColor: 'red'
         });
-      }, "expected <div style=\"background-color: blue;\"></div> to have css {\"backgroundColor\":\"red\"}");
+      }, "expected <div style=\"background-color: blue;\"></div> to have css { backgroundColor: 'red' }");
 
       done();
     });
@@ -195,25 +195,25 @@ module.exports = {
     });
   },
 
-  'test haveId()': function(done) {
+  'test id()': function(done) {
     executeWithJsdom(function (window) {
-      window.$('<a id="foobar"></a>').should.haveId('foobar');
+      window.$('<a id="foobar"></a>').should.have.id('foobar');
 
       err(function () {
-        window.$('<a id="foobar"></a>').should.haveId('bazqux');
-      }, "expected <a id=\"foobar\"></a> to have ID bazqux");
+        window.$('<a id="foobar"></a>').should.have.id('bazqux');
+      }, "expected <a id=\"foobar\"></a> to have ID 'bazqux'");
 
       done();
     });
   },
 
-  'test haveHtml()': function(done) {
+  'test html()': function(done) {
     executeWithJsdom('<div><p>hello</p></div>', function (window) {
-      window.$('div').should.haveHtml('<p>hello</p>');
+      window.$('div').should.have.html('<p>hello</p>');
 
       err(function () {
-        window.$('div').should.haveHtml('<div>goodbye</div>');
-      }, "expected SELECTOR(div) matching 1 elements: <div><p>hello</p></div> to have HTML <div>goodbye</div>");
+        window.$('div').should.have.html('<div>goodbye</div>');
+      }, "expected SELECTOR(div) matching 1 elements: <div><p>hello</p></div> to have HTML '<div>goodbye</div>'");
 
       done();
     });
@@ -225,23 +225,23 @@ module.exports = {
 
       err(function () {
         window.$('div').should.containHtml('<u>goodbye</u>');
-      }, "expected SELECTOR(div) matching 1 elements: <div><p><em>hello</em></p></div> to contain HTML <u>goodbye</u>");
+      }, "expected SELECTOR(div) matching 1 elements: <div><p><em>hello</em></p></div> to contain HTML '<u>goodbye</u>'");
 
       done();
     });
   },
 
-  'test haveText()': function(done) {
+  'test text()': function(done) {
     executeWithJsdom('<div>hello</div>', function (window) {
-      window.$('div').should.haveText('hello');
-      window.$('div').should.haveText(/hel+o/);
+      window.$('div').should.have.text('hello');
+      window.$('div').should.have.text(/hel+o/);
 
       err(function () {
-        window.$('div').should.haveText('goodbye');
-      }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to have text goodbye");
+        window.$('div').should.have.text('goodbye');
+      }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to have text 'goodbye'");
 
       err(function () {
-        window.$('div').should.haveText(/go+dbye/);
+        window.$('div').should.have.text(/go+dbye/);
       }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to have text /go+dbye/");
 
       done();
@@ -255,7 +255,7 @@ module.exports = {
 
       err(function () {
         window.$('div').should.containText('odbye');
-      }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to contain text odbye");
+      }, "expected SELECTOR(div) matching 1 elements: <div>hello</div> to contain text 'odbye'");
 
       err(function () {
         window.$('div').should.containText(/o+dby/);
@@ -265,13 +265,13 @@ module.exports = {
     });
   },
 
-  'test haveValue()': function(done) {
+  'test value()': function(done) {
     executeWithJsdom('<input type="text" value="hello" />', function (window) {
-      window.$('input').should.haveValue('hello');
+      window.$('input').should.have.value('hello');
 
       err(function () {
-        window.$('input').should.haveValue('goodbye');
-      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" value=\"hello\" /> to have value goodbye");
+        window.$('input').should.have.value('goodbye');
+      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" value=\"hello\" /> to have value 'goodbye'");
 
       done();
     });
@@ -298,6 +298,23 @@ module.exports = {
       err(function () {
         window.$('input').should.have.data('blessing');
       }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" data-greeting=\"hello\" /> to have data 'blessing'");
+
+      done();
+    });
+  },
+
+  'test containElement()': function(done) {
+    executeWithJsdom('<div><p>hi</p></div><table></table>', function (window) {
+      window.$('div').should.containElement('p');
+      window.$('div').should.containElement(window.$('p'));
+
+      err(function () {
+        window.$('div').should.containElement('img');
+      }, "expected SELECTOR(div) matching 1 elements: <div><p>hi</p></div> to contain SELECTOR(img) matching 0 elements");
+
+      err(function () {
+        window.$('div').should.containElement(window.$('table'));
+      }, "expected SELECTOR(div) matching 1 elements: <div><p>hi</p></div> to contain SELECTOR(table) matching 1 elements: <table></table>");
 
       done();
     });
@@ -378,4 +395,4 @@ module.exports = {
       done();
     });
   }
-}
+};
