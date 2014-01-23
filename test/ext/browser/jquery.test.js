@@ -169,7 +169,7 @@ module.exports = {
   'test haveProp()': function(done) {
     executeWithJsdom(function (window) {
       var node = window.$('<a target="_blank"></a>');
-      node[0].foobar = 'hello'
+      node[0].foobar = 'hello';
 
       node.should.have.prop('foobar', 'hello');
       node.should.have.prop({
@@ -195,12 +195,13 @@ module.exports = {
     });
   },
 
-  'test id()': function(done) {
+  'test elementId()': function(done) {
     executeWithJsdom(function (window) {
-      window.$('<a id="foobar"></a>').should.have.id('foobar');
+      window.$('<a id="foobar"></a>').should.have.elementId('foobar');
 
       err(function () {
-        window.$('<a id="foobar"></a>').should.have.id('bazqux');
+
+        window.$('<a id="foobar"></a>').should.have.elementId('bazqux');
       }, "expected <a id=\"foobar\"></a> to have ID 'bazqux'");
 
       done();
