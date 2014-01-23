@@ -18,10 +18,11 @@ should
   .use(require('./ext/property'))
   .use(require('./ext/error'))
   .use(require('./ext/match'))
+  .use(require('./ext/browser/jquery'))
   .use(require('./ext/deprecated'));
 
  module.exports = should;
-},{"./ext/assert":3,"./ext/bool":4,"./ext/chain":5,"./ext/deprecated":6,"./ext/eql":7,"./ext/error":8,"./ext/match":9,"./ext/number":10,"./ext/property":11,"./ext/string":12,"./ext/type":13,"./should":14}],2:[function(require,module,exports){
+},{"./ext/assert":3,"./ext/bool":4,"./ext/browser/jquery":5,"./ext/chain":6,"./ext/deprecated":7,"./ext/eql":8,"./ext/error":9,"./ext/match":10,"./ext/number":11,"./ext/property":12,"./ext/string":13,"./ext/type":14,"./should":15}],2:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -125,7 +126,7 @@ function objEquiv (a, b) {
   return true;
 }
 
-},{"./util":15}],3:[function(require,module,exports){
+},{"./util":16}],3:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -183,7 +184,7 @@ module.exports = function(should) {
     }
   };
 };
-},{"../util":15,"assert":16}],4:[function(require,module,exports){
+},{"../util":16,"assert":17}],4:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -212,6 +213,234 @@ module.exports = function(should, Assertion) {
  * MIT Licensed
  */
 
+/*!
+ * Portions copyright (c) 2010, 2011, 2012 Wojciech Zawistowski, Travis Jeffery
+ * From the jasmine-jquery project under the MIT License.
+ */
+
+var util = require('../../util');
+
+module.exports = function(should, Assertion) {
+  var i = should.format;
+  var $ = this.jQuery || this.$;
+
+  /* Otherwise, node's util.inspect loops hangs */
+  if (HTMLElement && !HTMLElement.prototype.inspect) {
+    HTMLElement.prototype.inspect = function () {
+      return this.outerHTML;
+    };
+  }
+
+  jQuery.fn.inspect = function () {
+    var elementList = this.toArray().map(function (e) {
+      return util.inspect(e);
+    }).join(", ");
+    if (this.selector) {
+      return "SELECTOR(" + this.selector + ") matching " + this.length + " elements" + (elementList.length ? ": " + elementList : "");
+    } else {
+      return elementList;
+    }
+  };
+
+  function jQueryAttributeTestHelper(method, singular, plural, nameOrHash, value) {
+    var keys = util.isObject(nameOrHash) ? Object.keys(nameOrHash) : [nameOrHash];
+    var allRelevantAttributes = keys.reduce(function (memo, key) {
+      var value = $(this.obj)[method](key);
+      if (typeof value !== 'undefined') {
+        memo[key] = value;
+      }
+      return memo;
+    }.bind(this), {});
+
+    if (arguments.length === 4 && util.isObject(nameOrHash)) {
+      this.params = { operator: 'to have ' + plural + ' ' + i(nameOrHash) };
+      allRelevantAttributes.should.have.properties(nameOrHash);
+    } else if (arguments.length === 4) {
+      this.params = { operator: 'to have ' + singular + ' ' + i(nameOrHash) };
+      allRelevantAttributes.should.have.property(nameOrHash);
+    } else {
+      this.params = { operator: 'to have ' + singular + ' ' + i(nameOrHash) + ' with value ' + i(value) };
+      allRelevantAttributes.should.have.property(nameOrHash, value);
+    }
+  }
+
+  var browserTagCaseIndependentHtml = function (html) {
+    return $('<div/>').append(html).html();
+  };
+
+  var addJqPredicateAssertion = function (predicate, nameOverride, operatorOverride) {
+    Assertion.add(nameOverride || predicate, function() {
+      this.params = { operator: 'to be ' + (operatorOverride || predicate) };
+      this.assert($(this.obj).is(':' + predicate));
+    }, true);
+  }
+
+  Assertion.add('className', function(className) {
+    this.params = { operator: 'to have class ' + className };
+    this.assert($(this.obj).hasClass(className));
+  });
+
+  Assertion.add('css', function(css) {
+    this.params = { operator: 'to have css ' + i(css) };
+    for (var prop in css) {
+      var value = css[prop];
+      if (value === 'auto' && $(this.obj).get(0).style[prop] === 'auto') {
+        continue;
+      }
+      $(this.obj).css(prop).should.eql(value);
+    }
+  });
+
+  addJqPredicateAssertion('visible');
+  addJqPredicateAssertion('hidden');
+  addJqPredicateAssertion('selected');
+  addJqPredicateAssertion('checked');
+  addJqPredicateAssertion('disabled');
+  addJqPredicateAssertion('empty', 'emptyJq');
+  addJqPredicateAssertion('focus', 'focused', 'focused');
+
+  Assertion.add('inDOM', function() {
+    this.params = { operator: 'to be in the DOM' };
+    this.assert($.contains(document.documentElement, $(this.obj)[0]));
+  }, true);
+
+  Assertion.add('exist', function() {
+    this.params = { operator: 'to exist' };
+    $(this.obj).should.not.have.length(0);
+  }, true);
+
+  Assertion.add('attr', function() {
+    var args = [
+      'attr',
+      'attribute',
+      'attributes'
+    ].concat(Array.prototype.slice.call(arguments, 0));
+    jQueryAttributeTestHelper.apply(this, args);
+  });
+
+  Assertion.add('prop', function() {
+    var args = [
+      'prop',
+      'property',
+      'properties'
+    ].concat(Array.prototype.slice.call(arguments, 0));
+    jQueryAttributeTestHelper.apply(this, args);
+  });
+
+  Assertion.add('elementId', function(id) {
+    this.params = { operator: 'to have ID ' + i(id) };
+    this.obj.should.have.attr('id', id);
+  });
+
+  Assertion.add('html', function(html) {
+    this.params = { operator: 'to have HTML ' + i(html) };
+    $(this.obj).html().should.eql(browserTagCaseIndependentHtml(html));
+  });
+
+  Assertion.add('containHtml', function(html) {
+    this.params = { operator: 'to contain HTML ' + i(html) };
+    $(this.obj).html().indexOf(browserTagCaseIndependentHtml(html)).should.be.above(-1);
+  });
+
+  Assertion.add('text', function(text) {
+    this.params = { operator: 'to have text ' + i(text) };
+    var trimmedText = $.trim($(this.obj).text());
+
+    if (util.isRegExp(text)) {
+      trimmedText.should.match(text);
+    } else {
+      trimmedText.should.eql(text);
+    }
+  });
+
+  Assertion.add('containText', function(text) {
+    this.params = { operator: 'to contain text ' + i(text) };
+    var trimmedText = $.trim($(this.obj).text());
+
+    if (util.isRegExp(text)) {
+      trimmedText.should.match(text);
+    } else {
+      trimmedText.indexOf(text).should.be.above(-1);
+    }
+  });
+
+  Assertion.add('value', function(val) {
+    this.params = { operator: 'to have value ' + i(val) };
+    $(this.obj).val().should.eql(val);
+  });
+
+  Assertion.add('data', function() {
+    var args = [
+      'data',
+      'data',
+      'data'
+    ].concat(Array.prototype.slice.call(arguments, 0));
+    jQueryAttributeTestHelper.apply(this, args);
+  });
+
+  Assertion.add('containElement', function(target) {
+    this.params = { operator: 'to contain ' + $(target).inspect() };
+    $(this.obj).find(target).should.not.have.length(0);
+  });
+
+  Assertion.add('matchedBy', function(selector) {
+    this.params = { operator: 'to be matched by selector ' + selector };
+    $(this.obj).filter(selector).should.not.have.length(0);
+  });
+
+  Assertion.add('handle', function(event) {
+    this.params = { operator: 'to handle ' + event };
+
+    var events = $._data($(this.obj).get(0), "events");
+
+    if (!events || !event || typeof event !== "string") {
+      return this.assert(false);
+    }
+
+    var namespaces = event.split("."),
+        eventType = namespaces.shift(),
+        sortedNamespaces = namespaces.slice(0).sort(),
+        namespaceRegExp = new RegExp("(^|\\.)" + sortedNamespaces.join("\\.(?:.*\\.)?") + "(\\.|$)");
+
+    if (events[eventType] && namespaces.length) {
+      for (var i = 0; i < events[eventType].length; i++) {
+        var namespace = events[eventType][i].namespace;
+
+        if (namespaceRegExp.test(namespace)) {
+          return;
+        }
+      }
+    } else {
+      events.should.have.property(eventType);
+      events[eventType].should.not.have.length(0);
+      return;
+    }
+
+    this.assert(false);
+  });
+
+  Assertion.add('handleWith', function(eventName, eventHandler) {
+    this.params = { operator: 'to handle ' + eventName + ' with ' + eventHandler };
+
+    var normalizedEventName = eventName.split('.')[0],
+        stack = $._data($(this.obj).get(0), "events")[normalizedEventName];
+
+    for (var i = 0; i < stack.length; i++) {
+      if (stack[i].handler == eventHandler) {
+        return;
+      }
+    }
+
+    this.assert(false);
+  });
+};
+},{"../../util":16}],6:[function(require,module,exports){
+/*!
+ * Should
+ * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
+ * MIT Licensed
+ */
+
 module.exports = function(should, Assertion) {
 
   function addLink(name) {
@@ -224,7 +453,7 @@ module.exports = function(should, Assertion) {
 
   ['an', 'of', 'a', 'and', 'be', 'have', 'with', 'is', 'which'].forEach(addLink);
 };
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -258,7 +487,7 @@ module.exports = function(should, Assertion) {
     }));
   });
 };
-},{"../eql":2,"../util":15}],7:[function(require,module,exports){
+},{"../eql":2,"../util":16}],8:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -282,7 +511,7 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('equal', 'exactly');
 };
-},{"../eql":2}],8:[function(require,module,exports){
+},{"../eql":2}],9:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -334,7 +563,7 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('throw', 'throwError');
 };
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -447,7 +676,7 @@ module.exports = function(should, Assertion) {
     }, this);
   });
 };
-},{"../eql":2,"../util":15}],10:[function(require,module,exports){
+},{"../eql":2,"../util":16}],11:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -498,7 +727,7 @@ module.exports = function(should, Assertion) {
   Assertion.alias('below', 'lessThan');
 
 };
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -714,7 +943,7 @@ module.exports = function(should, Assertion) {
   });
 
 };
-},{"../eql":2,"../util":15}],12:[function(require,module,exports){
+},{"../eql":2,"../util":16}],13:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -734,7 +963,7 @@ module.exports = function(should, Assertion) {
     this.assert(this.obj.indexOf(str, this.obj.length - str.length) >= 0);
   });
 };
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -812,7 +1041,7 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('instanceof', 'instanceOf');
 };
-},{"../util":15}],14:[function(require,module,exports){
+},{"../util":16}],15:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -983,7 +1212,7 @@ Assertion.prototype = {
 };
 
 
-},{"./util":15}],15:[function(require,module,exports){
+},{"./util":16}],16:[function(require,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -1103,7 +1332,7 @@ exports.forOwn = function(obj, f, context) {
     }
   }
 };
-},{"assert":16,"util":19}],16:[function(require,module,exports){
+},{"assert":17,"util":20}],17:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -1465,7 +1694,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":19}],17:[function(require,module,exports){
+},{"util/":20}],18:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1490,14 +1719,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2085,6 +2314,6 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":18,"inherits":17}]},{},[1])
+},{"./support/isBuffer":19,"inherits":18}]},{},[1])
 (1)
 });
