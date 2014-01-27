@@ -1,3 +1,8 @@
+3.1.1 / 2014-01-28
+==================
+
+ * Fix for HTMLElement in DOM less environments
+
 3.1.0 / 2014-01-23
 ==================
 
