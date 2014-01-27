@@ -225,7 +225,7 @@ module.exports = function(should, Assertion) {
   var $ = this.jQuery || this.$;
 
   /* Otherwise, node's util.inspect loops hangs */
-  if (HTMLElement && !HTMLElement.prototype.inspect) {
+  if (typeof HTMLElement !== "undefined" && HTMLElement && !HTMLElement.prototype.inspect) {
     HTMLElement.prototype.inspect = function () {
       return this.outerHTML;
     };
