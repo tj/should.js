@@ -1,3 +1,8 @@
+3.1.2 / 2014-01-28
+==================
+
+ * Fix for adding .inspect for JQuery object only in case when it is exist
+
 3.1.1 / 2014-01-28
 ==================
 
