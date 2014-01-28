@@ -231,16 +231,18 @@ module.exports = function(should, Assertion) {
     };
   }
 
-  jQuery.fn.inspect = function () {
-    var elementList = this.toArray().map(function (e) {
-      return util.inspect(e);
-    }).join(", ");
-    if (this.selector) {
-      return "SELECTOR(" + this.selector + ") matching " + this.length + " elements" + (elementList.length ? ": " + elementList : "");
-    } else {
-      return elementList;
-    }
-  };
+  if (typeof jQuery !== "undefined" && jQuery && !jQuery.prototype.inspect) {
+    jQuery.fn.inspect = function () {
+      var elementList = this.toArray().map(function (e) {
+        return util.inspect(e);
+      }).join(", ");
+      if (this.selector) {
+        return "SELECTOR(" + this.selector + ") matching " + this.length + " elements" + (elementList.length ? ": " + elementList : "");
+      } else {
+        return elementList;
+      }
+    };
+  }
 
   function jQueryAttributeTestHelper(method, singular, plural, nameOrHash, value) {
     var keys = util.isObject(nameOrHash) ? Object.keys(nameOrHash) : [nameOrHash];
