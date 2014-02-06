@@ -1,6 +1,6 @@
 # should.js
 
-_should_ is an expressive, readable, test framework agnostic, assertion library. Main goals of this library __to be expressive__ and __to be helpful__. It means test code should be clean, and error messages enough helpfull to understand error.
+_should_ is an expressive, readable, test framework agnostic, assertion library. Main goals of this library __to be expressive__ and __to be helpful__. It keeps your test code clean, and your error messages helpful.
 
 It extends the `Object.prototype` with a single non-enumerable getter that allows you to express how that object should behave, also it returns itself when required with `require`.
 
@@ -45,7 +45,7 @@ var should = require('should');
 
 ## In browser
 
-If you want to use _should_ in browser, use version that is in root of repository (or build it yourself). It is builded with browserify (see [Makefile](https://github.com/visionmedia/should.js/blob/master/Makefile)). To build fresh version:
+If you want to use _should_ in browser, use the `should.js` file in the root of this repository, or build it yourself. It is built with browserify (see [Makefile](https://github.com/visionmedia/should.js/blob/master/Makefile)). To build a fresh version:
 
 ```bash
 # you should have browserify
@@ -53,13 +53,13 @@ npm install -g browserify
 make browser
 ```
 
-This script exported to `window.Should`. It is the same as use `should` statically:
+The script is exported to `window.Should`. It is the same as using `should` statically:
 
 ```js
 Should(5).be.exactly(5)
 ```
 
-Also as for node.js case `Object.prototype` extended with `should` (that is why `window.Should` used):
+Also, in the case of node.js, `Object.prototype` is extended with `should` (hence the capital S in `window.Should`):
 
 ```js
 window.should.be.exactly(window);
@@ -74,7 +74,7 @@ should.be.exactly(window);
 *should.js* uses EcmaScript 5 very extensively so any browser that support ES5 is supported. (IE <=8 not supported).
 See [kangax's compat table](http://kangax.github.io/es5-compat-table) to know which exactly.
 
-You can easy install it with again npm or bower:
+You can easy install it with npm or bower:
 ```
 npm install should --save-dev
 # or
@@ -84,7 +84,7 @@ bower install visionmedia/should.js
 ## Static should and assert module
 
 For some rare cases should can be used statically, without `Object.prototype`.
-It can be replacement for node assert module:
+It can be a replacement for the node assert module:
 
 ```javascript
 assert.fail(actual, expected, message, operator) // just write wrong should assertion
@@ -99,7 +99,7 @@ assert.throws(block, [error], [message]) // should(block).throw([error])
 assert.doesNotThrow(block, [message]) // should(block).not.throw([error])
 assert.ifError(value) // should(value).Error (to check if it is error) or should(value).not.ok (to check that it is falsy)
 ```
-	
+
 ## .not
 
 `.not` negate current assertion.
@@ -108,17 +108,17 @@ assert.ifError(value) // should(value).Error (to check if it is error) or should
 ## chaining assertions
 
 Every assertion will return a `should.js`-wrapped Object, so assertions can be chained.
-You can use this helpers to just chain: `.an`, `.of`, `.a`, `.and`, `.be`, `.have`, `.with`, `.is`, `.which`. Use them for better readability, they do nothing at all.
+To help chained assertions read more clearly, you can use the following helpers anywhere in your chain: `.an`, `.of`, `.a`, `.and`, `.be`, `.have`, `.with`, `.is`, `.which`. Use them for better readability; they do nothing at all.
 For example:
 ```js
 user.should.be.an.instanceOf(Object).and.have.property('name', 'tj');
 user.pets.should.be.instanceof(Array).and.have.lengthOf(4);
 ```
-Almost all assertions return the same object - so you can easy chain them. But some move assertion object to property value. See feather, it will be mention if object chainged.
+Almost all assertions return the same object - so you can easy chain them. But some (eg: `.length` and `.property`) move the assertion object to a property value, so be careful.
 
 ## .ok
 
-Assert if asseted object is truthy in javascript meaning of truthy ('', null, undefined, 0 , NaN, Infinity - is falsy, so all others are truthy).
+Assert if chained object is truthy in javascript (ie: not '', null, undefined, 0 , NaN, or Infinity).
 
 Assert truthfulness:
 
@@ -139,7 +139,7 @@ false.should.not.be.ok;
 
 ## .true
 
-Assert if asseted object === true:
+Assert if chained object === true:
 
 ```javascript
 true.should.be.true;
@@ -148,7 +148,7 @@ true.should.be.true;
 
 ## .false
 
-Assert if asseted object === false:
+Assert if chained object === false:
 
 ```javascript
 false.should.be.false;
@@ -157,7 +157,7 @@ false.should.be.false;
 
 ## .eql(otherValue)
 
-Assert if asserted object is *equal* to otherValue. This means that object compared by its actual content, not just reference equality.
+Assert if chained object is *equal* to otherValue. The object is compared by its actual content, not just reference equality.
  
 ```javascript
 ({ foo: 'bar' }).should.eql({ foo: 'bar' });
@@ -167,7 +167,7 @@ Assert if asserted object is *equal* to otherValue. This means that object compa
 ```
 ## .equal(otherValue) and .exactly(otherValue)
 
-Assert if asserted object strictly equal to `otherValue` (using `===` - no type conversion for primitive types and reference equivalence for reference types).
+Assert if chained object is strictly equal to `otherValue` (using `===` - no type conversion for primitive types and reference equivalence for reference types).
 
 ```javascript
 (4).should.equal(4);
@@ -178,7 +178,7 @@ Assert if asserted object strictly equal to `otherValue` (using `===` - no type 
 
 ## .startWith(str)
 
-Assert that string starts with `str`.
+Assert that a string starts with `str`.
 
 ```javascript
 'foobar'.should.startWith('foo');
@@ -186,7 +186,7 @@ Assert that string starts with `str`.
 ```
 ## .endWith(str)
 
-Assert that string ends with `str`.
+Assert that a string ends with `str`.
 
 ```javascript
 'foobar'.should.endWith('bar');
@@ -249,7 +249,7 @@ Assert numeric value is Infinity:
 
 ## .type(str)
 
-Assert given value have such type (using __typeof__ operator):
+Assert given object is of a particular type (using __typeof__ operator):
 ```javascript
 user.should.be.type('object');
 'test'.should.be.type('string');
@@ -257,7 +257,7 @@ user.should.be.type('object');
 
 ## .instanceof(constructor) and .instanceOf(constructor)
 
-Assert given value is instance of `constructor` (using __instanceof__ operator):
+Assert given object is an instance of `constructor` (using __instanceof__ operator):
 
 ```javascript
 user.should.be.an.instanceof(User);
@@ -276,7 +276,7 @@ args.should.be.arguments;
 
 ## .Object, .Number, .Array, .Boolean, .Function, .String, .Error
 
-Assert given object is instance of such constructor (shortcut for `.instanceof` assertion).
+Assert given object is instance of the given constructor (shortcut for `.instanceof` assertion).
 
 ```javascript
 ({}).should.be.an.Object;
@@ -288,7 +288,7 @@ Assert given object is instance of such constructor (shortcut for `.instanceof` 
 
 ## .property(name[, value])
 
-Assert property exists and has optional value(compare using `.eql`):
+Assert property exists and has optional value (compare using `.eql`):
 ```javascript
 user.should.have.property('name');
 user.should.have.property('age', 15);
@@ -297,13 +297,13 @@ user.should.not.have.property('age', 0);
 [1, 2].should.have.property('0', 1);
 ```
 
-__NB__ `.property` change object to actual property value!
+__NB__ `.property` changes the chain's object to the given property's value, so be careful when chaining after  `.property`!
 
 ## .properties(propName1, propName2, ...) or .properties([propName1, propName2, ...]) or .properties(obj)
 
-`obj` it is object that map properties to their actual values.
+`obj` should be an object that maps properties to their actual values.
 
-Assert all given properties exists and have given values (compare using `.eql`):
+Assert all given properties exist and have given values (compare using `.eql`):
 
 ```javascript
 user.should.have.properties('name', 'age');
@@ -323,7 +323,7 @@ user.pets.should.have.a.lengthOf(5);
 ({ length: 10}).should.have.length(10);
 ```
 
-__NB__ `.length` change object to actual property value!
+__NB__ `.length` and `.lengthOf` change the chain's object to the given length value, so be careful when chaining!
 
 ## .ownProperty(str) and .hasOwnProperty(str)
 
@@ -332,11 +332,11 @@ Assert given object has own property (using `.hasOwnProperty`):
 ({ foo: 'bar' }).should.have.ownProperty('foo').equal('bar');
 ```
 
-__NB__ `.length` change object to actual property value!
+__NB__ `.ownProperty` and `.hasOwnProperty` change the chain's object to the given property value, so be careful when chaining!
 
 ## .empty
 
-Assert given value is empty. It means for strings, arrays, arguments length == 0 and for object do not have own properties.
+Assert given value is empty. Strings, arrays, arguments with a length of 0, and objects without their own properties, are considered empty.
 
 ```javascript
 [].should.be.empty;
@@ -401,15 +401,15 @@ Again see examples:
 [{a: 'a'}, {b: 'b', c: 'c'}].should.containDeep([{b: 'b'}]);
 ```
 
-It does not search somewhere in depth it check all pattern in depth. Object checked
-by properties key and value, arrays checked like sub sequences. Everyting compared using .eql.
-Main difference with `.containEql` is that this assertion require full type chain -
+It does not search somewhere in depth it check all pattern in depth. Objects are checked
+by properties key and value; arrays are checked like sub sequences. Everyting is compared using `.eql`.
+Main difference with `.containEql` is that this assertion requires full type chain -
 if asserted value is an object, otherValue should be also an object (which is sub object of given).
-The same true for arrays, otherValue should be an array which compared to be subsequence of given object.
+The same is true for arrays, otherValue should be an array which compared to be subsequence of given object.
 
 ## .match(otherValue)
 
-Assert given object to match `otherValue`.
+Assert given object matches `otherValue`.
 
 Given: String, otherValue: regexp. Uses `RegExp#exec(str)`:
 ```javascript
@@ -430,7 +430,7 @@ Given: Object, otherValue: regexp - assert own property's values to match regexp
 
 Given: Anything, otherValue: function - assert if given value matched to function.
 
-Function can use .should inside or return 'true' or 'false', in all other cases it do nothing. If you return value that return assertion, you will receive better error messages.
+Function can use `.should` inside or return 'true' or 'false', in all other cases it do nothing. If you return value that return assertion, you will receive better error messages.
 
 ```javascript
 (5).should.match(function(n) { return n > 0; });
@@ -476,7 +476,7 @@ If `otherValue` is Function, then check each property value and key matched it:
 [10, 11, 12].should.matchEach(function(it) { return it >= 10; });
 ```
 
-In other cases it check that each property value is `.eql` to `otherValue`:
+In other cases it checks that each property value is `.eql` to `otherValue`:
 ```javascript
 [10, 10].should.matchEach(10);
 ```
@@ -523,7 +523,7 @@ isPositive.bind(null, 10).should.not.throw();
 isPositive.bind(null, -10).should.throw();
 ```
 
-If you need to check something in asynchronous function it is required to do in 2 steps:
+If you need to check something in an asynchronous function, you must do it in 2 steps:
 
 ```js
 // first we need to check that function is called
@@ -538,7 +538,7 @@ collection.findOne({ _id: 10 }, function(err, res) {
 called.should.be.true;
 ```
 
-In case you are using something like `Mocha`, you should use asynchronous test and call `done()` in proper place to make sure that you asynchronous function is called before test is finished.
+In case you are using something like `Mocha`, you should use an asynchronous test, and call `done()` in the proper place to make sure that your asynchronous function is called before the test finishes.
 ```js
 collection.findOne({ _id: 10 }, function(err, res) {
     if(err) return done(err);
@@ -549,7 +549,7 @@ collection.findOne({ _id: 10 }, function(err, res) {
 });
 ```
 
-In general case if you need to check that something is executed you need such thing as `spies`, good example is an [sinon](http://sinonjs.org/).
+In general, if you need to check that something is executed, you are best using `spies`. A good example is [sinon](http://sinonjs.org/).
 
 ## .status(code)
 
@@ -627,13 +627,13 @@ To run the tests for _should_ simply run:
     
 Before contribute something:
 
-1. Your code looks like all other code - all project should look like it was written by one man, always.
-2. If you want propose something - just create issue and describe your question with much description as you can.
-3. Please never send issues or pull requests about code style, jshint violations etc - i do not accept it (and you will spend your time for free).
-4. If you think you have some general receipt, consider create PR with it.
-5. If you not sure if you receipt enough general just create your own plugin for should.js. (see should.use and Assertion.add usage).
-6. If you add new code it should be covered by tests, no tests - no code. 
-7. If you find bug (or at least you think it is a bug), create issue with library version and test case that I can run and see what are you talking about, or at least full steps that I can reproduce it.
+1. Your code should look like all the other code - this project should look like it was written by one man, always.
+2. If you want propose something - just create an issue and describe your question with as much description as you can.
+3. Please never send issues or pull requests about code style, jshint violations etc - I do not accept it (and you will spend your time for free).
+4. If you think you have some general improvement, consider creating a pull request with it.
+5. If you are not sure whether your improvement is general enough, just create your own plugin for should.js. (see should.use and Assertion.add usage).
+6. If you add new code, it should be covered by tests. No tests - no code. 
+7. If you find bug (or at least you think it is a bug), create an issue with the library version and test case that I can run and see what are you talking about, or at least full steps by which I can reproduce it.
 
 ## OMG IT EXTENDS OBJECT???!?!@
 
