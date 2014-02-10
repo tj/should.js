@@ -118,7 +118,7 @@ Almost all assertions return the same object - so you can easy chain them. But s
 
 ## .ok
 
-Assert if chained object is truthy in javascript (ie: not '', null, undefined, 0 , NaN, or Infinity).
+Assert if chained object is truthy in javascript (ie: not '', null, undefined, 0 , NaN).
 
 Assert truthfulness:
 
@@ -136,6 +136,13 @@ false.should.not.be.ok;
 ''.should.not.be.ok;
 (0).should.not.be.ok;
 ```
+
+*Warning:* No assertions can be done on null and undefined. 
+e.g. 
+```js
+  undefined.should.not.be.ok;
+```
+will give you `Uncaught TypeError: Cannot read property 'should' of undefined)`.
 
 ## .true
 
