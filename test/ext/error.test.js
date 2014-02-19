@@ -1,7 +1,7 @@
 var err = require('../util').err,
 	should = require('../../');
 
-module.exports = {
+module.exports['error'] = {
   'test throw()': function(){
     (function(){}).should.not.throw();
     (function(){ throw new Error('fail') }).should.throw();

@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['number'] = {
   'test NaN': function(){
     NaN.should.be.NaN;
     Infinity.should.not.be.NaN;

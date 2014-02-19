@@ -1,7 +1,7 @@
 var err = require('../util').err,
 	should = require('../../');
 
-module.exports = {
+module.exports['type'] = {
   'test arguments': function(){
     var args = (function(){ return arguments; })(1,2,3);
     args.should.be.arguments;

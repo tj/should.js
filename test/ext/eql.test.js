@@ -1,7 +1,7 @@
 var err = require('../util').err,
 	should = require('../../');
 
-module.exports = {
+module.exports['eql'] = {
   'test eql(val)': function(){
     'test'.should.eql('test');
     ({ foo: 'bar' }).should.eql({ foo: 'bar' });

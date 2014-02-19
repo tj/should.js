@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['http'] = {
  'test .json': function(){
     var req = {
       headers: {

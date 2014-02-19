@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['deprecated'] = {
 	 'test include() with string': function(){
     'foobar'.should.include('bar');
     'foobar'.should.include('foo');

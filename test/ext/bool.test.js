@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['bool'] = {
   'test true': function(){
     true.should.be.true;
     false.should.not.be.true;

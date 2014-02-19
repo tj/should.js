@@ -33,7 +33,7 @@ function err_should_not_exist(obj) {
   }, 'expected ' + util.inspect(obj) + ' to not exist');
 }
 
-module.exports = {
+module.exports['should.exist'] = {
   
   // static should.exist() pass:
   

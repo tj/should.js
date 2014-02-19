@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['string'] = {
   'test startWith()': function() {
     'foobar'.should.startWith('foo');
     'foobar'.should.not.startWith('bar');

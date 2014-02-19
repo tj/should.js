@@ -15,7 +15,7 @@ function err(fn, msg) {
   }
 }
 
-module.exports = {
+module.exports['should'] = {
   'test double require': function(){
     require('../').should.equal(should);
   },

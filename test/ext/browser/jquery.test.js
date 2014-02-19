@@ -25,7 +25,7 @@ function executeWithJsdom(html, callback) {
   });
 }
 
-module.exports = {
+module.exports['browser - jquery'] = {
   // commented out because :visible and :hidden are flaky is jsdom
 
   // 'test visible()': function(done) {

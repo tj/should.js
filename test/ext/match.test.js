@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['match'] = {
 
   'test string match(regexp)': function(){
     'foobar'.should.match(/^foo/)

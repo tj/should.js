@@ -1,7 +1,7 @@
 var err = require('../util').err;
 var should = require('../../');
 
-module.exports = {
+module.exports['property'] = {
 	'test property(name)': function(){
     'test'.should.have.property('length');
     (4).should.not.have.property('length');
