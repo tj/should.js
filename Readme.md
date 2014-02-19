@@ -33,15 +33,17 @@ someAsyncTask(foo, function(err, result){
 
  1. Install it:
     
+    ```bash
     $ npm install should --save-dev
-    
+    ```
+
  2. Require it and use:
 
-```javascript
-var should = require('should');
+    ```js
+    var should = require('should');
 
-(5).should.be.exactly(5).and.be.a.Number;
-```
+    (5).should.be.exactly(5).and.be.a.Number;
+    ```
 
 ## In browser
 
@@ -49,8 +51,8 @@ If you want to use _should_ in browser, use the `should.js` file in the root of 
 
 ```bash
 # you should have browserify
-npm install -g browserify
-make browser
+$ npm install -g browserify
+$ make browser
 ```
 
 The script is exported to `window.Should`. It is the same as using `should` statically:
