@@ -6,7 +6,7 @@ function err(fn, msg) {
     fn();
     ok = false;
   } catch (err) {
-    assert.equal(msg, err.message);
+    assert.equal(err.message, msg);
   }
   if(!ok) assert.fail('expected an error');
 }

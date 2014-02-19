@@ -358,7 +358,7 @@ module.exports = {
 
       err(function () {
         window.$('input#two').should.be.focused;
-      }, "expected SELECTOR(input#two) matching 1 elements: <input type=\"text\" id=\"two\" /> to be focused");
+      }, "expected SELECTOR(input#two) matching 1 elements: <input id=\"two\" /> to be focused");
 
       done();
     });
@@ -372,7 +372,7 @@ module.exports = {
 
       err(function () {
         window.$('input').should.handle('change');
-      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" /> to handle change");
+      }, "expected SELECTOR(input) matching 1 elements: <input /> to handle change");
 
       done();
     });
@@ -391,7 +391,7 @@ module.exports = {
 
       err(function () {
         window.$('input').should.handleWith('change', clickHandler);
-      }, "expected SELECTOR(input) matching 1 elements: <input type=\"text\" /> to handle change with function clickHandler() {}");
+      }, "expected SELECTOR(input) matching 1 elements: <input /> to handle change with function clickHandler() {}");
 
       done();
     });

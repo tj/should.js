@@ -26,6 +26,22 @@ module.exports = {
     err(function(){
       'asd'.should.have.property('constructor', Number);
     }, "expected 'asd' to have property 'constructor' of [Function: Number] (got [Function: String])");
+
+    err(function () {
+      ({a: {b: 1}}).should.have.property('a')
+        .and.have.property('b', 100);
+    }, "expected { b: 1 } to have property 'b' of 100 (got 1)");
+
+    err(function () {
+      ({a: {b: 1}}).should.have.property('a')
+        .and.have.property('c', 100);
+    }, "expected { b: 1 } to have property 'c'");
+
+    err(function () {
+      ({a: {b: 1}}).should.have.property('a')
+        .and.have.property('c');
+    }, "expected { b: 1 } to have property 'c'");
+
   },
 
   'test length(n)': function(){
