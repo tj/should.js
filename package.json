@@ -6,6 +6,7 @@
   , "homepage": "https://github.com/visionmedia/should.js"
   , "scripts": { "test": "make test" }
   , "devDependencies": {
+      "browserify": "*",
       "mocha": "*",
       "jsdom": "*",
       "jquery": "*"
