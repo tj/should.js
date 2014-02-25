@@ -1,8 +1,6 @@
-TESTS=$(shell find test -name *.test.js)
-
 test:
 	@browserify lib/browser.js -s Should --dg false -o should.js.for-tests
-	@./node_modules/.bin/mocha --ui exports --recursive $(TESTS)
+	@./node_modules/.bin/mocha --ui exports --reporter mocha-better-spec-reporter 'test/**/*.test.js'
 
 browser:
 	@browserify lib/browser.js -s Should --dg false -o should.js
