@@ -689,8 +689,7 @@ module.exports = function(should, Assertion) {
   Assertion.add('NaN', function() {
     this.params = { operator: 'to be NaN' };
 
-    this.is.a.Number
-      .and.assert(isNaN(this.obj));
+    this.assert(this.obj !== this.obj);
   }, true);
 
   Assertion.add('Infinity', function() {
@@ -729,6 +728,7 @@ module.exports = function(should, Assertion) {
   Assertion.alias('below', 'lessThan');
 
 };
+
 },{}],12:[function(require,module,exports){
 /*!
  * Should
@@ -898,7 +898,7 @@ module.exports = function(should, Assertion) {
     } else if(util.isObject(obj)) {
       // object contains object case
       util.forOwn(other, function(value, key) {
-        obj[key].should.eql(value);
+        obj.should.have.property(key, value);
       });
     } else {
       //other uncovered cases

@@ -12,6 +12,7 @@
     "test": "make test"
   },
   "devDependencies": {
+    "browserify": "*",
     "mocha": "*",
     "jsdom": "*",
     "jquery": "*",
