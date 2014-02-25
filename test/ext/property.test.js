@@ -167,6 +167,8 @@ module.exports['property'] = {
     [{a: 'a'}, {b: 'b', c: 'c'}].should.containEql({a: 'a'});
     [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containEql({b: 'b'});
 
+    ({}).should.not.containEql({ a: 10 });
+
     ({ b: 10 }).should.containEql({ b: 10 });
     [1, 2, 3].should.containEql(1);
     ([1, 2, { a: 10 }]).should.containEql({ a: 10 });
