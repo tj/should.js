@@ -7,4 +7,3 @@ Before contribute something:
 5. If you are not sure whether your improvement is general enough, just create your own plugin for should.js. (see should.use and Assertion.add usage).
 6. If you add new code, it should be covered by tests. No tests - no code.
 7. If you find a bug (or at least you think it is a bug), create an issue with the library version and test case that I can run and see what are you talking about, or at least full steps by which I can reproduce it.
-=
