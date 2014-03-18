@@ -1,5 +1,8 @@
 var err = require('../util').err,
-	should = require('../../');
+  should = require('../../');
+
+var AssertionError = require('assert').AssertionError;
+var util = require('util');
 
 module.exports['type'] = {
   'test arguments': function(){
@@ -177,7 +180,7 @@ module.exports['type'] = {
     ({}).should.not.be.a.Boolean;
 
     err(function() {
-      [].should.be.a.Boolean
+      [].should.be.a.Boolean;
     }, 'expected [] to be a boolean');
   },
   'test Error': function() {
@@ -185,8 +188,22 @@ module.exports['type'] = {
 
     ({}).should.not.be.Error;
 
+    var ae = new AssertionError({ actual: 10 });
+    ae.should.be.an.Error;
+
+    var AsyncTimeoutError = function AsyncTimeoutError(msg) {
+      msg && (this.message = msg);
+      Error.apply(this, arguments);
+      Error.captureStackTrace(this, AsyncTimeoutError);
+    };
+    util.inherits(AsyncTimeoutError, Error);
+    AsyncTimeoutError.prototype.name = AsyncTimeoutError.name;
+
+    var e = new AsyncTimeoutError('foo');
+    e.should.be.an.Error;
+
     err(function() {
-      [].should.be.an.Error
+      ([]).should.be.an.Error;
     }, 'expected [] to be an error');
-  },
+  }
 }
