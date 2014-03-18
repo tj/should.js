@@ -1,3 +1,8 @@
+3.1.4 / 2014-03-18
+==================
+
+ * .Error now do not throw assertion error for custom errors.
+
 3.1.3 / 2014-02-25
 ==================
 

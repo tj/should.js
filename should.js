@@ -1317,7 +1317,7 @@ exports.isFunction = function(arg) {
 };
 
 function isError(e) {
-  return isObject(e) && objectToString(e) === '[object Error]';
+  return (isObject(e) && objectToString(e) === '[object Error]') || (e instanceof Error);
 }
 exports.isError = isError;
 
