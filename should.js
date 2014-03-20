@@ -778,14 +778,20 @@ module.exports = function(should, Assertion) {
     var props = missingProperties;
     if(props.length === 0) {
       props = names.map(i);
+    } else if(this.one) {
+      props = names.filter(function(name) {
+        return missingProperties.indexOf(i(name)) < 0;
+      }).map(i);
     }
 
     var operator = (props.length === 1 ?
-      'to have property ' : 'to have properties ') + props.join(', ');
+      'to have property ' : 'to have '+(this.one? 'any of ' : '')+'properties ') + props.join(', ');
 
     this.params = { operator: operator };
 
-    this.assert(missingProperties.length === 0);
+    //check that all properties presented
+    //or if we request one of them that at least one them presented
+    this.assert(missingProperties.length === 0 || (this.one && missingProperties.length != names.length));
 
     // check if values in object matched expected
     var valueCheckNames = Object.keys(values);
@@ -803,16 +809,18 @@ module.exports = function(should, Assertion) {
         }
       });
 
-      if(wrongValues.length > 0) {
+      if((wrongValues.length !== 0 && !this.one) || (this.one && props.length === 0)) {
         props = wrongValues;
       }
 
       operator = (props.length === 1 ?
-        'to have property ' : 'to have properties ') + props.join(', ');
+        'to have property ' : 'to have '+(this.one? 'any of ' : '')+'properties ') + props.join(', ');
 
       this.params = { operator: operator };
 
-      this.assert(wrongValues.length === 0);
+      //if there is no not matched values
+      //or there is at least one matched
+      this.assert(wrongValues.length === 0 || (this.one && wrongValues.length != valueCheckNames.length));
     }
   });
 
@@ -1088,6 +1096,7 @@ Assertion.add = function(name, f, isGetter) {
   prop[isGetter ? 'get' : 'value'] = function() {
     var context = new Assertion(this.obj);
     context.copy = context.copyIfMissing;
+    context.one = this.one;
 
     try {
       f.apply(context, arguments);
@@ -1209,6 +1218,16 @@ Assertion.prototype = {
 
   get not() {
     this.negate = !this.negate;
+    return this;
+  },
+
+  /**
+   * Any modifier - it affect on execution of sequenced assertion to do not check all, but any of
+   *
+   * @api public
+   */
+  get any() {
+    this.one = true;
     return this;
   }
 };

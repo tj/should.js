@@ -104,6 +104,40 @@ module.exports['property'] = {
     }, "expected 'asd' to have property 'foo'");
   },
 
+  'test any of properties': function() {
+    'test'.should.have.any.of.properties('length', 'a', 'b');
+
+    'test'.should.have.any.of.properties('length');
+
+    ({ a: 10 }).should.have.any.of.properties('a', 'b');
+
+    ({ a: 10 }).should.have.any.of.properties({ a: 10, b: 12 });
+
+    ({ a: 10 }).should.not.have.any.of.properties('b', 'c');
+
+    ({ a: 10 }).should.have.any.of.properties(['a', 'b']);
+
+    err(function() {
+      ({ a: 10 }).should.not.have.any.of.properties(['a', 'b']);
+    }, "expected { a: 10 } not to have property 'a'");
+
+    err(function() {
+      ({ a: 10, b: 10 }).should.not.have.any.of.properties(['a', 'b']);
+    }, "expected { a: 10, b: 10 } not to have any of properties 'a', 'b'");
+
+    err(function() {
+      ({ a: 10, b: 10 }).should.not.have.any.of.properties({ a: 10, b: 12 });
+    }, "expected { a: 10, b: 10 } not to have property 'a' of 10");
+
+    err(function() {
+      ({ a: 10, b: 10 }).should.not.have.any.of.properties({ a: 10, b: 10 });
+    }, "expected { a: 10, b: 10 } not to have any of properties 'a' of 10, 'b' of 10");
+
+    err(function() {
+      ({ a: 11, b: 11 }).should.have.any.of.properties({ a: 10, b: 10 });
+    }, "expected { a: 11, b: 11 } to have any of properties 'a' of 10 (got 11), 'b' of 10 (got 11)");
+  },
+
   'test keys(array)': function(){
     ({ foo: 1 }).should.have.keys(['foo']);
     ({ foo: 1, bar: 2 }).should.have.keys(['foo', 'bar']);
