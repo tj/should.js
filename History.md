@@ -1,3 +1,10 @@
+3.2.0 / 2014-03-29
+==================
+
+ * Added first version of .any modifier that affect assertions with multiple parameters
+ * .header now have more nice message
+ * assertion can now override how to show object
+
 3.1.4 / 2014-03-18
 ==================
 

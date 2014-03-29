@@ -108,6 +108,10 @@ assert.ifError(value) // should(value).Error (to check if it is error) or should
 
 `.not` negate current assertion.
 
+## .any
+
+`.any` allow for assertions with multiple parameters to assert on any of parameters (not all)
+
 # Assertions
 ## chaining assertions
 

@@ -193,11 +193,11 @@ module.exports = function(should) {
 
 module.exports = function(should, Assertion) {
   Assertion.add('true', function() {
-    this.is.exactly(true)
+    this.is.exactly(true);
   }, true);
 
   Assertion.add('false', function() {
-    this.is.exactly(false)
+    this.is.exactly(false);
   }, true);
 
   Assertion.add('ok', function() {
@@ -453,7 +453,7 @@ module.exports = function(should, Assertion) {
     });
   }
 
-  ['an', 'of', 'a', 'and', 'be', 'have', 'with', 'is', 'which'].forEach(addLink);
+  ['an', 'of', 'a', 'and', 'be', 'have', 'with', 'is', 'which', 'the'].forEach(addLink);
 };
 },{}],7:[function(require,module,exports){
 /*!
@@ -1197,7 +1197,7 @@ Assertion.prototype = {
   },
 
   getMessage: function() {
-    return 'expected ' + i(this.obj) + (this.negate ? ' not ': ' ') +
+    return 'expected ' + ('obj' in this.params ? this.params.obj: i(this.obj)) + (this.negate ? ' not ': ' ') +
         this.params.operator + ('expected' in this.params  ? ' ' + i(this.params.expected) : '');
   },
 
