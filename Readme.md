@@ -32,7 +32,7 @@ someAsyncTask(foo, function(err, result){
 ## To begin
 
  1. Install it:
-    
+
     ```bash
     $ npm install should --save-dev
     ```
@@ -68,7 +68,7 @@ Also, in the case of node.js, `Object.prototype` is extended with `should` (henc
 ```js
 window.should.be.exactly(window);
 // the same
-// window is host object 
+// window is host object
 should.be.exactly(window);
 // you should not really care about it
 
@@ -145,8 +145,8 @@ false.should.not.be.ok;
 (0).should.not.be.ok;
 ```
 
-*Warning:* No assertions can be done on null and undefined. 
-e.g. 
+*Warning:* No assertions can be done on null and undefined.
+e.g.
 ```js
   undefined.should.not.be.ok;
 ```
@@ -173,7 +173,7 @@ false.should.be.false;
 ## .eql(otherValue)
 
 Assert if chained object is *equal* to otherValue. The object is compared by its actual content, not just reference equality.
- 
+
 ```javascript
 ({ foo: 'bar' }).should.eql({ foo: 'bar' });
 [1,2,3].should.eql([1,2,3]);
@@ -299,6 +299,17 @@ Assert given object is instance of the given constructor (shortcut for `.instanc
 [].should.be.an.Array.and.an.Object;
 (true).should.be.a.Boolean;
 ''.should.be.a.String;
+```
+## .enumerable(name[, value])
+
+Assert a property exists, is enumerable, and has optional value (compare using `.eql`):
+```javascript
+'asd'.should.not.have.enumerable('0');
+user.should.have.enumerable('name');
+user.should.have.enumerable('age', 15);
+user.should.not.have.enumerable('rawr');
+user.should.not.have.enumerable('age', 0);
+[1, 2].should.have.enumerable('0', 1);
 ```
 
 ## .property(name[, value])
@@ -473,7 +484,7 @@ Given: object, otherValue: another object - assert that object properties match 
 	.match({ '0': 10, '1': /c$/, '2': function(it) { return it.should.have.property('d', 10); } });
 
 [10, 'abc', { d: 10 }, 0].should
-    .match([10, /c$/, function(it) { return it.should.have.property('d', 10); }]); 
+    .match([10, /c$/, function(it) { return it.should.have.property('d', 10); }]);
 ```
 
 ## .matchEach(otherValue)
@@ -545,7 +556,7 @@ If you need to check something in an asynchronous function, you must do it in 2 
 var called = false;
 collection.findOne({ _id: 10 }, function(err, res) {
     called = true;
-    
+
     //second we test what you want
     res.should.be....
 });
@@ -559,7 +570,7 @@ collection.findOne({ _id: 10 }, function(err, res) {
     if(err) return done(err);
     //second we test what you want
     res.should.be....
-    
+
     done();
 });
 ```
