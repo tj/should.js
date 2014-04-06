@@ -3,3 +3,4 @@ node_modules
 desktop.ini
 .idea
 should.js.for-tests
+*.swp

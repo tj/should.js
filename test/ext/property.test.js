@@ -2,6 +2,23 @@ var err = require('../util').err;
 var should = require('../../');
 
 module.exports['property'] = {
+  'test enumerable(name)': function() {
+    ({'length':5}).should.have.enumerable('length');
+    (4).should.not.have.enumerable('length');
+
+    err(function(){
+      'asd'.should.have.enumerable('length');
+    }, "expected 'asd' to have enumerable property 'length'");
+  },
+
+  'test enumerable(name, val)': function() {
+    ({'length':5}).should.have.enumerable('length', 5);
+
+    err(function(){
+      ({'length':3}).should.have.enumerable('length', 5);
+    }, "expected { length: 3 } to have enumerable property 'length' equal to '5'");
+  },
+
 	'test property(name)': function(){
     'test'.should.have.property('length');
     (4).should.not.have.property('length');
