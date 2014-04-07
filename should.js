@@ -744,6 +744,19 @@ var aSlice = Array.prototype.slice;
 module.exports = function(should, Assertion) {
   var i = should.format;
 
+  Assertion.add('enumerable', function(name, val) {
+    this.params = {
+      operator:"to have enumerable property '"+name+"'"
+    };
+
+    this.assert(this.obj.propertyIsEnumerable(name));
+
+    if(arguments.length > 1){
+      this.params.operator += " equal to '"+val+"'";
+      this.assert(eql(val, this.obj[name]));
+    }
+  });
+
   Assertion.add('property', function(name, val) {
     if(arguments.length > 1) {
       var p = {};
@@ -953,6 +966,7 @@ module.exports = function(should, Assertion) {
   });
 
 };
+
 },{"../eql":2,"../util":16}],13:[function(require,module,exports){
 /*!
  * Should
