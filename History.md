@@ -1,3 +1,10 @@
+3.3.1 / 2014-04-16
+==================
+
+ * Added aliases for es reserved words
+ * Fix bug with ownProperty alias
+ * Fix bug with not function alias
+
 3.3.0 / 2014-04-07
 ==================
 

@@ -196,9 +196,13 @@ module.exports = function(should, Assertion) {
     this.is.exactly(true);
   }, true);
 
+  Assertion.alias('true', 'True');
+
   Assertion.add('false', function() {
     this.is.exactly(false);
   }, true);
+
+  Assertion.alias('false', 'False');
 
   Assertion.add('ok', function() {
     this.params = { operator: 'to be truthy' };
@@ -853,7 +857,7 @@ module.exports = function(should, Assertion) {
     this.obj = this.obj[name];
   });
 
-  Assertion.alias('hasOwnProperty', 'ownProperty');
+  Assertion.alias('ownProperty', 'hasOwnProperty');
 
   Assertion.add('empty', function() {
     this.params = { operator: 'to be empty' };
@@ -936,7 +940,7 @@ module.exports = function(should, Assertion) {
         var otherIdx = 0;
         obj.forEach(function(item) {
           try {
-            should(item).not.be.null.and.containDeep(other[otherIdx]);
+            should(item).not.be.Null.and.containDeep(other[otherIdx]);
             otherIdx++;
           } catch(e) {
             if(e instanceof should.AssertionError) {
@@ -955,7 +959,7 @@ module.exports = function(should, Assertion) {
     } else if(util.isObject(obj)) {// object contains object case
       if(util.isObject(other)) {
         util.forOwn(other, function(value, key) {
-          should(obj[key]).not.be.null.and.containDeep(value);
+          should(obj[key]).not.be.Null.and.containDeep(value);
         });
       } else {//one of the properties contain value
         this.assert(false);
@@ -1063,6 +1067,8 @@ module.exports = function(should, Assertion) {
     this.assert(this.obj === null);
   }, true);
 
+  Assertion.alias('null', 'Null');
+
   Assertion.alias('instanceof', 'instanceOf');
 };
 },{"../util":16}],15:[function(require,module,exports){
@@ -1146,7 +1152,9 @@ Assertion.add = function(name, f, isGetter) {
 };
 
 Assertion.alias = function(from, to) {
-  Assertion.prototype[to] = Assertion.prototype[from]
+  var desc = Object.getOwnPropertyDescriptor(Assertion.prototype, from);
+  if(!desc) throw new Error('Alias ' + from + ' -> ' + to + ' could not be created as ' + from + ' not defined');
+  Object.defineProperty(Assertion.prototype, to, desc);
 };
 
 should.AssertionError = AssertionError;
