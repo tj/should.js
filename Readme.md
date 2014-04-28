@@ -404,6 +404,8 @@ Assert given value to contain something *.eql* to otherValue. See examples to un
 [{a: 'a'}, {b: 'b', c: 'c'}].should.not.containEql({b: 'b'});
 ```
 
+When `.containEql` check arrays it check elements to be in the same order in `otherValue` and object just to be presented.
+
 ## .containDeep(otherValue)
 
 Assert given value to contain something *.eql* to otherValue within depth.
@@ -432,6 +434,8 @@ by properties key and value; arrays are checked like sub sequences. Everyting is
 Main difference with `.containEql` is that this assertion requires full type chain -
 if asserted value is an object, otherValue should be also an object (which is sub object of given).
 The same is true for arrays, otherValue should be an array which compared to be subsequence of given object.
+
+When `.containDeep` check arrays it check elements to be in the same order (as arrays ordered collections) in `otherValue` and object just to be presented.
 
 ## .match(otherValue)
 
