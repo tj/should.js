@@ -20,8 +20,8 @@ user.should.have.property('pets').with.lengthOf(4);
 // then it doesn't inherit `Object` and have the `should` getter
 // so you can do:
 
-should(user).have.property('name', 'tj');
-should(true).ok;
+Should(user).have.property('name', 'tj');
+Should(true).ok;
 
 someAsyncTask(foo, function(err, result){
   should.not.exist(err);
