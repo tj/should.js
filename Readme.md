@@ -152,6 +152,11 @@ e.g.
 ```
 will give you `Uncaught TypeError: Cannot read property 'should' of undefined)`.
 
+In order to test for null use
+```js
+(err === null).should.be.true;
+```
+
 ## .true
 
 Assert if chained object === true:
