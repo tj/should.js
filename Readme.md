@@ -1,3 +1,5 @@
+# Repo was moved to own organization. See https://github.com/shouldjs/should.js.
+
 # should.js
 
 _should_ is an expressive, readable, test framework agnostic, assertion library. Main goals of this library __to be expressive__ and __to be helpful__. It keeps your test code clean, and your error messages helpful.
