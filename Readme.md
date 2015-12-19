@@ -437,7 +437,7 @@ Again see examples:
 ```
 
 It does not search somewhere in depth it check all pattern in depth. Objects are checked
-by properties key and value; arrays are checked like sub sequences. Everyting is compared using `.eql`.
+by properties key and value; arrays are checked like sub sequences. Everything is compared using `.eql`.
 Main difference with `.containEql` is that this assertion requires full type chain -
 if asserted value is an object, otherValue should be also an object (which is sub object of given).
 The same is true for arrays, otherValue should be an array which compared to be subsequence of given object.
@@ -542,7 +542,7 @@ Assert exception message matches string:
 }).should.throw('fail');
 ```
 
-Assert exepection message matches regexp:
+Assert exception message matches regexp:
 
 ```js
 (function(){
