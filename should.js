@@ -1,28 +1,29 @@
-!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Should=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Should=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var should = require('./should');
+var should = _dereq_('./should');
 
 should
-  .use(require('./ext/assert'))
-  .use(require('./ext/chain'))
-  .use(require('./ext/bool'))
-  .use(require('./ext/number'))
-  .use(require('./ext/eql'))
-  .use(require('./ext/type'))
-  .use(require('./ext/string'))
-  .use(require('./ext/property'))
-  .use(require('./ext/error'))
-  .use(require('./ext/match'))
-  .use(require('./ext/browser/jquery'))
-  .use(require('./ext/deprecated'));
+  .use(_dereq_('./ext/assert'))
+  .use(_dereq_('./ext/chain'))
+  .use(_dereq_('./ext/bool'))
+  .use(_dereq_('./ext/number'))
+  .use(_dereq_('./ext/eql'))
+  .use(_dereq_('./ext/type'))
+  .use(_dereq_('./ext/string'))
+  .use(_dereq_('./ext/property'))
+  .use(_dereq_('./ext/error'))
+  .use(_dereq_('./ext/match'))
+  .use(_dereq_('./ext/browser/jquery'))
+  .use(_dereq_('./ext/deprecated'))
+  .use(_dereq_('./ext/sets'));
 
  module.exports = should;
-},{"./ext/assert":3,"./ext/bool":4,"./ext/browser/jquery":5,"./ext/chain":6,"./ext/deprecated":7,"./ext/eql":8,"./ext/error":9,"./ext/match":10,"./ext/number":11,"./ext/property":12,"./ext/string":13,"./ext/type":14,"./should":15}],2:[function(require,module,exports){
+},{"./ext/assert":3,"./ext/bool":4,"./ext/browser/jquery":5,"./ext/chain":6,"./ext/deprecated":7,"./ext/eql":8,"./ext/error":9,"./ext/match":10,"./ext/number":11,"./ext/property":12,"./ext/sets":13,"./ext/string":14,"./ext/type":15,"./should":16}],2:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -31,7 +32,7 @@ should
 
 // Taken from node's assert module, because it sucks
 // and exposes next to nothing useful.
-var util = require('./util');
+var util = _dereq_('./util');
 
 module.exports = _deepEqual;
 
@@ -126,15 +127,15 @@ function objEquiv (a, b) {
   return true;
 }
 
-},{"./util":16}],3:[function(require,module,exports){
+},{"./util":17}],3:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var util = require('../util')
-  , assert = require('assert')
+var util = _dereq_('../util')
+  , assert = _dereq_('assert')
   , AssertionError = assert.AssertionError;
 
 module.exports = function(should) {
@@ -184,7 +185,7 @@ module.exports = function(should) {
     }
   };
 };
-},{"../util":16,"assert":17}],4:[function(require,module,exports){
+},{"../util":17,"assert":18}],4:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -210,7 +211,7 @@ module.exports = function(should, Assertion) {
     this.assert(this.obj);
   }, true);
 };
-},{}],5:[function(require,module,exports){
+},{}],5:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -222,7 +223,7 @@ module.exports = function(should, Assertion) {
  * From the jasmine-jquery project under the MIT License.
  */
 
-var util = require('../../util');
+var util = _dereq_('../../util');
 
 module.exports = function(should, Assertion) {
   var i = should.format;
@@ -440,7 +441,7 @@ module.exports = function(should, Assertion) {
     this.assert(false);
   });
 };
-},{"../../util":16}],6:[function(require,module,exports){
+},{"../../util":17}],6:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -459,15 +460,15 @@ module.exports = function(should, Assertion) {
 
   ['an', 'of', 'a', 'and', 'be', 'have', 'with', 'is', 'which', 'the'].forEach(addLink);
 };
-},{}],7:[function(require,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var util = require('../util'),
-  eql = require('../eql');
+var util = _dereq_('../util'),
+  eql = _dereq_('../eql');
 
 module.exports = function(should, Assertion) {
   var i = should.format;
@@ -493,14 +494,14 @@ module.exports = function(should, Assertion) {
     }));
   });
 };
-},{"../eql":2,"../util":16}],8:[function(require,module,exports){
+},{"../eql":2,"../util":17}],8:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var eql = require('../eql');
+var eql = _dereq_('../eql');
 
 module.exports = function(should, Assertion) {
   Assertion.add('eql', function(val, description) {
@@ -517,7 +518,7 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('equal', 'exactly');
 };
-},{"../eql":2}],9:[function(require,module,exports){
+},{"../eql":2}],9:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -569,15 +570,15 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('throw', 'throwError');
 };
-},{}],10:[function(require,module,exports){
+},{}],10:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var util = require('../util'),
-  eql = require('../eql');
+var util = _dereq_('../util'),
+  eql = _dereq_('../eql');
 
 module.exports = function(should, Assertion) {
   var i = should.format;
@@ -682,7 +683,7 @@ module.exports = function(should, Assertion) {
     }, this);
   });
 };
-},{"../eql":2,"../util":16}],11:[function(require,module,exports){
+},{"../eql":2,"../util":17}],11:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -733,15 +734,15 @@ module.exports = function(should, Assertion) {
 
 };
 
-},{}],12:[function(require,module,exports){
+},{}],12:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var util = require('../util'),
-  eql = require('../eql');
+var util = _dereq_('../util'),
+  eql = _dereq_('../eql');
 
 var aSlice = Array.prototype.slice;
 
@@ -971,7 +972,41 @@ module.exports = function(should, Assertion) {
 
 };
 
-},{"../eql":2,"../util":16}],13:[function(require,module,exports){
+},{"../eql":2,"../util":17}],13:[function(_dereq_,module,exports){
+/*!
+ * Should
+ * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
+ * MIT Licensed
+ */
+
+
+module.exports = function (should, Assertion) {
+  var i = should.format;
+
+  Assertion.add('subsetOf', function (other) {
+    this.params = { operator: 'to be a subsetOf ' + i(other) };
+
+    var item;
+    var obj = this.obj;
+    for (var j = 0; j < obj.length; j++) {
+      item = obj[j];
+      this.assert(other.indexOf(item) !== -1)
+    }
+  });
+
+  Assertion.add('supersetOf', function (other) {
+    this.params = { operator: 'to be a supersetOf ' + i(other) };
+
+    var item;
+    var obj = this.obj;
+    for (var j = 0; j < other.length; j++) {
+      item = other[j];
+      this.assert(obj.indexOf(item) !== -1)
+    }
+  });
+};
+
+},{}],14:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -991,14 +1026,14 @@ module.exports = function(should, Assertion) {
     this.assert(this.obj.indexOf(str, this.obj.length - str.length) >= 0);
   });
 };
-},{}],14:[function(require,module,exports){
+},{}],15:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
  * MIT Licensed
  */
 
-var util = require('../util');
+var util = _dereq_('../util');
 
 module.exports = function(should, Assertion) {
   Assertion.add('Number', function() {
@@ -1071,7 +1106,7 @@ module.exports = function(should, Assertion) {
 
   Assertion.alias('instanceof', 'instanceOf');
 };
-},{"../util":16}],15:[function(require,module,exports){
+},{"../util":17}],16:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -1079,7 +1114,7 @@ module.exports = function(should, Assertion) {
  */
 
 
-var util = require('./util')
+var util = _dereq_('./util')
   , AssertionError = util.AssertionError
   , inspect = util.inspect;
 
@@ -1255,7 +1290,7 @@ Assertion.prototype = {
 };
 
 
-},{"./util":16}],16:[function(require,module,exports){
+},{"./util":17}],17:[function(_dereq_,module,exports){
 /*!
  * Should
  * Copyright(c) 2010-2014 TJ Holowaychuk <tj@vision-media.ca>
@@ -1362,9 +1397,9 @@ function isError(e) {
 }
 exports.isError = isError;
 
-exports.inspect = require('util').inspect;
+exports.inspect = _dereq_('util').inspect;
 
-exports.AssertionError = require('assert').AssertionError;
+exports.AssertionError = _dereq_('assert').AssertionError;
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -1375,7 +1410,7 @@ exports.forOwn = function(obj, f, context) {
     }
   }
 };
-},{"assert":17,"util":20}],17:[function(require,module,exports){
+},{"assert":18,"util":23}],18:[function(_dereq_,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -1403,7 +1438,7 @@ exports.forOwn = function(obj, f, context) {
 // when used in node, this will actually load the util module we depend on
 // versus loading the builtin util module as happens otherwise
 // this is a bug in node module loading as far as I am concerned
-var util = require('util/');
+var util = _dereq_('util/');
 
 var pSlice = Array.prototype.slice;
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -1737,39 +1772,14 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":20}],18:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],19:[function(require,module,exports){
+},{"util/":20}],19:[function(_dereq_,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],20:[function(require,module,exports){
+},{}],20:[function(_dereq_,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2295,7 +2305,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = require('./support/isBuffer');
+exports.isBuffer = _dereq_('./support/isBuffer');
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -2339,7 +2349,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = require('inherits');
+exports.inherits = _dereq_('inherits');
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -2357,6 +2367,35 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-},{"./support/isBuffer":19,"inherits":18}]},{},[1])
+},{"./support/isBuffer":19,"inherits":21}],21:[function(_dereq_,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],22:[function(_dereq_,module,exports){
+module.exports=_dereq_(19)
+},{}],23:[function(_dereq_,module,exports){
+module.exports=_dereq_(20)
+},{"./support/isBuffer":22,"inherits":21}]},{},[1])
 (1)
 });
