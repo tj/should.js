@@ -29,8 +29,8 @@ module.exports['should'] = {
     try {
       'foo'.should.equal('bar');
     } catch (err) {
-      assert('foo' == err.actual, 'err.actual');
-      assert('bar' == err.expected, 'err.expected');
+      'foo'.should.equal(err.actual, 'err.actual');
+      'bar'.should.equal(err.expected, 'err.expected');
     }
   },
  
