@@ -20,6 +20,7 @@ module.exports['bool'] = {
     false.should.be.false;
     true.should.not.be.false;
     (0).should.not.be.false;
+    (new Boolean(false)).should.not.be.false;
 
     err(function(){
       ''.should.be.false;
