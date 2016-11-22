@@ -8,7 +8,7 @@ It extends the `Object.prototype` with a single non-enumerable getter that allow
 
 ## Example
 ```javascript
-var should = require('should');
+require('should');
 
 var user = {
     name: 'tj'
@@ -643,7 +643,7 @@ The methods that support this optional description are: `eql`, `equal`, `within`
 For example you can use should with the [Mocha test framework](http://visionmedia.github.io/mocha/) by simply including it:
 
 ```javascript
-var should = require('should');
+require('should');
 var mylib = require('mylib');
 
 
